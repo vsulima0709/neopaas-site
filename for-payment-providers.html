@@ -4,490 +4,506 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For payment providers — Stop building. Start earning. | NeoPaaS</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f5f1e8;
     --bg-soft: #ede7d6;
-    --ink: #1a1614;
-    --ink-soft: #5a544e;
+    --ink: #0a0a0a;
+    --ink-soft: #404040;
+    --ink-faint: #7f7f7f;
     --green: #0c3b2e;
+    --green-deep: #081f17;
     --green-soft: #1f5546;
     --clay: #c2410c;
     --clay-soft: #ea580c;
-    --line: rgba(26, 22, 20, 0.12);
-    --container: 1200px;
+    --lime: #b3ed97;
+    --line: rgba(0, 0, 0, 0.10);
+    --line-strong: rgba(0, 0, 0, 0.22);
+    --line-dark: rgba(255, 255, 255, 0.10);
+    --container: 1328px;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
     background: var(--bg); color: var(--ink);
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 1.0625rem; line-height: 1.55;
-    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
   }
   a { color: inherit; text-decoration: none; }
-  .container { max-width: var(--container); margin: 0 auto; padding: 0 2rem; }
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* NAV */
   nav.top {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(245, 241, 232, 0.92);
-    backdrop-filter: blur(12px);
+    background: rgba(245, 241, 232, 0.85);
+    backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line);
   }
-  nav.top .container { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-  .logo { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.03em; color: var(--green); }
+  nav.top .container { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .logo { font-weight: 500; font-size: 26px; letter-spacing: -0.04em; color: var(--ink); }
   .logo::after { content: '.'; color: var(--clay); }
-  .nav-links { display: flex; gap: 2.5rem; }
-  .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--ink-soft); transition: color 0.15s; }
-  .nav-links a.active { color: var(--ink); }
-  .nav-links a:hover { color: var(--ink); }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a { font-size: 15px; color: var(--ink); transition: color 0.15s; }
+  .nav-links a:hover { color: var(--clay); }
+  .nav-links a.active { color: var(--clay); }
   .nav-cta {
-    background: var(--green); color: #fff !important;
-    padding: 0.6rem 1.2rem; border-radius: 999px;
-    font-size: 0.9rem; font-weight: 500;
+    background: var(--ink) !important; color: var(--bg) !important;
+    padding: 12px 24px; border-radius: 50px;
+    font-size: 15px; font-weight: 500; transition: all 0.2s;
   }
-  .nav-cta:hover { background: var(--green-soft); }
-  @media (max-width: 760px) { .nav-links { display: none; } }
+  .nav-cta:hover { background: var(--clay) !important; transform: translateY(-1px); }
+  @media (max-width: 860px) { .nav-links { display: none; } }
 
   /* HERO */
   section.hero {
-    padding: 5rem 0 4rem;
-    border-bottom: 1px solid var(--line);
+    background: var(--green-deep);
+    color: #f9f9f8;
+    padding: 120px 0 100px;
+    position: relative; overflow: hidden;
   }
-  .breadcrumb {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem; color: var(--ink-soft);
-    margin-bottom: 1.75rem;
-    letter-spacing: 0.03em;
+  .hero-bg-glow {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(194,65,12,0.22) 0%, transparent 40%),
+      radial-gradient(circle at 20% 80%, rgba(12,59,46,0.6) 0%, transparent 50%);
+    pointer-events: none;
+    animation: bgPulse 12s ease-in-out infinite;
   }
-  .breadcrumb span { color: var(--clay); }
+  @keyframes bgPulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+  .hero-content { position: relative; z-index: 2; max-width: 1100px; }
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 16px;
+    background: rgba(179, 237, 151, 0.10);
+    border: 1px solid rgba(179, 237, 151, 0.25);
+    border-radius: 50px;
+    font-size: 13px; color: var(--lime);
+    margin-bottom: 32px; letter-spacing: -0.01em;
+  }
+  .live-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--lime);
+    animation: livePulse 1.8s ease-out infinite;
+  }
+  @keyframes livePulse {
+    0% { box-shadow: 0 0 0 0 rgba(179, 237, 151, 0.6); }
+    70% { box-shadow: 0 0 0 8px rgba(179, 237, 151, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(179, 237, 151, 0); }
+  }
   h1.display {
-    font-size: clamp(2.6rem, 6.5vw, 5.5rem);
-    font-weight: 700;
-    line-height: 0.98;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 400; line-height: 0.98;
     letter-spacing: -0.045em;
-    color: var(--ink);
+    color: #f9f9f8;
+    margin-bottom: 32px;
     max-width: 18ch;
-    margin-bottom: 2rem;
   }
-  h1.display em {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic; font-weight: 400; color: var(--green);
-  }
+  h1.display .alt { color: var(--lime); }
   .sub {
-    font-size: clamp(1.1rem, 1.6vw, 1.375rem);
-    color: var(--ink-soft);
-    max-width: 52ch;
-    line-height: 1.5;
-    margin-bottom: 2.5rem;
+    font-size: clamp(18px, 1.5vw, 22px);
+    line-height: 1.4;
+    color: rgba(249, 249, 248, 0.72);
+    max-width: 52ch; margin-bottom: 40px;
   }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 4rem; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
   .btn {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.95rem 1.5rem; border-radius: 999px;
-    font-size: 0.95rem; font-weight: 500;
-    transition: all 0.15s; border: 1.5px solid transparent;
-    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 28px; border-radius: 50px;
+    font-size: 15px; font-weight: 500;
+    transition: all 0.2s; border: 1.5px solid transparent;
+    cursor: pointer; line-height: 1;
   }
-  .btn-primary { background: var(--green); color: #fff; }
-  .btn-primary:hover { background: var(--green-soft); }
-  .btn-secondary { border-color: var(--ink); color: var(--ink); background: transparent; }
-  .btn-secondary:hover { background: var(--ink); color: var(--bg); }
+  .btn-primary { background: var(--lime); color: var(--green-deep); }
+  .btn-primary:hover { background: #c8f5b3; transform: translateY(-2px); }
+  .btn-secondary { border-color: rgba(249,249,248,0.30); color: #f9f9f8; background: transparent; }
+  .btn-secondary:hover { border-color: #f9f9f8; }
   .btn .arrow { transition: transform 0.15s; }
   .btn:hover .arrow { transform: translateX(3px); }
+  .btn-primary-light { background: var(--ink); color: var(--bg); }
+  .btn-primary-light:hover { background: var(--clay); transform: translateY(-2px); }
+  .btn-secondary-light { border-color: var(--ink); color: var(--ink); background: transparent; }
+  .btn-secondary-light:hover { background: var(--ink); color: var(--bg); }
+
   .hero-stats {
-    display: flex; gap: 3rem; flex-wrap: wrap;
-    padding-top: 2.5rem; border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line-dark);
   }
-  .hero-stats .stat { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--ink-soft); }
-  .hero-stats .stat strong {
-    display: block; font-family: 'Inter', sans-serif;
-    font-size: 1.75rem; font-weight: 700; color: var(--ink);
-    letter-spacing: -0.02em; margin-bottom: 0.25rem;
+  .hero-stat .num {
+    font-size: 40px; font-weight: 400;
+    line-height: 1; letter-spacing: -0.04em;
+    color: #f9f9f8; margin-bottom: 8px;
   }
-  .hero-stats .stat strong em { color: var(--clay); font-style: normal; }
+  .hero-stat .num .unit { color: var(--lime); font-size: 0.6em; vertical-align: top; margin-left: 0.1em; }
+  .hero-stat .label {
+    font-size: 13px; color: rgba(249,249,248,0.55); line-height: 1.4;
+  }
+  @media (max-width: 860px) { .hero-stats { grid-template-columns: 1fr 1fr; } }
 
-  /* PAIN SECTION (Light move — bold big numbers) */
-  section.pain {
-    padding: 7rem 0;
+  /* SECTION DEFAULTS */
+  section { padding: 112px 0; }
+  .section-head {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: end;
+    margin-bottom: 64px;
+  }
+  .section-eyebrow { font-size: 13px; color: var(--clay); margin-bottom: 20px; }
+  h2.heading {
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 400; line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: var(--ink); max-width: 20ch;
+  }
+  h2.heading .alt { color: var(--clay); }
+  p.section-lead {
+    font-size: 19px; color: var(--ink-soft);
+    max-width: 50ch; line-height: 1.45;
+  }
+  @media (max-width: 860px) { .section-head { grid-template-columns: 1fr; gap: 16px; align-items: start; } }
+
+  /* PAIN */
+  section.onramp { background: var(--bg); }
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pain-card {
+    background: var(--bg-soft);
+    border-radius: 20px;
+    padding: 36px 32px;
+    transition: transform 0.3s ease;
+    position: relative; overflow: hidden;
+  }
+  .pain-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 0; height: 4px;
+    background: var(--clay);
+    transition: width 0.4s ease;
+  }
+  .pain-card:hover::before { width: 100%; }
+  .pain-card:hover { transform: translateY(-3px); }
+  .pain-num {
+    font-size: 13px; color: var(--clay);
+    margin-bottom: 18px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .pain-num::after {
+    content: ''; width: 32px; height: 1px; background: var(--line-strong);
+  }
+  .pain-stat-big {
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 400; letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--clay); margin-bottom: 20px;
+  }
+  .pain-card p.copy {
+    font-size: 16px; line-height: 1.5;
+    color: var(--ink-soft); letter-spacing: -0.005em;
+  }
+  @media (max-width: 860px) { .pain-grid { grid-template-columns: 1fr; } }
+
+  /* MANIFESTO (The deal) */
+  section.manifesto {
     background: var(--ink);
-    color: var(--bg);
+    color: #f9f9f8;
+    padding: 140px 0;
   }
-  section.pain .section-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--clay-soft);
-    margin-bottom: 1.5rem;
+  section.manifesto h2 {
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 400; line-height: 1.05;
+    letter-spacing: -0.045em;
+    color: #f9f9f8;
+    max-width: 22ch;
+    margin-bottom: 32px;
   }
-  section.pain h2 {
-    font-size: clamp(2.25rem, 5vw, 4rem);
-    font-weight: 700;
-    letter-spacing: -0.035em;
-    line-height: 1.05;
-    margin-bottom: 4rem;
-    max-width: 18ch;
+  section.manifesto h2 .alt { color: var(--lime); }
+  section.manifesto .body p {
+    font-size: 19px; line-height: 1.55;
+    color: rgba(249,249,248,0.72);
+    max-width: 62ch; margin-bottom: 20px;
   }
-  section.pain h2 em {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic; font-weight: 400; color: var(--clay-soft);
-  }
-  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
-  .pain-stat { border-top: 1px solid rgba(245, 241, 232, 0.25); padding-top: 1.5rem; }
-  .pain-stat .num {
-    font-size: clamp(3rem, 6vw, 4.5rem);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 0.95;
-    color: var(--clay-soft);
-    margin-bottom: 1rem;
-  }
-  .pain-stat .label {
-    color: rgba(245, 241, 232, 0.7);
-    font-size: 1.05rem; line-height: 1.4;
-  }
-  @media (max-width: 860px) { .pain-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+  section.manifesto .body p strong { color: var(--lime); font-weight: 500; }
+  section.manifesto .section-eyebrow { color: var(--lime); }
 
-  /* THE DEAL */
-  section.deal {
-    padding: 7rem 0;
-  }
-  .deal-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
-  .deal-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--clay); margin-bottom: 1.5rem;
-  }
-  .deal-grid h2 {
-    font-size: clamp(2rem, 4vw, 3.25rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
-  }
-  .deal-grid p.deal-body {
-    font-size: 1.25rem;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-  .deal-grid p.deal-body strong { color: var(--green); }
-  @media (max-width: 860px) { .deal-grid { grid-template-columns: 1fr; gap: 2rem; } }
-
-  /* CALCULATOR (Rainforest move — live ROI on page) */
+  /* CALCULATOR */
   section.calc {
-    padding: var(--section, 6rem) 0;
-    background: var(--green);
-    color: var(--bg);
+    background: var(--green-deep); color: #f9f9f8;
+    padding: 112px 0;
   }
-  section.calc .section-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--clay-soft); margin-bottom: 1.5rem;
+  section.calc .section-eyebrow { color: var(--lime); }
+  section.calc h2.heading { color: #f9f9f8; }
+  section.calc h2.heading .alt { color: var(--lime); }
+  section.calc p.section-lead { color: rgba(249,249,248,0.65); }
+  .calc-grid {
+    display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px;
+    align-items: start;
+    margin-top: 24px;
   }
-  section.calc h2 {
-    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-    font-weight: 700; letter-spacing: -0.035em;
-    line-height: 1.05; margin-bottom: 1rem; max-width: 22ch;
-  }
-  section.calc h2 em {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic; font-weight: 400; color: var(--clay-soft);
-  }
-  section.calc > .container > p.calc-intro { color: rgba(245, 241, 232, 0.7); max-width: 50ch; margin-bottom: 4rem; }
-  .calc-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: start; }
-  .calc-controls .control { margin-bottom: 2.25rem; }
+  .calc-controls .control { margin-bottom: 32px; }
   .calc-label {
     display: flex; justify-content: space-between; align-items: baseline;
-    margin-bottom: 0.75rem;
-    font-size: 0.95rem;
+    margin-bottom: 12px; font-size: 15px;
   }
-  .calc-label .name { color: rgba(245, 241, 232, 0.7); font-weight: 500; }
+  .calc-label .name { color: rgba(249,249,248,0.75); }
   .calc-label .val {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.05rem; font-weight: 500;
-    color: var(--clay-soft);
+    font-size: 18px; font-weight: 400;
+    color: var(--lime); letter-spacing: -0.015em;
   }
   .calc-controls input[type=range] {
     width: 100%; height: 4px;
-    background: rgba(245, 241, 232, 0.2); border-radius: 999px;
+    background: rgba(249, 249, 248, 0.15); border-radius: 999px;
     appearance: none; -webkit-appearance: none;
     outline: none;
   }
   .calc-controls input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none; appearance: none;
-    width: 22px; height: 22px; border-radius: 50%;
-    background: var(--clay); border: 3px solid var(--bg);
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--lime); border: 3px solid var(--green-deep);
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
   .calc-controls input[type=range]::-moz-range-thumb {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: var(--clay); border: 3px solid var(--bg);
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--lime); border: 3px solid var(--green-deep);
     cursor: pointer;
   }
   .calc-output {
-    background: rgba(245, 241, 232, 0.06);
-    border: 1px solid rgba(245, 241, 232, 0.15);
-    border-radius: 24px;
-    padding: 3rem 2.5rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 20px;
+    padding: 40px 36px;
   }
   .calc-output .calc-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    color: rgba(245, 241, 232, 0.55);
-    margin-bottom: 0.75rem;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(249,249,248,0.55);
+    margin-bottom: 12px;
   }
   .calc-output .big-num {
-    font-size: clamp(3.5rem, 7vw, 5rem);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 0.95;
-    color: var(--bg);
-    margin-bottom: 0.5rem;
+    font-size: clamp(56px, 7vw, 88px);
+    font-weight: 400; line-height: 1;
+    letter-spacing: -0.05em;
+    color: #f9f9f8;
+    margin-bottom: 8px;
   }
-  .calc-output .big-num .currency { color: var(--clay-soft); font-size: 0.55em; vertical-align: top; margin-right: 0.15em; }
+  .calc-output .big-num .currency { color: var(--lime); font-size: 0.45em; vertical-align: top; margin-right: 0.15em; font-weight: 400; }
   .calc-output .annual {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.95rem;
-    color: var(--clay-soft);
-    margin-bottom: 2.5rem;
+    font-size: 15px;
+    color: var(--lime);
+    margin-bottom: 32px;
   }
   .calc-output .breakdown {
-    display: grid; grid-template-columns: 1fr; gap: 0.85rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(245, 241, 232, 0.15);
+    display: grid; gap: 12px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.10);
   }
   .calc-output .breakdown div {
     display: flex; justify-content: space-between;
-    font-size: 0.92rem;
-    color: rgba(245, 241, 232, 0.75);
+    font-size: 14px;
+    color: rgba(249,249,248,0.75);
   }
   .calc-output .breakdown div span:last-child {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--bg);
+    color: #f9f9f8;
+    letter-spacing: -0.01em;
   }
   .calc-note {
-    margin-top: 1.5rem;
-    font-size: 0.85rem;
-    color: rgba(245, 241, 232, 0.5);
+    margin-top: 18px;
+    font-size: 13px;
+    color: rgba(249,249,248,0.45);
     font-style: italic;
   }
-  @media (max-width: 860px) { .calc-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+  @media (max-width: 860px) { .calc-grid { grid-template-columns: 1fr; gap: 32px; } }
 
-  /* SCOPE — what we handle / you handle */
-  section.scope { padding: 7rem 0; border-bottom: 1px solid var(--line); }
-  section.scope h2 {
-    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-    font-weight: 700; letter-spacing: -0.035em;
-    line-height: 1.05; margin-bottom: 3rem;
-    max-width: 22ch;
-  }
-  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  /* SCOPE — what we handle / you keep */
+  section.scope { background: var(--bg); }
+  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .scope-col {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: 2.5rem;
+    background: var(--bg-soft);
+    border-radius: 20px;
+    padding: 40px 36px;
+    transition: transform 0.3s ease;
   }
-  .scope-col.we { background: var(--green); color: var(--bg); border-color: var(--green); }
+  .scope-col:hover { transform: translateY(-3px); }
+  .scope-col.we { background: var(--green-deep); color: #f9f9f8; }
+  .scope-col .scope-eyebrow {
+    font-size: 13px; color: var(--clay);
+    margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .scope-col.we .scope-eyebrow { color: var(--lime); }
   .scope-col h3 {
-    font-size: 1.5rem; font-weight: 700; letter-spacing: -0.025em;
-    margin-bottom: 1.75rem;
-    display: flex; align-items: center; gap: 0.6rem;
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 400; letter-spacing: -0.035em;
+    line-height: 1.0; margin-bottom: 28px;
+    color: var(--ink);
   }
-  .scope-col h3 .dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--clay);
-    display: inline-block;
-  }
-  .scope-col.we h3 .dot { background: var(--clay-soft); }
+  .scope-col.we h3 { color: #f9f9f8; }
   .scope-col ul { list-style: none; padding: 0; }
   .scope-col li {
-    padding: 0.85rem 0;
+    padding: 14px 0;
     border-top: 1px solid var(--line);
-    font-size: 1rem;
-    line-height: 1.4;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    display: flex; gap: 12px;
   }
-  .scope-col.we li { border-top-color: rgba(245, 241, 232, 0.15); color: rgba(245, 241, 232, 0.9); }
+  .scope-col li::before {
+    content: ''; flex-shrink: 0;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--clay); margin-top: 9px;
+  }
+  .scope-col.we li {
+    border-top-color: rgba(255,255,255,0.10);
+    color: rgba(249,249,248,0.85);
+  }
+  .scope-col.we li::before { background: var(--lime); }
   .scope-col li:first-child { border-top: none; padding-top: 0; }
-  @media (max-width: 760px) { .scope-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .scope-grid { grid-template-columns: 1fr; } }
 
-  /* CODE BLOCK (Stedi move) */
-  section.code {
-    padding: 7rem 0;
-    background: var(--bg-soft);
-  }
-  .code-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
-  .code-grid .section-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--clay); margin-bottom: 1.5rem;
-  }
-  .code-grid h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700; letter-spacing: -0.03em;
-    line-height: 1.1; margin-bottom: 1.5rem;
-  }
-  .code-grid p { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.5; }
+  /* CODE BLOCK */
+  section.code-section { background: var(--bg-soft); }
+  .code-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: center; }
+  .code-grid h2.heading { max-width: 14ch; margin-bottom: 24px; }
+  .code-grid p.section-lead { max-width: 44ch; }
   .code-block {
     background: var(--ink);
-    border-radius: 16px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 12px 32px rgba(12, 59, 46, 0.12);
+    box-shadow: 0 24px 48px rgba(12, 59, 46, 0.14);
   }
   .code-header {
-    background: rgba(255,255,255,0.04);
-    padding: 0.85rem 1.25rem;
+    background: rgba(255,255,255,0.03);
+    padding: 14px 20px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    display: flex; align-items: center; gap: 0.5rem;
+    display: flex; align-items: center; gap: 8px;
   }
   .code-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.15); }
-  .code-dot.r { background: #ef4444; opacity: 0.6; }
-  .code-dot.y { background: #eab308; opacity: 0.6; }
-  .code-dot.g { background: #22c55e; opacity: 0.6; }
+  .code-dot.r { background: #ef4444; opacity: 0.65; }
+  .code-dot.y { background: #eab308; opacity: 0.65; }
+  .code-dot.g { background: #22c55e; opacity: 0.65; }
   .code-file {
     margin-left: auto;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 12px;
     color: rgba(255,255,255,0.5);
   }
   .code-body {
-    padding: 1.75rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.88rem; line-height: 1.7;
-    color: rgba(245, 241, 232, 0.85);
+    padding: 28px;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 14px; line-height: 1.75;
+    color: rgba(249, 249, 248, 0.88);
     overflow-x: auto;
   }
   .code-body .kw { color: #c084fc; }
   .code-body .str { color: #fde68a; }
   .code-body .fn { color: #93c5fd; }
-  .code-body .com { color: rgba(245, 241, 232, 0.4); font-style: italic; }
-  .code-body .ok { color: #86efac; }
-  @media (max-width: 860px) { .code-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+  .code-body .com { color: rgba(249, 249, 248, 0.4); font-style: italic; }
+  .code-body .ok { color: var(--lime); }
+  @media (max-width: 860px) { .code-grid { grid-template-columns: 1fr; gap: 32px; } }
 
-  /* TERMS (Helcim move — radical clarity) */
-  section.terms { padding: 7rem 0; }
-  section.terms .section-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--clay); margin-bottom: 1.5rem;
-  }
-  section.terms h2 {
-    font-size: clamp(2rem, 4vw, 3.25rem);
-    font-weight: 700; letter-spacing: -0.03em;
-    line-height: 1.05; margin-bottom: 3rem; max-width: 22ch;
-  }
-  .terms-list {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
-  }
+  /* TERMS */
+  section.terms { background: var(--bg); }
+  .terms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .term-card {
     background: var(--bg-soft);
-    border: 1px solid var(--line);
     border-radius: 16px;
-    padding: 2rem;
+    padding: 36px 32px;
+    transition: transform 0.3s ease;
   }
-  .term-card h3 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--clay); margin-bottom: 0.75rem;
+  .term-card:hover { transform: translateY(-3px); }
+  .term-card .term-eyebrow {
+    font-size: 13px; color: var(--clay);
+    margin-bottom: 16px;
+    display: inline-flex; align-items: center; gap: 8px;
   }
-  .term-card p {
-    font-size: 1.25rem; font-weight: 500;
-    letter-spacing: -0.015em; line-height: 1.35;
+  .term-card .term-eyebrow::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--lime);
+  }
+  .term-card p.term-body {
+    font-size: 19px; font-weight: 400;
+    letter-spacing: -0.015em; line-height: 1.4;
     color: var(--ink);
   }
-  .term-card p strong { color: var(--green); font-weight: 700; }
-  @media (max-width: 760px) { .terms-list { grid-template-columns: 1fr; } }
+  .term-card p.term-body strong { color: var(--clay); font-weight: 500; }
+  @media (max-width: 860px) { .terms-grid { grid-template-columns: 1fr; } }
 
   /* FAQ */
-  section.faq { padding: 7rem 0; background: var(--bg-soft); }
-  section.faq .section-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--clay); margin-bottom: 1.5rem;
-  }
-  section.faq h2 {
-    font-size: clamp(2rem, 4vw, 3.25rem);
-    font-weight: 700; letter-spacing: -0.03em;
-    line-height: 1.05; margin-bottom: 3rem;
-  }
-  .faq-list { max-width: 800px; }
+  section.faq { background: var(--bg-soft); }
+  .faq-list { max-width: 880px; margin-top: 56px; }
   details.faq-item {
-    border-top: 1px solid var(--line);
-    padding: 1.5rem 0;
+    border-top: 1px solid var(--line-strong);
+    padding: 24px 0;
     cursor: pointer;
   }
-  details.faq-item:last-of-type { border-bottom: 1px solid var(--line); }
+  details.faq-item:last-of-type { border-bottom: 1px solid var(--line-strong); }
   details.faq-item summary {
-    font-size: 1.25rem; font-weight: 600;
-    letter-spacing: -0.015em;
+    font-size: 22px; font-weight: 400;
+    letter-spacing: -0.02em;
     list-style: none;
     display: flex; justify-content: space-between; align-items: center;
-    gap: 1rem;
+    gap: 16px;
+    color: var(--ink);
   }
   details.faq-item summary::-webkit-details-marker { display: none; }
   details.faq-item summary::after {
     content: '+';
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.4rem; font-weight: 400;
+    font-size: 28px; font-weight: 300;
     color: var(--clay);
     transition: transform 0.2s;
+    line-height: 1;
   }
   details.faq-item[open] summary::after { content: '−'; }
   details.faq-item .answer {
-    padding-top: 1rem; padding-right: 3rem;
-    color: var(--ink-soft); font-size: 1.0625rem; line-height: 1.55;
+    padding-top: 16px; padding-right: 48px;
+    color: var(--ink-soft);
+    font-size: 17px; line-height: 1.5;
   }
 
   /* FINAL CTA */
   section.final {
-    padding: 8rem 0;
-    text-align: center;
+    background: var(--green-deep); color: #f9f9f8;
+    padding: 160px 0; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  section.final::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(179,237,151,0.10) 0%, transparent 50%);
+    pointer-events: none;
   }
   section.final h2 {
-    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
-    font-weight: 700; letter-spacing: -0.035em;
-    line-height: 1.02; margin-bottom: 1.5rem;
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 400; letter-spacing: -0.05em;
+    line-height: 0.98;
+    margin-bottom: 28px; max-width: 16ch;
+    margin-left: auto; margin-right: auto;
+    color: #f9f9f8; position: relative;
   }
-  section.final h2 em {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic; font-weight: 400; color: var(--clay);
-  }
+  section.final h2 .alt { color: var(--lime); }
   section.final p {
-    font-size: 1.15rem; color: var(--ink-soft);
-    max-width: 42ch; margin: 0 auto 2.5rem;
+    font-size: 19px; color: rgba(249,249,248,0.65);
+    max-width: 48ch; margin: 0 auto 36px;
+    line-height: 1.5; position: relative;
   }
-  section.final .cta-row { justify-content: center; margin-bottom: 0; }
+  section.final .cta-row { justify-content: center; position: relative; }
 
   /* FOOTER */
-  footer { background: var(--green); color: rgba(245, 241, 232, 0.7); padding: 4rem 0 2rem; }
-  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
-  footer .logo { color: var(--bg); }
-  footer .tagline { font-size: 0.95rem; max-width: 28ch; line-height: 1.5; margin-top: 1rem; }
-  .foot-col h4 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--clay-soft); margin-bottom: 1.25rem;
-  }
-  .foot-col a { display: block; padding: 0.4rem 0; font-size: 0.95rem; color: rgba(245, 241, 232, 0.7); }
-  .foot-col a:hover { color: var(--bg); }
-  .foot-bottom {
-    padding-top: 2rem; border-top: 1px solid rgba(245, 241, 232, 0.15);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem; color: rgba(245, 241, 232, 0.5);
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-  }
+  footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 72px 0 36px; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 56px; }
+  footer .logo { color: #fff; font-size: 30px; }
+  footer .tagline { font-size: 15px; max-width: 30ch; line-height: 1.5; margin-top: 14px; color: rgba(255,255,255,0.55); }
+  .foot-col h4 { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lime); margin-bottom: 18px; font-weight: 500; }
+  .foot-col a { display: block; padding: 6px 0; font-size: 14px; color: rgba(255,255,255,0.6); transition: color 0.15s; }
+  .foot-col a:hover { color: #fff; }
+  .foot-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.10); font-size: 12px; color: rgba(255,255,255,0.4); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
   @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
 
   .wf-label {
-    position: fixed; bottom: 1rem; right: 1rem; z-index: 100;
+    position: fixed; bottom: 16px; right: 16px; z-index: 100;
     background: var(--ink); color: var(--bg);
-    padding: 0.5rem 0.85rem; border-radius: 999px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem; letter-spacing: 0.05em; opacity: 0.7;
+    padding: 6px 12px; border-radius: 999px;
+    font-size: 11px; opacity: 0.7;
   }
 </style>
 </head>
@@ -498,10 +514,10 @@
   <div class="container">
     <a href="index.html" class="logo">NeoPaaS</a>
     <div class="nav-links">
-      <a href="index.html#platform">Platform</a>
+      <a href="index.html#what">Platform</a>
+      <a href="for-merchants.html">For your business</a>
       <a href="for-payment-providers.html" class="active">Partners</a>
       <a href="#pricing">Pricing</a>
-      <a href="#about">About</a>
     </div>
     <a href="#talk" class="nav-cta">Talk to partnerships</a>
   </div>
@@ -509,65 +525,88 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg-glow"></div>
   <div class="container">
-    <p class="breadcrumb">For payment providers <span>·</span> MSPs <span>·</span> Acquirers</p>
-    <h1 class="display">Stop building integrations. <em>Start earning</em> from them.</h1>
-    <p class="sub">Your engineers spend 30–40% of their time on merchant integrations. That's your cost center. Distribute NeoPaaS to your merchant base instead — and turn it into a recurring revenue stream. Zero code from your team.</p>
-    <div class="cta-row">
-      <a href="#talk" class="btn btn-primary">Talk to partnerships <span class="arrow">→</span></a>
-      <a href="#calc" class="btn btn-secondary">Run the numbers</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><strong>20<em>%</em></strong>recurring revenue share</div>
-      <div class="stat"><strong>4 weeks</strong>to first merchant live</div>
-      <div class="stat"><strong>SAR 0</strong>upfront. Ever.</div>
+    <div class="hero-content">
+      <div class="live-badge">
+        <span class="live-dot"></span>
+        For payment providers · MSPs · Acquirers
+      </div>
+      <h1 class="display">Stop building integrations. <span class="alt">Start earning</span> from them.</h1>
+      <p class="sub">Your engineers spend 30–40% of their time on merchant integrations. That's your cost center. Distribute NeoPaaS to your merchant base instead — and turn it into a recurring revenue stream. Zero code from your team.</p>
+      <div class="cta-row">
+        <a href="#talk" class="btn btn-primary">Talk to partnerships <span class="arrow">→</span></a>
+        <a href="#calc" class="btn btn-secondary">Run the numbers</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num"><span data-counter="20">0</span><span class="unit">%</span></div>
+          <div class="label">Recurring revenue share, paid monthly</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num"><span data-counter="4">0</span> weeks</div>
+          <div class="label">To your first merchant live on the platform</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">SAR 0</div>
+          <div class="label">Upfront cost. No setup fee. Ever.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PAIN (Light move — bold giant numbers on dark) -->
-<section class="pain">
+<!-- PAIN -->
+<section class="onramp">
   <div class="container">
-    <p class="section-eyebrow">The integration tax you're already paying</p>
-    <h2>Every merchant you onboard costs you <em>three weeks</em> and a team of engineers.</h2>
+    <div class="section-head reveal">
+      <h2 class="heading">The integration tax you're already <span class="alt">paying.</span></h2>
+      <p class="section-lead">Every merchant you onboard costs you weeks of engineering and a recurring line on the ops budget. Three numbers from MSPs in Saudi Arabia:</p>
+    </div>
     <div class="pain-grid">
-      <div class="pain-stat">
-        <p class="num">30–40%</p>
-        <p class="label">Of engineering time spent on custom SDK work, store-by-store activations, and integration troubleshooting.</p>
+      <div class="pain-card reveal">
+        <p class="pain-num">a.</p>
+        <p class="pain-stat-big">30–40%</p>
+        <p class="copy">Of engineering time spent on custom SDK work, store-by-store activations, and integration troubleshooting.</p>
       </div>
-      <div class="pain-stat">
-        <p class="num">SAR 1.1M+</p>
-        <p class="label">Annual cost of running integration as a cost center — fully-loaded engineering, ops, and support.</p>
+      <div class="pain-card reveal">
+        <p class="pain-num">b.</p>
+        <p class="pain-stat-big">SAR 1.1M+</p>
+        <p class="copy">Annual cost of running integration as a cost center — fully-loaded engineering, ops, and support.</p>
       </div>
-      <div class="pain-stat">
-        <p class="num">3–12 wks</p>
-        <p class="label">Time from signed merchant to first transaction processed. Every week is a week of churn risk.</p>
+      <div class="pain-card reveal">
+        <p class="pain-num">c.</p>
+        <p class="pain-stat-big">3–12 wks</p>
+        <p class="copy">Time from signed merchant to first transaction processed. Every week is a week of churn risk.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- THE DEAL -->
-<section class="deal">
+<!-- THE DEAL (Manifesto pattern) -->
+<section class="manifesto">
   <div class="container">
-    <div class="deal-grid">
-      <div>
-        <p class="deal-eyebrow">The partnership</p>
-        <h2>One agreement. Three things change.</h2>
+    <div class="reveal">
+      <p class="section-eyebrow">The partnership</p>
+      <h2>One agreement. <span class="alt">Three things change.</span></h2>
+      <div class="body">
+        <p>You distribute NeoPaaS to your existing merchant base. We handle every cashier integration, every terminal activation, every ZATCA filing, every reconciliation — on infrastructure your engineers don't touch and your ops team doesn't maintain.</p>
+        <p><strong>You keep the customer relationship. You earn 20% of every terminal subscription, every month, for as long as that merchant stays on us.</strong> No upfront fee. No build cost. No hiring.</p>
       </div>
-      <p class="deal-body">
-        You distribute NeoPaaS to your existing merchant base. We handle every cashier integration, every terminal activation, every ZATCA filing, every reconciliation — on infrastructure your engineers don't touch and your ops team doesn't maintain. <strong>You keep the customer relationship. You earn 20% of every terminal subscription, every month, for as long as that merchant stays on us.</strong> No upfront fee. No build cost. No hiring.
-      </p>
     </div>
   </div>
 </section>
 
-<!-- LIVE CALCULATOR (Rainforest move) -->
+<!-- LIVE CALCULATOR -->
 <section class="calc" id="calc">
   <div class="container">
-    <p class="section-eyebrow">The math</p>
-    <h2>What 20% recurring <em>actually</em> looks like.</h2>
-    <p class="calc-intro">Move the sliders. The number on the right is yours, every year, for as long as the merchants stay on the platform — which historically is forever.</p>
+    <div class="section-head reveal">
+      <div>
+        <p class="section-eyebrow">The math</p>
+        <h2 class="heading">What 20% recurring <span class="alt">actually</span> looks like.</h2>
+      </div>
+      <p class="section-lead">Move the sliders. The number on the right is yours, every year, for as long as the merchants stay on the platform — which historically is forever.</p>
+    </div>
     <div class="calc-grid">
       <div class="calc-controls">
         <div class="control">
@@ -619,10 +658,14 @@
 <!-- SCOPE -->
 <section class="scope">
   <div class="container">
-    <h2>What's on us. What's on you.</h2>
+    <div class="section-head reveal">
+      <h2 class="heading">What's on us. <span class="alt">What's on you.</span></h2>
+      <p class="section-lead">A clean split. You own the relationship. We own the infrastructure. No grey zone in between.</p>
+    </div>
     <div class="scope-grid">
-      <div class="scope-col we">
-        <h3><span class="dot"></span> What NeoPaaS handles</h3>
+      <div class="scope-col we reveal">
+        <p class="scope-eyebrow">— On us</p>
+        <h3>What NeoPaaS handles.</h3>
         <ul>
           <li>All cashier system integrations — FOODICS, OASIS, ERPNext, custom POS</li>
           <li>Acquirer routing — Mada, NeoLeap, Geidea, NmoHub, Arab Bank</li>
@@ -634,8 +677,9 @@
           <li>99.99% uptime SLA with credit-backed guarantees</li>
         </ul>
       </div>
-      <div class="scope-col">
-        <h3><span class="dot"></span> What you keep</h3>
+      <div class="scope-col reveal">
+        <p class="scope-eyebrow">— On you</p>
+        <h3>What you keep.</h3>
         <ul>
           <li>The customer relationship — they're your merchant, on your contract</li>
           <li>Pricing flexibility — set your retail tier; we invoice you net</li>
@@ -651,16 +695,16 @@
   </div>
 </section>
 
-<!-- CODE BLOCK (Stedi move) -->
-<section class="code">
+<!-- CODE BLOCK -->
+<section class="code-section">
   <div class="container">
     <div class="code-grid">
-      <div>
+      <div class="reveal">
         <p class="section-eyebrow">For your engineers</p>
-        <h2>Onboard a merchant in one API call.</h2>
-        <p>No SDK shipping. No on-prem installer. No cable in the store. One POST request and a merchant's entire fleet is live, filing ZATCA, and reconciling in real time. Your engineers see the same docs your customers do — public, versioned, sandboxed.</p>
+        <h2 class="heading">Onboard a merchant in <span class="alt">one API call.</span></h2>
+        <p class="section-lead">No SDK shipping. No on-prem installer. No cable in the store. One POST request and a merchant's entire fleet is live, filing ZATCA, and reconciling in real time. Your engineers see the same docs your customers do — public, versioned, sandboxed.</p>
       </div>
-      <div class="code-block">
+      <div class="code-block reveal">
         <div class="code-header">
           <span class="code-dot r"></span>
           <span class="code-dot y"></span>
@@ -684,35 +728,37 @@
   </div>
 </section>
 
-<!-- TERMS (Helcim move — radical pricing clarity) -->
+<!-- TERMS -->
 <section class="terms">
   <div class="container">
-    <p class="section-eyebrow">The terms — in plain language</p>
-    <h2>No legal warfare. No lock-in. No surprises.</h2>
-    <div class="terms-list">
-      <div class="term-card">
-        <h3>Revenue share</h3>
-        <p><strong>20%</strong> of every merchant subscription, paid monthly, for as long as that merchant uses the platform.</p>
+    <div class="section-head reveal">
+      <h2 class="heading">The terms — in <span class="alt">plain language.</span></h2>
+      <p class="section-lead">No legal warfare. No lock-in. No surprises. The whole deal fits on one page.</p>
+    </div>
+    <div class="terms-grid">
+      <div class="term-card reveal">
+        <p class="term-eyebrow">Revenue share</p>
+        <p class="term-body"><strong>20%</strong> of every merchant subscription, paid monthly, for as long as that merchant uses the platform.</p>
       </div>
-      <div class="term-card">
-        <h3>Term</h3>
-        <p><strong>3 years</strong>, auto-renewing annually. <strong>90-day exit</strong> with notice. No penalty if you leave.</p>
+      <div class="term-card reveal">
+        <p class="term-eyebrow">Term</p>
+        <p class="term-body"><strong>3 years</strong>, auto-renewing annually. <strong>90-day exit</strong> with notice. No penalty if you leave.</p>
       </div>
-      <div class="term-card">
-        <h3>Minimums</h3>
-        <p><strong>None.</strong> No volume commitment. No quota. We earn it merchant by merchant.</p>
+      <div class="term-card reveal">
+        <p class="term-eyebrow">Minimums</p>
+        <p class="term-body"><strong>None.</strong> No volume commitment. No quota. We earn it merchant by merchant.</p>
       </div>
-      <div class="term-card">
-        <h3>Upfront cost</h3>
-        <p><strong>SAR 0.</strong> No setup fee. No integration fee. No "platform" fee.</p>
+      <div class="term-card reveal">
+        <p class="term-eyebrow">Upfront cost</p>
+        <p class="term-body"><strong>SAR 0.</strong> No setup fee. No integration fee. No "platform" fee.</p>
       </div>
-      <div class="term-card">
-        <h3>What we provide</h3>
-        <p>Full platform, dedicated account manager, marketing collateral, partner portal, monthly revenue payouts.</p>
+      <div class="term-card reveal">
+        <p class="term-eyebrow">What we provide</p>
+        <p class="term-body">Full platform, dedicated account manager, marketing collateral, partner portal, monthly revenue payouts.</p>
       </div>
-      <div class="term-card">
-        <h3>What we ask</h3>
-        <p>You actively promote NeoPaaS to your merchant base and provide first-line support. We do everything else.</p>
+      <div class="term-card reveal">
+        <p class="term-eyebrow">What we ask</p>
+        <p class="term-body">You actively promote NeoPaaS to your merchant base and provide first-line support. We do everything else.</p>
       </div>
     </div>
   </div>
@@ -721,8 +767,10 @@
 <!-- FAQ -->
 <section class="faq">
   <div class="container">
-    <p class="section-eyebrow">Questions partners actually ask</p>
-    <h2>The honest answers.</h2>
+    <div class="section-head reveal">
+      <h2 class="heading">Questions partners <span class="alt">actually ask.</span></h2>
+      <p class="section-lead">The honest answers. No marketing hedge.</p>
+    </div>
     <div class="faq-list">
       <details class="faq-item">
         <summary>Why not just build it ourselves?</summary>
@@ -759,7 +807,7 @@
 <!-- FINAL CTA -->
 <section class="final" id="talk">
   <div class="container">
-    <h2>Let's run <em>your</em> numbers.</h2>
+    <h2>Let's run <span class="alt">your numbers.</span></h2>
     <p>If you're an MSP, acquirer, or aggregator with a merchant base in Saudi Arabia — you should know what 20% of your existing book looks like as recurring revenue. A 30-minute call. We'll have an answer by the end of it.</p>
     <div class="cta-row">
       <a href="#contact" class="btn btn-primary">Book the partnership call <span class="arrow">→</span></a>
@@ -778,22 +826,21 @@
       </div>
       <div class="foot-col">
         <h4>Platform</h4>
-        <a href="index.html#platform">Orchestration</a>
-        <a href="index.html#platform">Settlement</a>
-        <a href="index.html#platform">Reconciliation</a>
-        <a href="index.html#platform">Compliance</a>
+        <a href="index.html#what">Overview</a>
+        <a href="index.html#what">Reconciliation</a>
+        <a href="index.html#compliance">Compliance</a>
+        <a href="index.html#what">Dashboard</a>
       </div>
       <div class="foot-col">
-        <h4>Partners</h4>
+        <h4>For</h4>
         <a href="for-payment-providers.html">Payment providers</a>
-        <a href="#">Cashier &amp; ERP systems</a>
-        <a href="#">Merchants</a>
-        <a href="#">Partner directory</a>
+        <a href="for-cashier-systems.html">POS &amp; ERP vendors</a>
+        <a href="for-merchants.html">Merchants</a>
       </div>
       <div class="foot-col">
         <h4>Company</h4>
         <a href="#">About</a>
-        <a href="#">Pricing</a>
+        <a href="#pricing">Pricing</a>
         <a href="#">Resources</a>
         <a href="#">Contact</a>
       </div>
@@ -805,17 +852,48 @@
   </div>
 </footer>
 
-<div class="wf-label">WIREFRAME v1 · FOR PAYMENT PROVIDERS</div>
+<div class="wf-label">WIREFRAME v10 · FOR PAYMENT PROVIDERS</div>
 
 <script>
+  // Counters + reveal observer
+  const animateCounter = (el) => {
+    const target = parseInt(el.dataset.counter);
+    const duration = 1800;
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(target * eased);
+      el.textContent = value.toLocaleString();
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (entry.target.dataset.counter && !entry.target.dataset.fired) {
+          entry.target.dataset.fired = '1';
+          animateCounter(entry.target);
+        }
+        entry.target.querySelectorAll('[data-counter]').forEach(c => {
+          if (!c.dataset.fired) { c.dataset.fired = '1'; animateCounter(c); }
+        });
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.reveal, [data-counter]').forEach(el => io.observe(el));
+
   // Live calculator
   const merchEl = document.getElementById('merchants');
   const termEl = document.getElementById('terminals');
   const priceEl = document.getElementById('price');
 
-  function fmt(n) { return n.toLocaleString('en-US'); }
+  const fmt = (n) => n.toLocaleString('en-US');
 
-  function update() {
+  const update = () => {
     const m = +merchEl.value;
     const t = +termEl.value;
     const p = +priceEl.value;
@@ -832,11 +910,9 @@
     document.getElementById('annual').textContent = fmt(annual);
     document.getElementById('totalVol').textContent = fmt(totalMonthlyVol);
     document.getElementById('ours').textContent = fmt(ours);
-  }
+  };
 
-  merchEl.addEventListener('input', update);
-  termEl.addEventListener('input', update);
-  priceEl.addEventListener('input', update);
+  [merchEl, termEl, priceEl].forEach(el => el.addEventListener('input', update));
   update();
 </script>
 
