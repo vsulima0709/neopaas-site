@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NeoPaaS — One platform behind every card payment in your business.</title>
+<title>NeoPaaS — Card payments, finally under control. Across every store.</title>
 <style>
-  /* v8 — Campfire-flavored, image-light, dynamic */
   :root {
     --bg: #f5f1e8;
     --bg-soft: #ede7d6;
@@ -26,22 +25,17 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    background: var(--bg);
-    color: var(--ink);
+    background: var(--bg); color: var(--ink);
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    font-size: 16px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
   }
   a { color: inherit; text-decoration: none; }
   .container { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
-
-  /* Reveal on scroll */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* ============ NAV ============ */
+  /* NAV */
   nav.top {
     position: sticky; top: 0; z-index: 50;
     background: rgba(245, 241, 232, 0.85);
@@ -52,37 +46,33 @@
   .logo { font-weight: 500; font-size: 26px; letter-spacing: -0.04em; color: var(--ink); }
   .logo::after { content: '.'; color: var(--clay); }
   .nav-links { display: flex; gap: 36px; }
-  .nav-links a { font-size: 15px; font-weight: 400; color: var(--ink); transition: color 0.15s; }
+  .nav-links a { font-size: 15px; color: var(--ink); transition: color 0.15s; }
   .nav-links a:hover { color: var(--clay); }
+  .nav-links a.active { color: var(--clay); }
   .nav-cta {
     background: var(--ink) !important; color: var(--bg) !important;
     padding: 12px 24px; border-radius: 50px;
-    font-size: 15px; font-weight: 500;
-    transition: all 0.2s;
+    font-size: 15px; font-weight: 500; transition: all 0.2s;
   }
   .nav-cta:hover { background: var(--clay) !important; transform: translateY(-1px); }
   @media (max-width: 860px) { .nav-links { display: none; } }
 
-  /* ============ HERO — DARK (Campfire signature) ============ */
+  /* HERO */
   section.hero {
     background: var(--green-deep);
     color: #f9f9f8;
     padding: 120px 0 100px;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
   .hero-bg-glow {
     position: absolute; inset: 0;
     background:
-      radial-gradient(circle at 80% 20%, rgba(194,65,12,0.20) 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba(194,65,12,0.22) 0%, transparent 40%),
       radial-gradient(circle at 20% 80%, rgba(12,59,46,0.6) 0%, transparent 50%);
     pointer-events: none;
     animation: bgPulse 12s ease-in-out infinite;
   }
-  @keyframes bgPulse {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
-  }
+  @keyframes bgPulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
   .hero-content { position: relative; z-index: 2; max-width: 1100px; }
   .live-badge {
     display: inline-flex; align-items: center; gap: 10px;
@@ -90,15 +80,12 @@
     background: rgba(179, 237, 151, 0.10);
     border: 1px solid rgba(179, 237, 151, 0.25);
     border-radius: 50px;
-    font-size: 13px;
-    color: var(--lime);
-    margin-bottom: 32px;
-    letter-spacing: -0.01em;
+    font-size: 13px; color: var(--lime);
+    margin-bottom: 32px; letter-spacing: -0.01em;
   }
   .live-dot {
     width: 8px; height: 8px; border-radius: 50%;
     background: var(--lime);
-    box-shadow: 0 0 0 0 rgba(179, 237, 151, 0.7);
     animation: livePulse 1.8s ease-out infinite;
   }
   @keyframes livePulse {
@@ -108,8 +95,7 @@
   }
   h1.display {
     font-size: clamp(48px, 8vw, 96px);
-    font-weight: 400;
-    line-height: 0.98;
+    font-weight: 400; line-height: 0.98;
     letter-spacing: -0.045em;
     color: #f9f9f8;
     margin-bottom: 32px;
@@ -120,8 +106,7 @@
     font-size: clamp(18px, 1.5vw, 22px);
     line-height: 1.4;
     color: rgba(249, 249, 248, 0.72);
-    max-width: 52ch;
-    margin-bottom: 40px;
+    max-width: 52ch; margin-bottom: 40px;
   }
   .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
   .btn {
@@ -143,7 +128,7 @@
   .btn-secondary-light:hover { background: var(--ink); color: var(--bg); }
 
   .hero-stats {
-    display: grid; grid-template-columns: repeat(4, 1fr);
+    display: grid; grid-template-columns: repeat(3, 1fr);
     gap: 32px;
     margin-top: 64px;
     padding-top: 32px;
@@ -152,37 +137,45 @@
   .hero-stat .num {
     font-size: 40px; font-weight: 400;
     line-height: 1; letter-spacing: -0.04em;
-    color: #f9f9f8;
-    margin-bottom: 8px;
+    color: #f9f9f8; margin-bottom: 8px;
   }
   .hero-stat .label {
-    font-size: 13px; color: rgba(249,249,248,0.55);
-    line-height: 1.4;
+    font-size: 13px; color: rgba(249,249,248,0.55); line-height: 1.4;
   }
-  @media (max-width: 860px) {
-    .hero-stats { grid-template-columns: 1fr 1fr; }
-  }
+  @media (max-width: 860px) { .hero-stats { grid-template-columns: 1fr 1fr; } }
 
-  /* ============ ON-RAMP / PAIN ============ */
-  section.onramp {
-    background: var(--bg);
-    padding: 112px 0;
+  /* SECTION DEFAULTS */
+  section { padding: 112px 0; }
+  .section-head {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: end;
+    margin-bottom: 64px;
   }
-  .pain-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+  .section-eyebrow { font-size: 13px; color: var(--clay); margin-bottom: 20px; }
+  h2.heading {
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 400; line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: var(--ink); max-width: 20ch;
   }
+  p.section-lead {
+    font-size: 19px; color: var(--ink-soft);
+    max-width: 50ch; line-height: 1.45;
+  }
+  @media (max-width: 860px) { .section-head { grid-template-columns: 1fr; gap: 16px; align-items: start; } }
+
+  /* PAIN */
+  section.onramp { background: var(--bg); padding: 112px 0; }
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .pain-card {
     background: var(--bg-soft);
     border-radius: 20px;
     padding: 36px 32px;
-    transition: transform 0.3s ease, background 0.3s ease;
+    transition: transform 0.3s ease;
     position: relative; overflow: hidden;
   }
   .pain-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0;
+    content: ''; position: absolute; top: 0; left: 0;
     width: 0; height: 4px;
     background: var(--clay);
     transition: width 0.4s ease;
@@ -190,8 +183,7 @@
   .pain-card:hover::before { width: 100%; }
   .pain-card:hover { transform: translateY(-3px); }
   .pain-num {
-    font-size: 13px;
-    color: var(--clay);
+    font-size: 13px; color: var(--clay);
     margin-bottom: 18px;
     display: inline-flex; align-items: center; gap: 8px;
   }
@@ -199,112 +191,122 @@
     content: ''; width: 32px; height: 1px; background: var(--line-strong);
   }
   .pain-card p {
-    font-size: 17px;
-    line-height: 1.45;
-    color: var(--ink);
-    letter-spacing: -0.01em;
+    font-size: 17px; line-height: 1.45;
+    color: var(--ink); letter-spacing: -0.01em;
   }
   @media (max-width: 860px) { .pain-grid { grid-template-columns: 1fr; } }
 
-  /* ============ MARQUEE — Campfire signature ============ */
-  section.marquee-section {
-    background: var(--bg);
-    padding: 100px 0;
-    overflow: hidden;
+  /* MANIFESTO */
+  section.manifesto {
+    background: var(--ink);
+    color: #f9f9f8;
+    padding: 140px 0;
   }
-  .marquee-intro {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 56px;
-  }
-  .marquee-intro h2 {
-    font-size: clamp(28px, 3vw, 44px);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.035em;
-    color: var(--ink);
-    margin-bottom: 20px;
-  }
-  .marquee-intro p {
-    font-size: 18px;
-    color: var(--ink-soft);
-    line-height: 1.45;
-  }
-  .marquee-row {
-    display: flex;
-    gap: 16px;
-    animation: marqueeScroll 38s linear infinite;
-    width: max-content;
-  }
-  .marquee-row.reverse {
-    animation: marqueeScrollReverse 42s linear infinite;
-    margin-top: 16px;
-  }
-  @keyframes marqueeScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  @keyframes marqueeScrollReverse {
-    0% { transform: translateX(-50%); }
-    100% { transform: translateX(0); }
-  }
-  .marquee-chip {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 22px;
-    background: transparent;
-    border: 1px solid var(--line-strong);
-    border-radius: 50px;
-    font-size: 17px;
-    color: var(--ink);
-    white-space: nowrap;
-    letter-spacing: -0.01em;
-    transition: background 0.2s, color 0.2s;
-  }
-  .marquee-chip:hover { background: var(--ink); color: var(--bg); }
-  .marquee-chip::before {
-    content: '';
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--clay);
-    flex-shrink: 0;
-  }
-  .marquee-section:hover .marquee-row { animation-play-state: paused; }
-
-  /* ============ SECTION DEFAULTS ============ */
-  section { padding: 112px 0; }
-  .section-head {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: end;
-    margin-bottom: 64px;
-  }
-  .section-eyebrow {
-    font-size: 13px;
-    color: var(--clay);
-    letter-spacing: -0.01em;
-    margin-bottom: 20px;
-  }
-  h2.heading {
+  section.manifesto h2 {
     font-size: clamp(36px, 5vw, 72px);
-    font-weight: 400;
-    line-height: 0.98;
+    font-weight: 400; line-height: 1.05;
     letter-spacing: -0.045em;
-    color: var(--ink);
-    max-width: 20ch;
+    color: #f9f9f8;
+    max-width: 22ch;
+    margin-bottom: 32px;
   }
-  p.section-lead {
-    font-size: 19px;
-    color: var(--ink-soft);
-    max-width: 50ch;
-    line-height: 1.45;
+  section.manifesto h2 .alt { color: var(--lime); }
+  section.manifesto .body p {
+    font-size: 19px; line-height: 1.5;
+    color: rgba(249,249,248,0.65);
+    max-width: 60ch; margin-bottom: 20px;
   }
-  @media (max-width: 860px) { .section-head { grid-template-columns: 1fr; gap: 16px; align-items: start; } }
 
-  /* ============ BENTO GRID — product features ============ */
-  section.bento {
-    background: var(--bg);
-    padding: 80px 0 112px;
+  /* CALCULATOR */
+  section.calc {
+    background: var(--green-deep); color: #f9f9f8;
+    padding: 112px 0;
   }
+  section.calc .section-eyebrow { color: var(--lime); }
+  section.calc h2.heading { color: #f9f9f8; }
+  section.calc h2.heading .alt { color: var(--lime); }
+  section.calc p.section-lead { color: rgba(249,249,248,0.65); }
+  .calc-grid {
+    display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px;
+    align-items: start;
+    margin-top: 24px;
+  }
+  .calc-controls .control { margin-bottom: 32px; }
+  .calc-label {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 12px; font-size: 15px;
+  }
+  .calc-label .name { color: rgba(249,249,248,0.75); }
+  .calc-label .val {
+    font-size: 18px; font-weight: 400;
+    color: var(--lime); letter-spacing: -0.015em;
+  }
+  .calc-controls input[type=range] {
+    width: 100%; height: 4px;
+    background: rgba(249, 249, 248, 0.15); border-radius: 999px;
+    appearance: none; -webkit-appearance: none;
+    outline: none;
+  }
+  .calc-controls input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--lime); border: 3px solid var(--green-deep);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .calc-controls input[type=range]::-moz-range-thumb {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--lime); border: 3px solid var(--green-deep);
+    cursor: pointer;
+  }
+  .calc-output {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 20px;
+    padding: 40px 36px;
+  }
+  .calc-output .calc-eyebrow {
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(249,249,248,0.55);
+    margin-bottom: 12px;
+  }
+  .calc-output .big-num {
+    font-size: clamp(56px, 7vw, 88px);
+    font-weight: 400; line-height: 1;
+    letter-spacing: -0.05em;
+    color: #f9f9f8;
+    margin-bottom: 8px;
+  }
+  .calc-output .big-num .currency { color: var(--lime); font-size: 0.45em; vertical-align: top; margin-right: 0.15em; font-weight: 400; }
+  .calc-output .annual {
+    font-size: 15px;
+    color: var(--lime);
+    margin-bottom: 32px;
+  }
+  .calc-output .breakdown {
+    display: grid; gap: 12px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+  }
+  .calc-output .breakdown div {
+    display: flex; justify-content: space-between;
+    font-size: 14px;
+    color: rgba(249,249,248,0.75);
+  }
+  .calc-output .breakdown div span:last-child {
+    color: #f9f9f8;
+    letter-spacing: -0.01em;
+  }
+  .calc-note {
+    margin-top: 18px;
+    font-size: 13px;
+    color: rgba(249,249,248,0.45);
+    font-style: italic;
+  }
+  @media (max-width: 860px) { .calc-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* BENTO */
+  section.bento { background: var(--bg); padding: 112px 0; }
   .bento-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
@@ -325,52 +327,25 @@
     transform: translateY(-4px);
     box-shadow: 0 24px 48px rgba(12, 59, 46, 0.10);
   }
-  .bento-card.dark {
-    background: var(--green-deep);
-    color: #f9f9f8;
-  }
+  .bento-card.dark { background: var(--green-deep); color: #f9f9f8; }
   .bento-card.dark h3 { color: #f9f9f8; }
   .bento-card.dark p { color: rgba(249,249,248,0.65); }
-  .bento-card.large {
-    grid-row: span 2;
-    min-height: 656px;
-  }
-  .bento-num {
-    font-size: 12px;
-    color: var(--clay);
-    margin-bottom: 16px;
-    letter-spacing: -0.01em;
-  }
+  .bento-card.large { grid-row: span 2; min-height: 656px; }
+  .bento-num { font-size: 12px; color: var(--clay); margin-bottom: 16px; }
   .bento-card h3 {
     font-size: clamp(24px, 2.5vw, 36px);
-    font-weight: 400;
-    letter-spacing: -0.035em;
-    line-height: 1.0;
-    margin-bottom: 16px;
+    font-weight: 400; letter-spacing: -0.035em;
+    line-height: 1.0; margin-bottom: 16px;
     color: var(--ink);
   }
   .bento-card p {
-    font-size: 16px;
-    color: var(--ink-soft);
-    line-height: 1.45;
-    flex: 1;
+    font-size: 16px; color: var(--ink-soft);
+    line-height: 1.45; flex: 1;
   }
   .bento-card.large h3 {
     font-size: clamp(36px, 4vw, 56px);
     max-width: 14ch;
   }
-
-  /* Counter on dark bento */
-  .counter-display {
-    font-size: clamp(64px, 7vw, 112px);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.05em;
-    color: var(--lime);
-    margin: 24px 0 16px;
-  }
-
-  /* Bento mini dashboard preview */
   .mini-dash {
     margin-top: 24px;
     background: #fff;
@@ -412,121 +387,13 @@
     0% { background: rgba(179, 237, 151, 0.35); }
     100% { background: transparent; }
   }
-
   @media (max-width: 860px) {
     .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
     .bento-card.large { grid-row: auto; min-height: 480px; }
   }
 
-  /* ============ MANIFESTO — black section ============ */
-  section.manifesto {
-    background: var(--ink);
-    color: #f9f9f8;
-    padding: 140px 0;
-  }
-  section.manifesto h2 {
-    font-size: clamp(36px, 5vw, 72px);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.045em;
-    color: #f9f9f8;
-    max-width: 22ch;
-    margin-bottom: 32px;
-  }
-  section.manifesto h2 .alt { color: var(--lime); }
-  section.manifesto .body p {
-    font-size: 19px;
-    line-height: 1.5;
-    color: rgba(249,249,248,0.65);
-    max-width: 60ch;
-    margin-bottom: 20px;
-  }
-
-  /* ============ DIAGRAM ============ */
-  section.diagram { background: var(--bg-soft); padding: 112px 0; }
-  .diagram-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-  }
-  .diagram-panel {
-    background: #ffffff;
-    padding: 40px 32px;
-    border-radius: 20px;
-  }
-  .diagram-panel.after {
-    background: var(--green-deep);
-    color: #f9f9f8;
-  }
-  .diagram-label { font-size: 12px; color: var(--ink-soft); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
-  .diagram-panel.after .diagram-label { color: var(--lime); }
-  .diagram-title {
-    font-size: 24px; font-weight: 400; letter-spacing: -0.03em;
-    line-height: 1.0; margin-bottom: 32px;
-    color: var(--ink);
-  }
-  .diagram-panel.after .diagram-title { color: #f9f9f8; }
-  .diagram-svg { width: 100%; height: auto; display: block; margin-bottom: 20px; }
-  .diagram-foot { font-size: 14px; color: var(--ink-soft); line-height: 1.45; }
-  .diagram-panel.after .diagram-foot { color: rgba(249,249,248,0.55); }
-  @media (max-width: 860px) { .diagram-grid { grid-template-columns: 1fr; } }
-
-  /* ============ INDUSTRIES — text-only cards, hover lift ============ */
-  section.industries { background: var(--bg); }
-  .ind-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .ind-card {
-    background: var(--bg-soft);
-    border-radius: 20px;
-    padding: 40px;
-    transition: transform 0.3s ease, background 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .ind-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0;
-    width: 0; height: 4px;
-    background: var(--clay);
-    transition: width 0.4s ease;
-  }
-  .ind-card:hover::before { width: 100%; }
-  .ind-card:hover { transform: translateY(-4px); }
-  .ind-num {
-    font-size: 13px; color: var(--clay); margin-bottom: 14px;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .ind-num::after {
-    content: ''; width: 32px; height: 1px; background: var(--line-strong);
-  }
-  .ind-card h3 {
-    font-size: 32px; font-weight: 400;
-    line-height: 1.0; letter-spacing: -0.035em;
-    margin-bottom: 14px;
-  }
-  .ind-card p { font-size: 17px; color: var(--ink-soft); line-height: 1.45; }
-  @media (max-width: 860px) { .ind-grid { grid-template-columns: 1fr; } }
-
-  /* ============ LOGO WALL ============ */
-  section.logos { background: var(--bg-soft); padding: 72px 0; }
-  .logos-eyebrow { text-align: center; font-size: 13px; color: var(--ink-soft); margin-bottom: 40px; }
-  .logos-grid {
-    display: grid; grid-template-columns: repeat(6, 1fr);
-    gap: 24px;
-    max-width: 1100px; margin: 0 auto;
-  }
-  .logo-slot {
-    height: 56px;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--ink-faint);
-    font-size: 14px;
-    border: 1px dashed var(--line-strong);
-    border-radius: 6px;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .logo-slot:hover { border-color: var(--clay); color: var(--clay); }
-  @media (max-width: 860px) { .logos-grid { grid-template-columns: repeat(3, 1fr); } }
-
-  /* ============ HOW IT WORKS ============ */
-  section.how { background: var(--bg); }
+  /* HOW IT WORKS */
+  section.how { background: var(--bg-soft); }
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
   .step {
     border-top: 1px solid var(--ink);
@@ -543,11 +410,11 @@
   .step p { font-size: 17px; color: var(--ink-soft); line-height: 1.45; }
   @media (max-width: 860px) { .steps { grid-template-columns: 1fr; gap: 32px; } }
 
-  /* ============ COMPLIANCE ============ */
-  section.compliance { background: var(--bg-soft); }
+  /* COMPLIANCE */
+  section.compliance { background: var(--bg); }
   .compliance-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .comp-card {
-    background: var(--bg);
+    background: var(--bg-soft);
     border-radius: 16px;
     padding: 36px 28px;
     transition: transform 0.3s ease;
@@ -565,78 +432,73 @@
   .comp-card p { font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
   @media (max-width: 860px) { .compliance-row { grid-template-columns: 1fr; } }
 
-  /* ============ COMPARE ============ */
-  section.compare { background: var(--bg); }
-  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .compare-col { padding: 48px 40px; border-radius: 20px; }
-  .compare-col.today { background: var(--bg-soft); }
-  .compare-col.neopaas { background: var(--green-deep); color: #f9f9f8; }
-  .compare-eyebrow { font-size: 13px; color: var(--ink-soft); margin-bottom: 14px; }
-  .compare-col.neopaas .compare-eyebrow { color: var(--lime); }
-  .compare-col h3 {
-    font-size: clamp(28px, 3vw, 40px);
-    font-weight: 400; line-height: 1.0; letter-spacing: -0.04em;
-    margin-bottom: 32px;
+  /* PRICING TEASER */
+  section.pricing-teaser { background: var(--bg-soft); }
+  .price-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
   }
-  .compare-col.neopaas h3 { color: #f9f9f8; }
-  .compare-col ul { list-style: none; padding: 0; }
-  .compare-col li {
-    padding: 16px 0;
-    border-top: 1px solid var(--line);
-    font-size: 16px; line-height: 1.4;
-    display: flex; gap: 14px;
-    color: var(--ink-soft);
-  }
-  .compare-col li::before {
-    font-size: 16px; flex-shrink: 0; line-height: 1.4; font-weight: 500;
-  }
-  .compare-col.today li::before { content: '×'; color: var(--ink-faint); font-size: 20px; }
-  .compare-col.neopaas li::before { content: '→'; color: var(--lime); }
-  .compare-col.neopaas li { border-top-color: rgba(255,255,255,0.10); color: rgba(249,249,248,0.85); }
-  @media (max-width: 860px) { .compare-grid { grid-template-columns: 1fr; } }
-
-  /* ============ PARTNERS ============ */
-  section.partners-strip { background: var(--bg-soft); }
-  .strip-grid { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 16px; }
-  .strip-intro {
-    display: flex; flex-direction: column; justify-content: center;
-    padding-right: 24px;
-  }
-  .strip-intro h2 {
-    font-size: clamp(28px, 3vw, 44px);
-    font-weight: 400; line-height: 1.0; letter-spacing: -0.04em;
-    margin-bottom: 18px;
-  }
-  .strip-intro p { font-size: 17px; line-height: 1.45; color: var(--ink-soft); }
-  .partner-card {
+  .price-card {
     background: var(--bg);
-    padding: 32px; border-radius: 20px;
-    display: flex; flex-direction: column;
+    border-radius: 16px;
+    padding: 36px 32px;
     transition: transform 0.3s, box-shadow 0.3s;
   }
-  .partner-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(12,59,46,0.08); }
-  .partner-card .pc-eyebrow { font-size: 12px; color: var(--clay); margin-bottom: 18px; letter-spacing: 0.04em; text-transform: uppercase; }
-  .partner-card h3 {
-    font-size: 26px; font-weight: 400;
-    line-height: 1.0; letter-spacing: -0.035em;
-    margin-bottom: 14px;
+  .price-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(12,59,46,0.08); }
+  .price-eyebrow { font-size: 13px; color: var(--clay); margin-bottom: 14px; }
+  .price-num {
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 400; letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 8px;
   }
-  .partner-card p { font-size: 15px; line-height: 1.5; color: var(--ink-soft); flex: 1; margin-bottom: 20px; }
-  .partner-card .go { font-size: 14px; font-weight: 500; color: var(--green); display: inline-flex; align-items: center; gap: 6px; }
-  .partner-card .go::after { content: '→'; transition: transform 0.15s; }
-  .partner-card:hover .go::after { transform: translateX(4px); }
-  @media (max-width: 860px) { .strip-grid { grid-template-columns: 1fr; } .strip-intro { padding-right: 0; } }
+  .price-num .unit { font-size: 16px; color: var(--ink-soft); letter-spacing: 0; }
+  .price-card .desc {
+    font-size: 15px; color: var(--ink-soft); line-height: 1.45;
+    margin-top: 14px;
+  }
+  @media (max-width: 860px) { .price-grid { grid-template-columns: 1fr; } }
 
-  /* ============ FINAL CTA — dark, big ============ */
+  /* FAQ */
+  section.faq { background: var(--bg); }
+  .faq-list { max-width: 880px; margin-top: 56px; }
+  details.faq-item {
+    border-top: 1px solid var(--line-strong);
+    padding: 24px 0;
+    cursor: pointer;
+  }
+  details.faq-item:last-of-type { border-bottom: 1px solid var(--line-strong); }
+  details.faq-item summary {
+    font-size: 22px; font-weight: 400;
+    letter-spacing: -0.02em;
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px;
+    color: var(--ink);
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary::after {
+    content: '+';
+    font-size: 28px; font-weight: 300;
+    color: var(--clay);
+    transition: transform 0.2s;
+    line-height: 1;
+  }
+  details.faq-item[open] summary::after { content: '−'; }
+  details.faq-item .answer {
+    padding-top: 16px; padding-right: 48px;
+    color: var(--ink-soft);
+    font-size: 17px; line-height: 1.5;
+  }
+
+  /* FINAL CTA */
   section.final {
     background: var(--green-deep); color: #f9f9f8;
-    padding: 160px 0;
-    text-align: center;
+    padding: 160px 0; text-align: center;
     position: relative; overflow: hidden;
   }
   section.final::before {
-    content: '';
-    position: absolute; inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: radial-gradient(circle at 50% 50%, rgba(179,237,151,0.10) 0%, transparent 50%);
     pointer-events: none;
   }
@@ -644,37 +506,27 @@
     font-size: clamp(48px, 7vw, 96px);
     font-weight: 400; letter-spacing: -0.05em;
     line-height: 0.98;
-    margin-bottom: 28px;
-    max-width: 16ch;
+    margin-bottom: 28px; max-width: 16ch;
     margin-left: auto; margin-right: auto;
-    color: #f9f9f8;
-    position: relative;
+    color: #f9f9f8; position: relative;
   }
   section.final h2 .alt { color: var(--lime); }
   section.final p {
     font-size: 19px; color: rgba(249,249,248,0.65);
     max-width: 42ch; margin: 0 auto 36px;
-    line-height: 1.5;
-    position: relative;
+    line-height: 1.5; position: relative;
   }
   section.final .cta-row { justify-content: center; position: relative; }
 
-  /* ============ FOOTER ============ */
+  /* FOOTER */
   footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 72px 0 36px; }
   .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 56px; }
   footer .logo { color: #fff; font-size: 30px; }
   footer .tagline { font-size: 15px; max-width: 30ch; line-height: 1.5; margin-top: 14px; color: rgba(255,255,255,0.55); }
-  .foot-col h4 {
-    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--lime); margin-bottom: 18px; font-weight: 500;
-  }
+  .foot-col h4 { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lime); margin-bottom: 18px; font-weight: 500; }
   .foot-col a { display: block; padding: 6px 0; font-size: 14px; color: rgba(255,255,255,0.6); transition: color 0.15s; }
   .foot-col a:hover { color: #fff; }
-  .foot-bottom {
-    padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.10);
-    font-size: 12px; color: rgba(255,255,255,0.4);
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
-  }
+  .foot-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.10); font-size: 12px; color: rgba(255,255,255,0.4); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
   @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
 
   .wf-label {
@@ -692,53 +544,48 @@
   <div class="container">
     <a href="index.html" class="logo">NeoPaaS</a>
     <div class="nav-links">
-      <a href="#what">Platform</a>
-      <a href="#industries">Industries</a>
-      <a href="for-payment-providers.html">Partners</a>
-      <a href="#pricing">Pricing</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="for-payment-providers.html">Payment providers</a>
+      <a href="for-cashier-systems.html">Cashier systems</a>
     </div>
-    <a href="#talk" class="nav-cta">Get a demo</a>
+    <a href="#talk" class="nav-cta">Book a demo</a>
   </div>
 </nav>
 
-<!-- HERO — Campfire-style dark, lime accent, live badge -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg-glow"></div>
   <div class="container">
     <div class="hero-content">
       <div class="live-badge">
         <span class="live-dot"></span>
-        Built in Riyadh · For multi-branch businesses in Saudi Arabia
+        For multi-branch businesses in Saudi Arabia
       </div>
-      <h1 class="display">One platform behind <span class="alt">every card payment</span> in your business.</h1>
-      <p class="sub">Connect every terminal in every store to one dashboard. Reconcile in real time. File ZATCA automatically.</p>
+      <h1 class="display">Card payments, finally <span class="alt">under control.</span></h1>
+      <p class="sub">One cloud platform for every terminal in every store. Reconcile in real time. File ZATCA automatically. Stop chasing settlements your bank should already have sent.</p>
       <div class="cta-row">
-        <a href="#talk" class="btn btn-primary">Get a demo <span class="arrow">→</span></a>
-        <a href="#what" class="btn btn-secondary">See how it works</a>
+        <a href="#talk" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
+        <a href="#calc" class="btn btn-secondary">Run your numbers</a>
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <div class="num" data-counter="2">0</div>
-          <div class="label">Weeks to live across every store</div>
-        </div>
-        <div class="hero-stat">
           <div class="num" data-counter="30" data-suffix="+">0</div>
-          <div class="label">Hours back to finance, every week</div>
+          <div class="label">Hours a week back to your finance team</div>
         </div>
         <div class="hero-stat">
           <div class="num" data-counter="5">0</div>
           <div class="label">Days faster cash flow on average</div>
         </div>
         <div class="hero-stat">
-          <div class="num" data-counter="100" data-suffix="%">0</div>
-          <div class="label">ZATCA filings, every transaction</div>
+          <div class="num" data-counter="2">0</div>
+          <div class="label">Weeks from signup to live everywhere</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ON-RAMP / PAIN — restored from v7 -->
+<!-- PAIN -->
 <section class="onramp">
   <div class="container">
     <div class="section-head reveal">
@@ -762,130 +609,90 @@
   </div>
 </section>
 
-<!-- MANIFESTO — black section -->
+<!-- MANIFESTO -->
 <section class="manifesto">
   <div class="container">
     <div class="reveal">
-      <h2>Accepting card payments in Saudi Arabia used to be slow, manual and <span class="alt">fragmented.</span></h2>
+      <h2>Your finance team is doing work that should happen <span class="alt">automatically.</span></h2>
       <div class="body">
-        <p>NeoPaaS replaces all of it.</p>
-        <p>One cloud platform. Every terminal. Every branch. Every payment provider. Reconciled and filed, automatically.</p>
+        <p>Reconciliation, ZATCA filing, settlement tracking, terminal monitoring — these are jobs the infrastructure should do. Not your CFO at 11pm in Excel.</p>
+        <p>NeoPaaS does it. One cloud platform. Every terminal. Every branch. Reconciled and filed before you wake up.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DIAGRAM -->
-<section class="diagram" id="what">
+<!-- LIVE CALCULATOR -->
+<section class="calc" id="calc">
   <div class="container">
     <div class="section-head reveal">
-      <h2 class="heading">A dozen integrations. One platform.</h2>
-      <p class="section-lead">Today, accepting a card payment across multiple stores means separately connecting every cashier, terminal, bank, and regulator. We sit in the middle and handle all of it.</p>
-    </div>
-    <div class="diagram-grid">
-      <div class="diagram-panel reveal">
-        <p class="diagram-label">— Today</p>
-        <p class="diagram-title">Direct, point-to-point. Brittle.</p>
-        <svg class="diagram-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-          <g font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#0a0a0a">
-            <rect x="20" y="40" width="100" height="32" rx="6" fill="#f5f1e8" stroke="#0a0a0a" stroke-width="1.2"/>
-            <text x="70" y="60" text-anchor="middle">Branch A</text>
-            <rect x="20" y="135" width="100" height="32" rx="6" fill="#f5f1e8" stroke="#0a0a0a" stroke-width="1.2"/>
-            <text x="70" y="155" text-anchor="middle">Branch B</text>
-            <rect x="20" y="230" width="100" height="32" rx="6" fill="#f5f1e8" stroke="#0a0a0a" stroke-width="1.2"/>
-            <text x="70" y="250" text-anchor="middle">Branch C</text>
-          </g>
-          <g font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#404040">
-            <rect x="280" y="15" width="100" height="26" rx="4" fill="#ede7d6" stroke="#404040" stroke-width="1"/>
-            <text x="330" y="32" text-anchor="middle">Cashier system</text>
-            <rect x="280" y="65" width="100" height="26" rx="4" fill="#ede7d6" stroke="#404040" stroke-width="1"/>
-            <text x="330" y="82" text-anchor="middle">Mada terminal</text>
-            <rect x="280" y="115" width="100" height="26" rx="4" fill="#ede7d6" stroke="#404040" stroke-width="1"/>
-            <text x="330" y="132" text-anchor="middle">Acquirer (bank)</text>
-            <rect x="280" y="165" width="100" height="26" rx="4" fill="#ede7d6" stroke="#404040" stroke-width="1"/>
-            <text x="330" y="182" text-anchor="middle">ZATCA filing</text>
-            <rect x="280" y="215" width="100" height="26" rx="4" fill="#ede7d6" stroke="#404040" stroke-width="1"/>
-            <text x="330" y="232" text-anchor="middle">SAMA reporting</text>
-            <rect x="280" y="265" width="100" height="26" rx="4" fill="#ede7d6" stroke="#404040" stroke-width="1"/>
-            <text x="330" y="282" text-anchor="middle">Reconciliation</text>
-          </g>
-          <g stroke="#c2410c" stroke-width="0.8" fill="none" opacity="0.5">
-            <line x1="120" y1="56" x2="280" y2="28"/><line x1="120" y1="56" x2="280" y2="78"/>
-            <line x1="120" y1="56" x2="280" y2="128"/><line x1="120" y1="56" x2="280" y2="178"/>
-            <line x1="120" y1="56" x2="280" y2="228"/><line x1="120" y1="56" x2="280" y2="278"/>
-            <line x1="120" y1="151" x2="280" y2="28"/><line x1="120" y1="151" x2="280" y2="78"/>
-            <line x1="120" y1="151" x2="280" y2="128"/><line x1="120" y1="151" x2="280" y2="178"/>
-            <line x1="120" y1="151" x2="280" y2="228"/><line x1="120" y1="151" x2="280" y2="278"/>
-            <line x1="120" y1="246" x2="280" y2="28"/><line x1="120" y1="246" x2="280" y2="78"/>
-            <line x1="120" y1="246" x2="280" y2="128"/><line x1="120" y1="246" x2="280" y2="178"/>
-            <line x1="120" y1="246" x2="280" y2="228"/><line x1="120" y1="246" x2="280" y2="278"/>
-          </g>
-        </svg>
-        <p class="diagram-foot">Every branch maintains custom connections to every service. Integrations break. Reconciliation gets harder with every new store.</p>
+      <div>
+        <p class="section-eyebrow">The math</p>
+        <h2 class="heading">What NeoPaaS saves <span class="alt">your business.</span></h2>
       </div>
-      <div class="diagram-panel after reveal">
-        <p class="diagram-label">— With NeoPaaS</p>
-        <p class="diagram-title">One cloud platform in the middle.</p>
-        <svg class="diagram-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-          <g font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#f9f9f8">
-            <rect x="20" y="40" width="100" height="32" rx="6" fill="rgba(255,255,255,0.08)" stroke="#f9f9f8" stroke-width="1"/>
-            <text x="70" y="60" text-anchor="middle">Branch A</text>
-            <rect x="20" y="135" width="100" height="32" rx="6" fill="rgba(255,255,255,0.08)" stroke="#f9f9f8" stroke-width="1"/>
-            <text x="70" y="155" text-anchor="middle">Branch B</text>
-            <rect x="20" y="230" width="100" height="32" rx="6" fill="rgba(255,255,255,0.08)" stroke="#f9f9f8" stroke-width="1"/>
-            <text x="70" y="250" text-anchor="middle">Branch C</text>
-          </g>
-          <g>
-            <rect x="160" y="115" width="80" height="70" rx="10" fill="#b3ed97" stroke="#f9f9f8" stroke-width="1.5"/>
-            <text x="200" y="148" text-anchor="middle" fill="#081f17" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="500">NeoPaaS</text>
-            <text x="200" y="165" text-anchor="middle" fill="#0c3b2e" font-family="Helvetica Neue, Arial, sans-serif" font-size="8" letter-spacing="1">CLOUD</text>
-          </g>
-          <g font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="rgba(249,249,248,0.85)">
-            <rect x="280" y="15" width="100" height="26" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-            <text x="330" y="32" text-anchor="middle">Cashier system</text>
-            <rect x="280" y="65" width="100" height="26" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-            <text x="330" y="82" text-anchor="middle">Mada terminal</text>
-            <rect x="280" y="115" width="100" height="26" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-            <text x="330" y="132" text-anchor="middle">Acquirer (bank)</text>
-            <rect x="280" y="165" width="100" height="26" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-            <text x="330" y="182" text-anchor="middle">ZATCA filing</text>
-            <rect x="280" y="215" width="100" height="26" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-            <text x="330" y="232" text-anchor="middle">SAMA reporting</text>
-            <rect x="280" y="265" width="100" height="26" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-            <text x="330" y="282" text-anchor="middle">Reconciliation</text>
-          </g>
-          <g stroke="#f9f9f8" stroke-width="1.2" fill="none" opacity="0.6">
-            <line x1="120" y1="56" x2="160" y2="135"/>
-            <line x1="120" y1="151" x2="160" y2="150"/>
-            <line x1="120" y1="246" x2="160" y2="165"/>
-          </g>
-          <g stroke="#b3ed97" stroke-width="1.2" fill="none">
-            <line x1="240" y1="135" x2="280" y2="28"/><line x1="240" y1="140" x2="280" y2="78"/>
-            <line x1="240" y1="150" x2="280" y2="128"/><line x1="240" y1="160" x2="280" y2="178"/>
-            <line x1="240" y1="165" x2="280" y2="228"/><line x1="240" y1="170" x2="280" y2="278"/>
-          </g>
-        </svg>
-        <p class="diagram-foot">One integration to NeoPaaS connects every branch to every service. We handle routing, compliance, and reconciliation. Live across your fleet in two weeks.</p>
+      <p class="section-lead">Move the sliders. The number on the right is what you'd save in finance time and working capital, every year.</p>
+    </div>
+    <div class="calc-grid">
+      <div class="calc-controls">
+        <div class="control">
+          <div class="calc-label">
+            <span class="name">Number of branches</span>
+            <span class="val"><span id="branchVal">15</span></span>
+          </div>
+          <input type="range" id="branches" min="2" max="100" step="1" value="15">
+        </div>
+        <div class="control">
+          <div class="calc-label">
+            <span class="name">Average terminals per branch</span>
+            <span class="val"><span id="termVal">4</span></span>
+          </div>
+          <input type="range" id="terminals" min="1" max="15" step="1" value="4">
+        </div>
+        <div class="control">
+          <div class="calc-label">
+            <span class="name">Finance hours / week on reconciliation</span>
+            <span class="val"><span id="hoursVal">30</span> hrs</span>
+          </div>
+          <input type="range" id="hours" min="5" max="80" step="1" value="30">
+        </div>
+        <div class="control">
+          <div class="calc-label">
+            <span class="name">Monthly card volume per terminal</span>
+            <span class="val">SAR <span id="volVal">45,000</span></span>
+          </div>
+          <input type="range" id="volume" min="5000" max="200000" step="5000" value="45000">
+        </div>
+      </div>
+      <div class="calc-output">
+        <p class="calc-eyebrow">Your annual saving</p>
+        <p class="big-num"><span class="currency">SAR</span><span id="annualSave">0</span></p>
+        <p class="annual">Labor recovered + working capital freed, per year.</p>
+        <div class="breakdown">
+          <div><span>Total terminals across your fleet</span><span id="totalTerm">60</span></div>
+          <div><span>Finance hours saved per year</span><span><span id="hoursSaved">0</span> hrs</span></div>
+          <div><span>Labor cost saved per year</span><span>SAR <span id="laborSave">0</span></span></div>
+          <div><span>Cash flow freed (5-day improvement)</span><span>SAR <span id="cashSave">0</span></span></div>
+          <div><span>NeoPaaS cost per year</span><span>SAR <span id="cost">0</span></span></div>
+          <div><span>Payback period</span><span><span id="payback">0</span> months</span></div>
+        </div>
+        <p class="calc-note">Illustrative. Real number depends on your volume mix and current finance staffing. Book a demo for an exact estimate.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BENTO GRID — product features replaces the 3-row spread -->
+<!-- BENTO -->
 <section class="bento">
   <div class="container">
     <div class="section-head reveal">
       <h2 class="heading">What your finance team gets back.</h2>
       <p class="section-lead">From the operator's chair, three things change immediately.</p>
     </div>
-
     <div class="bento-grid">
-      <!-- LARGE CARD with live dashboard preview -->
       <div class="bento-card large dark">
         <p class="bento-num">01 — Reconciliation</p>
         <h3>30 hours a week, back.</h3>
         <p>Every transaction matched to every settlement, automatically. Across every acquirer, terminal, and branch.</p>
-
         <div class="mini-dash" id="liveDash">
           <div class="mini-dash-h">
             <span class="live-text"><span class="live-dot" style="width:6px;height:6px;"></span> Live transactions</span>
@@ -920,73 +727,16 @@
           </div>
         </div>
       </div>
-
-      <!-- ZATCA card -->
       <div class="bento-card">
         <p class="bento-num">02 — ZATCA filing</p>
         <h3>Filed automatically.</h3>
         <p>Every transaction generates a compliant e-invoice and files itself in real time. No batch jobs. No month-end fire drill.</p>
       </div>
-
-      <!-- Visibility card -->
       <div class="bento-card">
         <p class="bento-num">03 — Visibility</p>
         <h3>Every terminal, live.</h3>
         <p>One dashboard for every branch. Today's revenue, last settlement, terminal status. Searchable. Exportable.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- INDUSTRIES — text cards, hover lift, NO PHOTOS -->
-<section class="industries" id="industries">
-  <div class="container">
-    <div class="section-head reveal">
-      <h2 class="heading">Built for multi-branch businesses.</h2>
-      <p class="section-lead">If you run one store, any POS will do. The moment you have multiple terminals across multiple branches, you need us.</p>
-    </div>
-    <div class="ind-grid">
-      <div class="ind-card">
-        <p class="ind-num">01 — F&amp;B</p>
-        <h3>Restaurants &amp; F&amp;B</h3>
-        <p>Quick-service, casual dining, coffee chains, cloud kitchens. 50 to 500 terminals across the kingdom.</p>
-      </div>
-      <div class="ind-card">
-        <p class="ind-num">02 — Retail</p>
-        <h3>Retail chains</h3>
-        <p>Apparel, grocery, electronics, pharmacy. Real-time visibility across every store and region.</p>
-      </div>
-      <div class="ind-card">
-        <p class="ind-num">03 — Hospitality</p>
-        <h3>Hotels &amp; hospitality</h3>
-        <p>Hotel groups and resorts. Front desk, F&amp;B, spa, and POS payments in one view. Audit-ready.</p>
-      </div>
-      <div class="ind-card">
-        <p class="ind-num">04 — Logistics</p>
-        <h3>Logistics &amp; delivery</h3>
-        <p>Couriers, last-mile, field service. Mobile terminals that work anywhere. Cash-on-delivery, replaced.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- LOGO WALL -->
-<section class="logos">
-  <div class="container">
-    <p class="logos-eyebrow">Saudi operators on NeoPaaS</p>
-    <div class="logos-grid">
-      <div class="logo-slot">LOGO</div>
-      <div class="logo-slot">LOGO</div>
-      <div class="logo-slot">LOGO</div>
-      <div class="logo-slot">LOGO</div>
-      <div class="logo-slot">LOGO</div>
-      <div class="logo-slot">LOGO</div>
-      <div class="logo-slot">LOGO</div>
-      <div class="logo-slot">LOGO</div>
-      <div class="logo-slot">LOGO</div>
-      <div class="logo-slot">LOGO</div>
-      <div class="logo-slot">LOGO</div>
-      <div class="logo-slot">LOGO</div>
     </div>
   </div>
 </section>
@@ -1042,61 +792,68 @@
   </div>
 </section>
 
-<!-- COMPARE -->
-<section class="compare">
+<!-- PRICING TEASER -->
+<section class="pricing-teaser" id="pricing">
   <div class="container">
     <div class="section-head reveal">
-      <h2 class="heading">How payments work today. And with NeoPaaS.</h2>
+      <h2 class="heading">Pricing that scales with you.</h2>
+      <p class="section-lead">Per-terminal subscription, volume-tiered. No setup fee. No long-term lock-in.</p>
     </div>
-    <div class="compare-grid">
-      <div class="compare-col today">
-        <p class="compare-eyebrow">Today</p>
-        <h3>Manual, fragmented, slow.</h3>
-        <ul>
-          <li>Reconciliation eats 30+ hours a week in Excel</li>
-          <li>ZATCA filed in batches, with a month-end scramble</li>
-          <li>Multiple bank portals for terminal visibility</li>
-          <li>Settlement files arrive T+3 to T+5</li>
-          <li>New terminal onboarding takes 2-3 weeks per store</li>
-          <li>Compliance burden lives with your finance team</li>
-        </ul>
+    <div class="price-grid">
+      <div class="price-card">
+        <p class="price-eyebrow">Small fleet · 1–50 terminals</p>
+        <p class="price-num">SAR 22<span class="unit"> / terminal / month</span></p>
+        <p class="desc">For chains and groups starting their first multi-branch rollout. Full platform included.</p>
       </div>
-      <div class="compare-col neopaas">
-        <p class="compare-eyebrow">With NeoPaaS</p>
-        <h3>Automatic, unified, real-time.</h3>
-        <ul>
-          <li>Reconciliation happens automatically, across every provider</li>
-          <li>ZATCA filed per transaction, the instant it lands</li>
-          <li>One dashboard for every terminal in every branch</li>
-          <li>Settlement tracked live, T+0 visibility</li>
-          <li>New terminals onboard in minutes, in bulk</li>
-          <li>Compliance is built in. We maintain it.</li>
-        </ul>
+      <div class="price-card">
+        <p class="price-eyebrow">Mid-market · 51–200 terminals</p>
+        <p class="price-num">SAR 18<span class="unit"> / terminal / month</span></p>
+        <p class="desc">Most common tier. Includes dedicated account manager and SLA-backed support.</p>
+      </div>
+      <div class="price-card">
+        <p class="price-eyebrow">Enterprise · 200+ terminals</p>
+        <p class="price-num">SAR 14<span class="unit"> / terminal / month</span></p>
+        <p class="desc">Custom pricing below the rate above. Direct technical line. Priority roadmap input.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PARTNERS -->
-<section class="partners-strip">
+<!-- FAQ -->
+<section class="faq">
   <div class="container">
-    <div class="strip-grid">
-      <div class="strip-intro">
-        <h2>Distribute NeoPaaS to your customers.</h2>
-        <p>If you're a payment provider or a software vendor, there's a partner program that earns you recurring revenue with no engineering work.</p>
-      </div>
-      <a href="for-payment-providers.html" class="partner-card">
-        <p class="pc-eyebrow">For payment providers</p>
-        <h3>MSPs &amp; acquirers</h3>
-        <p>Distribute NeoPaaS to your existing merchant base. 20% recurring. Zero engineering.</p>
-        <span class="go">Partner program</span>
-      </a>
-      <a href="#cashier" class="partner-card">
-        <p class="pc-eyebrow">For software vendors</p>
-        <h3>POS, ERP &amp; kiosk vendors</h3>
-        <p>White-label NeoPaaS inside your product. Ship payments in 4 weeks instead of building for 18 months.</p>
-        <span class="go">White-label program</span>
-      </a>
+    <div class="section-head reveal">
+      <h2 class="heading">Questions operators actually ask.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Will this work with my current POS / cashier system?</summary>
+        <p class="answer">Almost certainly. We're already integrated with FOODICS, OASIS, ERPNext, Odoo, and a long list of others. If yours isn't on the list, we'll add it during your week-one setup. No SDK to install on your side.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Will this work with my current bank / acquirer?</summary>
+        <p class="answer">Yes. We route through Mada, NeoLeap, Geidea, NmoHub, Arab Bank, and others. You keep your existing acquirer relationships. We just orchestrate across them.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if a terminal goes down?</summary>
+        <p class="answer">You'll see it in the dashboard within 60 seconds — branch, terminal ID, last successful transaction, current connectivity status. Your operations team can dispatch before a single customer is impacted.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How long until we're live across every store?</summary>
+        <p class="answer">Two weeks from signed contract. Week 1: we integrate. Week 2: we train your team and switch branches over one at a time. Day 14: every terminal is on NeoPaaS, reconciling, filing.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What does support look like?</summary>
+        <p class="answer">24/7 technical, Arabic and English. Slack channel for your finance and ops teams. Dedicated account manager. 99.99% uptime SLA with credit-backed guarantees. Response time under 15 minutes for critical issues.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if we want to leave?</summary>
+        <p class="answer">90-day notice, no penalty. We hand you back your full transaction history, your settlement records, and your ZATCA filings in standard formats. You're never locked in by data.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is this really better than what my bank gives me?</summary>
+        <p class="answer">Your bank gives you transaction processing. We give you a platform layer on top — across every bank you use, with reconciliation, ZATCA filing, terminal monitoring, and a real dashboard. Your bank's portal stops at "your transactions on us." Ours covers your entire business.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -1105,9 +862,9 @@
 <section class="final" id="talk">
   <div class="container">
     <h2>See it for <span class="alt">your business.</span></h2>
-    <p>30 minutes. We connect to your real data and show you what changes.</p>
+    <p>30 minutes. We connect to your real data and show you exactly what changes — across your stores, your terminals, your reconciliation week.</p>
     <div class="cta-row">
-      <a href="#contact" class="btn btn-primary">Get a demo <span class="arrow">→</span></a>
+      <a href="#contact" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
       <a href="#pricing" class="btn btn-secondary">See pricing</a>
     </div>
   </div>
@@ -1123,23 +880,21 @@
       </div>
       <div class="foot-col">
         <h4>Platform</h4>
-        <a href="#what">Overview</a>
-        <a href="#what">Reconciliation</a>
-        <a href="#compliance">Compliance</a>
-        <a href="#what">Dashboard</a>
+        <a href="index.html#what">Overview</a>
+        <a href="index.html#what">Reconciliation</a>
+        <a href="index.html#compliance">Compliance</a>
+        <a href="index.html#what">Dashboard</a>
       </div>
       <div class="foot-col">
         <h4>For</h4>
-        <a href="#industries">Restaurants &amp; F&amp;B</a>
-        <a href="#industries">Retail chains</a>
-        <a href="#industries">Hotels</a>
-        <a href="#industries">Logistics</a>
-        <a href="for-payment-providers.html">Partners</a>
+        <a href="index.html">Merchants</a>
+        <a href="for-payment-providers.html">Payment providers</a>
+        <a href="for-cashier-systems.html">Cashier systems</a>
       </div>
       <div class="foot-col">
         <h4>Company</h4>
         <a href="#">About</a>
-        <a href="#">Pricing</a>
+        <a href="#pricing">Pricing</a>
         <a href="#">Resources</a>
         <a href="#">Contact</a>
       </div>
@@ -1151,10 +906,10 @@
   </div>
 </footer>
 
-<div class="wf-label">WIREFRAME v10 · CLEAN FLOW</div>
+<div class="wf-label">WIREFRAME v10 · HOME</div>
 
 <script>
-  // ============ Counter animation on viewport entry ============
+  // Counters
   const animateCounter = (el) => {
     const target = parseInt(el.dataset.counter);
     const suffix = el.dataset.suffix || '';
@@ -1169,29 +924,66 @@
     };
     requestAnimationFrame(step);
   };
-
-  // ============ Reveal-on-scroll ============
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         if (entry.target.dataset.counter) animateCounter(entry.target);
-        const counters = entry.target.querySelectorAll('[data-counter]');
-        counters.forEach(c => {
-          if (!c.dataset.fired) {
-            c.dataset.fired = '1';
-            animateCounter(c);
-          }
+        entry.target.querySelectorAll('[data-counter]').forEach(c => {
+          if (!c.dataset.fired) { c.dataset.fired = '1'; animateCounter(c); }
         });
         io.unobserve(entry.target);
       }
     });
   }, { threshold: 0.2 });
-
   document.querySelectorAll('.reveal, [data-counter]').forEach(el => io.observe(el));
 
-  // ============ Simulated live transaction feed ============
-  const branches = ['Riyadh — Olaya', 'Jeddah — Tahlia', 'Dammam — King Fahd', 'Riyadh — Diplomatic', 'Jeddah — Corniche', 'Riyadh — Olaya', 'Dammam — King Fahd', 'Jeddah — Tahlia'];
+  // ROI Calculator
+  const branchEl = document.getElementById('branches');
+  const termEl = document.getElementById('terminals');
+  const hoursEl = document.getElementById('hours');
+  const volEl = document.getElementById('volume');
+
+  const fmt = (n) => Math.round(n).toLocaleString('en-US');
+
+  const updateCalc = () => {
+    const branches = +branchEl.value;
+    const termPerBranch = +termEl.value;
+    const hoursWeek = +hoursEl.value;
+    const vol = +volEl.value;
+
+    const totalTerminals = branches * termPerBranch;
+    const hourlyRate = 95; // SAR/hour fully loaded finance staff
+    const hoursSavedYear = hoursWeek * 50 * 0.9; // 90% reduction over 50 working weeks
+    const laborSave = hoursSavedYear * hourlyRate;
+    const totalMonthlyVol = totalTerminals * vol;
+    const cashSave = (totalMonthlyVol / 30) * 5; // 5-day improvement
+    // Pricing tier
+    let perTerm = 22;
+    if (totalTerminals > 50) perTerm = 18;
+    if (totalTerminals > 200) perTerm = 14;
+    const cost = totalTerminals * perTerm * 12;
+    const totalSave = laborSave + (cashSave * 0.06); // cash freed at 6% capital cost
+    const payback = cost > 0 ? Math.max(1, Math.round((cost / totalSave) * 12)) : 0;
+
+    document.getElementById('branchVal').textContent = branches;
+    document.getElementById('termVal').textContent = termPerBranch;
+    document.getElementById('hoursVal').textContent = hoursWeek;
+    document.getElementById('volVal').textContent = fmt(vol);
+    document.getElementById('totalTerm').textContent = totalTerminals;
+    document.getElementById('hoursSaved').textContent = fmt(hoursSavedYear);
+    document.getElementById('laborSave').textContent = fmt(laborSave);
+    document.getElementById('cashSave').textContent = fmt(cashSave);
+    document.getElementById('cost').textContent = fmt(cost);
+    document.getElementById('annualSave').textContent = fmt(totalSave);
+    document.getElementById('payback').textContent = payback;
+  };
+
+  [branchEl, termEl, hoursEl, volEl].forEach(el => el.addEventListener('input', updateCalc));
+  updateCalc();
+
+  // Simulated live transaction feed
+  const branches = ['Riyadh — Olaya', 'Jeddah — Tahlia', 'Dammam — King Fahd', 'Riyadh — Diplomatic', 'Jeddah — Corniche'];
   const amounts = ['287.50', '1,420.00', '95.00', '624.75', '88.00', '342.10', '1,150.50', '78.25', '410.00', '215.75'];
   const statuses = [
     {label: 'Settled', cls: 'pill'},
@@ -1199,7 +991,6 @@
     {label: 'Settled', cls: 'pill'},
     {label: 'Pending', cls: 'pill pending'}
   ];
-
   const rows = document.getElementById('dashRows');
   const addRow = () => {
     if (!rows) return;
