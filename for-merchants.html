@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For merchants — Card payments, under control. Across every store. | NeoPaaS</title>
+<style>
+  :root {
+    --bg: #f5f1e8;
+    --bg-soft: #ede7d6;
+    --ink: #0a0a0a;
+    --ink-soft: #404040;
+    --ink-faint: #7f7f7f;
+    --green: #0c3b2e;
+    --green-deep: #081f17;
+    --green-soft: #1f5546;
+    --clay: #c2410c;
+    --clay-soft: #ea580c;
+    --lime: #b3ed97;
+    --line: rgba(0, 0, 0, 0.10);
+    --line-strong: rgba(0, 0, 0, 0.22);
+    --line-dark: rgba(255, 255, 255, 0.10);
+    --container: 1328px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* NAV */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245, 241, 232, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.top .container { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .logo { font-weight: 500; font-size: 26px; letter-spacing: -0.04em; color: var(--ink); }
+  .logo::after { content: '.'; color: var(--clay); }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a { font-size: 15px; color: var(--ink); transition: color 0.15s; }
+  .nav-links a:hover { color: var(--clay); }
+  .nav-links a.active { color: var(--clay); }
+  .nav-cta {
+    background: var(--ink) !important; color: var(--bg) !important;
+    padding: 12px 24px; border-radius: 50px;
+    font-size: 15px; font-weight: 500; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--clay) !important; transform: translateY(-1px); }
+  @media (max-width: 860px) { .nav-links { display: none; } }
+
+  /* HERO */
+  section.hero {
+    background: var(--green-deep);
+    color: #f9f9f8;
+    padding: 120px 0 100px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-glow {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(194,65,12,0.22) 0%, transparent 40%),
+      radial-gradient(circle at 20% 80%, rgba(12,59,46,0.6) 0%, transparent 50%);
+    pointer-events: none;
+    animation: bgPulse 12s ease-in-out infinite;
+  }
+  @keyframes bgPulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+  .hero-content { position: relative; z-index: 2; max-width: 1100px; }
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 16px;
+    background: rgba(179, 237, 151, 0.10);
+    border: 1px solid rgba(179, 237, 151, 0.25);
+    border-radius: 50px;
+    font-size: 13px; color: var(--lime);
+    margin-bottom: 32px; letter-spacing: -0.01em;
+  }
+  .live-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--lime);
+    animation: livePulse 1.8s ease-out infinite;
+  }
+  @keyframes livePulse {
+    0% { box-shadow: 0 0 0 0 rgba(179, 237, 151, 0.6); }
+    70% { box-shadow: 0 0 0 8px rgba(179, 237, 151, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(179, 237, 151, 0); }
+  }
+  h1.display {
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 400; line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: #f9f9f8;
+    margin-bottom: 32px;
+    max-width: 18ch;
+  }
+  h1.display .alt { color: var(--lime); }
+  .sub {
+    font-size: clamp(18px, 1.5vw, 22px);
+    line-height: 1.4;
+    color: rgba(249, 249, 248, 0.72);
+    max-width: 52ch; margin-bottom: 40px;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 28px; border-radius: 50px;
+    font-size: 15px; font-weight: 500;
+    transition: all 0.2s; border: 1.5px solid transparent;
+    cursor: pointer; line-height: 1;
+  }
+  .btn-primary { background: var(--lime); color: var(--green-deep); }
+  .btn-primary:hover { background: #c8f5b3; transform: translateY(-2px); }
+  .btn-secondary { border-color: rgba(249,249,248,0.30); color: #f9f9f8; background: transparent; }
+  .btn-secondary:hover { border-color: #f9f9f8; }
+  .btn .arrow { transition: transform 0.15s; }
+  .btn:hover .arrow { transform: translateX(3px); }
+  .btn-primary-light { background: var(--ink); color: var(--bg); }
+  .btn-primary-light:hover { background: var(--clay); transform: translateY(-2px); }
+  .btn-secondary-light { border-color: var(--ink); color: var(--ink); background: transparent; }
+  .btn-secondary-light:hover { background: var(--ink); color: var(--bg); }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line-dark);
+  }
+  .hero-stat .num {
+    font-size: 40px; font-weight: 400;
+    line-height: 1; letter-spacing: -0.04em;
+    color: #f9f9f8; margin-bottom: 8px;
+  }
+  .hero-stat .label {
+    font-size: 13px; color: rgba(249,249,248,0.55); line-height: 1.4;
+  }
+  @media (max-width: 860px) { .hero-stats { grid-template-columns: 1fr 1fr; } }
+
+  /* SECTION DEFAULTS */
+  section { padding: 112px 0; }
+  .section-head {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: end;
+    margin-bottom: 64px;
+  }
+  .section-eyebrow { font-size: 13px; color: var(--clay); margin-bottom: 20px; }
+  h2.heading {
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 400; line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: var(--ink); max-width: 20ch;
+  }
+  p.section-lead {
+    font-size: 19px; color: var(--ink-soft);
+    max-width: 50ch; line-height: 1.45;
+  }
+  @media (max-width: 860px) { .section-head { grid-template-columns: 1fr; gap: 16px; align-items: start; } }
+
+  /* PAIN */
+  section.onramp { background: var(--bg); padding: 112px 0; }
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pain-card {
+    background: var(--bg-soft);
+    border-radius: 20px;
+    padding: 36px 32px;
+    transition: transform 0.3s ease;
+    position: relative; overflow: hidden;
+  }
+  .pain-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 0; height: 4px;
+    background: var(--clay);
+    transition: width 0.4s ease;
+  }
+  .pain-card:hover::before { width: 100%; }
+  .pain-card:hover { transform: translateY(-3px); }
+  .pain-num {
+    font-size: 13px; color: var(--clay);
+    margin-bottom: 18px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .pain-num::after {
+    content: ''; width: 32px; height: 1px; background: var(--line-strong);
+  }
+  .pain-card p {
+    font-size: 17px; line-height: 1.45;
+    color: var(--ink); letter-spacing: -0.01em;
+  }
+  @media (max-width: 860px) { .pain-grid { grid-template-columns: 1fr; } }
+
+  /* MANIFESTO */
+  section.manifesto {
+    background: var(--ink);
+    color: #f9f9f8;
+    padding: 140px 0;
+  }
+  section.manifesto h2 {
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 400; line-height: 1.05;
+    letter-spacing: -0.045em;
+    color: #f9f9f8;
+    max-width: 22ch;
+    margin-bottom: 32px;
+  }
+  section.manifesto h2 .alt { color: var(--lime); }
+  section.manifesto .body p {
+    font-size: 19px; line-height: 1.5;
+    color: rgba(249,249,248,0.65);
+    max-width: 60ch; margin-bottom: 20px;
+  }
+
+  /* CALCULATOR */
+  section.calc {
+    background: var(--green-deep); color: #f9f9f8;
+    padding: 112px 0;
+  }
+  section.calc .section-eyebrow { color: var(--lime); }
+  section.calc h2.heading { color: #f9f9f8; }
+  section.calc h2.heading .alt { color: var(--lime); }
+  section.calc p.section-lead { color: rgba(249,249,248,0.65); }
+  .calc-grid {
+    display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px;
+    align-items: start;
+    margin-top: 24px;
+  }
+  .calc-controls .control { margin-bottom: 32px; }
+  .calc-label {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 12px; font-size: 15px;
+  }
+  .calc-label .name { color: rgba(249,249,248,0.75); }
+  .calc-label .val {
+    font-size: 18px; font-weight: 400;
+    color: var(--lime); letter-spacing: -0.015em;
+  }
+  .calc-controls input[type=range] {
+    width: 100%; height: 4px;
+    background: rgba(249, 249, 248, 0.15); border-radius: 999px;
+    appearance: none; -webkit-appearance: none;
+    outline: none;
+  }
+  .calc-controls input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--lime); border: 3px solid var(--green-deep);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .calc-controls input[type=range]::-moz-range-thumb {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--lime); border: 3px solid var(--green-deep);
+    cursor: pointer;
+  }
+  .calc-output {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 20px;
+    padding: 40px 36px;
+  }
+  .calc-output .calc-eyebrow {
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(249,249,248,0.55);
+    margin-bottom: 12px;
+  }
+  .calc-output .big-num {
+    font-size: clamp(56px, 7vw, 88px);
+    font-weight: 400; line-height: 1;
+    letter-spacing: -0.05em;
+    color: #f9f9f8;
+    margin-bottom: 8px;
+  }
+  .calc-output .big-num .currency { color: var(--lime); font-size: 0.45em; vertical-align: top; margin-right: 0.15em; font-weight: 400; }
+  .calc-output .annual {
+    font-size: 15px;
+    color: var(--lime);
+    margin-bottom: 32px;
+  }
+  .calc-output .breakdown {
+    display: grid; gap: 12px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+  }
+  .calc-output .breakdown div {
+    display: flex; justify-content: space-between;
+    font-size: 14px;
+    color: rgba(249,249,248,0.75);
+  }
+  .calc-output .breakdown div span:last-child {
+    color: #f9f9f8;
+    letter-spacing: -0.01em;
+  }
+  .calc-note {
+    margin-top: 18px;
+    font-size: 13px;
+    color: rgba(249,249,248,0.45);
+    font-style: italic;
+  }
+  @media (max-width: 860px) { .calc-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* BENTO */
+  section.bento { background: var(--bg); padding: 112px 0; }
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+  }
+  .bento-card {
+    background: var(--bg-soft);
+    border-radius: 20px;
+    padding: 36px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 320px;
+    display: flex; flex-direction: column;
+  }
+  .bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(12, 59, 46, 0.10);
+  }
+  .bento-card.dark { background: var(--green-deep); color: #f9f9f8; }
+  .bento-card.dark h3 { color: #f9f9f8; }
+  .bento-card.dark p { color: rgba(249,249,248,0.65); }
+  .bento-card.large { grid-row: span 2; min-height: 656px; }
+  .bento-num { font-size: 12px; color: var(--clay); margin-bottom: 16px; }
+  .bento-card h3 {
+    font-size: clamp(24px, 2.5vw, 36px);
+    font-weight: 400; letter-spacing: -0.035em;
+    line-height: 1.0; margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .bento-card p {
+    font-size: 16px; color: var(--ink-soft);
+    line-height: 1.45; flex: 1;
+  }
+  .bento-card.large h3 {
+    font-size: clamp(36px, 4vw, 56px);
+    max-width: 14ch;
+  }
+  .mini-dash {
+    margin-top: 24px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    flex: 1;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .mini-dash-h {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 12px; border-bottom: 1px solid var(--line);
+    margin-bottom: 12px;
+    font-size: 12px;
+  }
+  .mini-dash-h .live-text { display: inline-flex; align-items: center; gap: 6px; color: var(--green); }
+  .mini-dash-row {
+    display: grid; grid-template-columns: 1fr auto auto;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 12px;
+    align-items: center;
+  }
+  .mini-dash-row:last-child { border-bottom: none; }
+  .mini-dash-row .branch { color: var(--ink); }
+  .mini-dash-row .amt { color: var(--ink); font-feature-settings: "tnum"; }
+  .mini-dash-row .pill {
+    padding: 2px 8px; border-radius: 99px;
+    font-size: 10px;
+    background: rgba(12, 59, 46, 0.08); color: var(--green);
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .mini-dash-row.new {
+    animation: rowFlash 1.6s ease-out;
+  }
+  @keyframes rowFlash {
+    0% { background: rgba(179, 237, 151, 0.35); }
+    100% { background: transparent; }
+  }
+  @media (max-width: 860px) {
+    .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .bento-card.large { grid-row: auto; min-height: 480px; }
+  }
+
+  /* HOW IT WORKS */
+  section.how { background: var(--bg-soft); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .step {
+    border-top: 1px solid var(--ink);
+    padding-top: 20px;
+    transition: padding-top 0.3s ease;
+  }
+  .step:hover { padding-top: 16px; border-top-color: var(--clay); border-top-width: 3px; }
+  .step-num { font-size: 13px; color: var(--clay); margin-bottom: 18px; }
+  .step h3 {
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 400; line-height: 1.0; letter-spacing: -0.035em;
+    margin-bottom: 16px;
+  }
+  .step p { font-size: 17px; color: var(--ink-soft); line-height: 1.45; }
+  @media (max-width: 860px) { .steps { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* COMPLIANCE */
+  section.compliance { background: var(--bg); }
+  .compliance-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .comp-card {
+    background: var(--bg-soft);
+    border-radius: 16px;
+    padding: 36px 28px;
+    transition: transform 0.3s ease;
+  }
+  .comp-card:hover { transform: translateY(-3px); }
+  .comp-card h4 {
+    font-size: 18px; font-weight: 500; letter-spacing: -0.02em;
+    color: var(--green); margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .comp-card h4::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--lime);
+  }
+  .comp-card p { font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
+  @media (max-width: 860px) { .compliance-row { grid-template-columns: 1fr; } }
+
+  /* PRICING TEASER */
+  section.pricing-teaser { background: var(--bg-soft); }
+  .price-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+  }
+  .price-card {
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 36px 32px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .price-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(12,59,46,0.08); }
+  .price-eyebrow { font-size: 13px; color: var(--clay); margin-bottom: 14px; }
+  .price-num {
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 400; letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .price-num .unit { font-size: 16px; color: var(--ink-soft); letter-spacing: 0; }
+  .price-card .desc {
+    font-size: 15px; color: var(--ink-soft); line-height: 1.45;
+    margin-top: 14px;
+  }
+  @media (max-width: 860px) { .price-grid { grid-template-columns: 1fr; } }
+
+  /* FAQ */
+  section.faq { background: var(--bg); }
+  .faq-list { max-width: 880px; margin-top: 56px; }
+  details.faq-item {
+    border-top: 1px solid var(--line-strong);
+    padding: 24px 0;
+    cursor: pointer;
+  }
+  details.faq-item:last-of-type { border-bottom: 1px solid var(--line-strong); }
+  details.faq-item summary {
+    font-size: 22px; font-weight: 400;
+    letter-spacing: -0.02em;
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px;
+    color: var(--ink);
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary::after {
+    content: '+';
+    font-size: 28px; font-weight: 300;
+    color: var(--clay);
+    transition: transform 0.2s;
+    line-height: 1;
+  }
+  details.faq-item[open] summary::after { content: '−'; }
+  details.faq-item .answer {
+    padding-top: 16px; padding-right: 48px;
+    color: var(--ink-soft);
+    font-size: 17px; line-height: 1.5;
+  }
+
+  /* FINAL CTA */
+  section.final {
+    background: var(--green-deep); color: #f9f9f8;
+    padding: 160px 0; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  section.final::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(179,237,151,0.10) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  section.final h2 {
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 400; letter-spacing: -0.05em;
+    line-height: 0.98;
+    margin-bottom: 28px; max-width: 16ch;
+    margin-left: auto; margin-right: auto;
+    color: #f9f9f8; position: relative;
+  }
+  section.final h2 .alt { color: var(--lime); }
+  section.final p {
+    font-size: 19px; color: rgba(249,249,248,0.65);
+    max-width: 42ch; margin: 0 auto 36px;
+    line-height: 1.5; position: relative;
+  }
+  section.final .cta-row { justify-content: center; position: relative; }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 72px 0 36px; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 56px; }
+  footer .logo { color: #fff; font-size: 30px; }
+  footer .tagline { font-size: 15px; max-width: 30ch; line-height: 1.5; margin-top: 14px; color: rgba(255,255,255,0.55); }
+  .foot-col h4 { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lime); margin-bottom: 18px; font-weight: 500; }
+  .foot-col a { display: block; padding: 6px 0; font-size: 14px; color: rgba(255,255,255,0.6); transition: color 0.15s; }
+  .foot-col a:hover { color: #fff; }
+  .foot-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.10); font-size: 12px; color: rgba(255,255,255,0.4); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+
+  .wf-label {
+    position: fixed; bottom: 16px; right: 16px; z-index: 100;
+    background: var(--ink); color: var(--bg);
+    padding: 6px 12px; border-radius: 999px;
+    font-size: 11px; opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="container">
+    <a href="index.html" class="logo">NeoPaaS</a>
+    <div class="nav-links">
+      <a href="index.html#what">Platform</a>
+      <a href="for-merchants.html" class="active">For your business</a>
+      <a href="for-payment-providers.html">Partners</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <a href="#talk" class="nav-cta">Book a demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="live-badge">
+        <span class="live-dot"></span>
+        For multi-branch businesses in Saudi Arabia
+      </div>
+      <h1 class="display">Card payments, finally <span class="alt">under control.</span></h1>
+      <p class="sub">One cloud platform for every terminal in every store. Reconcile in real time. File ZATCA automatically. Stop chasing settlements your bank should already have sent.</p>
+      <div class="cta-row">
+        <a href="#talk" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
+        <a href="#calc" class="btn btn-secondary">Run your numbers</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num" data-counter="30" data-suffix="+">0</div>
+          <div class="label">Hours a week back to your finance team</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num" data-counter="5">0</div>
+          <div class="label">Days faster cash flow on average</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num" data-counter="2">0</div>
+          <div class="label">Weeks from signup to live everywhere</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="onramp">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="heading">Sound familiar?</h2>
+      <p class="section-lead">If any of these three are part of your week, you already know why we exist.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <p class="pain-num">a.</p>
+        <p>Your finance team spends every week chasing settlement files from the bank. They still can't tell which transaction matches which order.</p>
+      </div>
+      <div class="pain-card reveal">
+        <p class="pain-num">b.</p>
+        <p>Your stores use terminals from two or three different acquirers. Reconciliation is a spreadsheet job that takes longer every month.</p>
+      </div>
+      <div class="pain-card reveal">
+        <p class="pain-num">c.</p>
+        <p>ZATCA filing is a panic every month-end. Rejected invoices show up weeks later. Someone has to fix them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="container">
+    <div class="reveal">
+      <h2>Your finance team is doing work that should happen <span class="alt">automatically.</span></h2>
+      <div class="body">
+        <p>Reconciliation, ZATCA filing, settlement tracking, terminal monitoring — these are jobs the infrastructure should do. Not your CFO at 11pm in Excel.</p>
+        <p>NeoPaaS does it. One cloud platform. Every terminal. Every branch. Reconciled and filed before you wake up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE CALCULATOR -->
+<section class="calc" id="calc">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <p class="section-eyebrow">The math</p>
+        <h2 class="heading">What NeoPaaS saves <span class="alt">your business.</span></h2>
+      </div>
+      <p class="section-lead">Move the sliders. The number on the right is what you'd save in finance time and working capital, every year.</p>
+    </div>
+    <div class="calc-grid">
+      <div class="calc-controls">
+        <div class="control">
+          <div class="calc-label">
+            <span class="name">Number of branches</span>
+            <span class="val"><span id="branchVal">15</span></span>
+          </div>
+          <input type="range" id="branches" min="2" max="100" step="1" value="15">
+        </div>
+        <div class="control">
+          <div class="calc-label">
+            <span class="name">Average terminals per branch</span>
+            <span class="val"><span id="termVal">4</span></span>
+          </div>
+          <input type="range" id="terminals" min="1" max="15" step="1" value="4">
+        </div>
+        <div class="control">
+          <div class="calc-label">
+            <span class="name">Finance hours / week on reconciliation</span>
+            <span class="val"><span id="hoursVal">30</span> hrs</span>
+          </div>
+          <input type="range" id="hours" min="5" max="80" step="1" value="30">
+        </div>
+        <div class="control">
+          <div class="calc-label">
+            <span class="name">Monthly card volume per terminal</span>
+            <span class="val">SAR <span id="volVal">45,000</span></span>
+          </div>
+          <input type="range" id="volume" min="5000" max="200000" step="5000" value="45000">
+        </div>
+      </div>
+      <div class="calc-output">
+        <p class="calc-eyebrow">Your annual saving</p>
+        <p class="big-num"><span class="currency">SAR</span><span id="annualSave">0</span></p>
+        <p class="annual">Labor recovered + working capital freed, per year.</p>
+        <div class="breakdown">
+          <div><span>Total terminals across your fleet</span><span id="totalTerm">60</span></div>
+          <div><span>Finance hours saved per year</span><span><span id="hoursSaved">0</span> hrs</span></div>
+          <div><span>Labor cost saved per year</span><span>SAR <span id="laborSave">0</span></span></div>
+          <div><span>Cash flow freed (5-day improvement)</span><span>SAR <span id="cashSave">0</span></span></div>
+          <div><span>NeoPaaS cost per year</span><span>SAR <span id="cost">0</span></span></div>
+          <div><span>Payback period</span><span><span id="payback">0</span> months</span></div>
+        </div>
+        <p class="calc-note">Illustrative. Real number depends on your volume mix and current finance staffing. Book a demo for an exact estimate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENTO -->
+<section class="bento">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="heading">What your finance team gets back.</h2>
+      <p class="section-lead">From the operator's chair, three things change immediately.</p>
+    </div>
+    <div class="bento-grid">
+      <div class="bento-card large dark">
+        <p class="bento-num">01 — Reconciliation</p>
+        <h3>30 hours a week, back.</h3>
+        <p>Every transaction matched to every settlement, automatically. Across every acquirer, terminal, and branch.</p>
+        <div class="mini-dash" id="liveDash">
+          <div class="mini-dash-h">
+            <span class="live-text"><span class="live-dot" style="width:6px;height:6px;"></span> Live transactions</span>
+            <span style="color:var(--ink-faint)">Today · 25 Jun</span>
+          </div>
+          <div id="dashRows">
+            <div class="mini-dash-row">
+              <div class="branch">Riyadh — Olaya</div>
+              <div class="amt">SAR 287.50</div>
+              <div><span class="pill">Settled</span></div>
+            </div>
+            <div class="mini-dash-row">
+              <div class="branch">Jeddah — Tahlia</div>
+              <div class="amt">SAR 1,420.00</div>
+              <div><span class="pill">Settled</span></div>
+            </div>
+            <div class="mini-dash-row">
+              <div class="branch">Dammam — King Fahd</div>
+              <div class="amt">SAR 95.00</div>
+              <div><span class="pill">Settled</span></div>
+            </div>
+            <div class="mini-dash-row">
+              <div class="branch">Riyadh — Diplomatic</div>
+              <div class="amt">SAR 624.75</div>
+              <div><span class="pill">Settled</span></div>
+            </div>
+            <div class="mini-dash-row">
+              <div class="branch">Jeddah — Corniche</div>
+              <div class="amt">SAR 88.00</div>
+              <div><span class="pill">Settled</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-card">
+        <p class="bento-num">02 — ZATCA filing</p>
+        <h3>Filed automatically.</h3>
+        <p>Every transaction generates a compliant e-invoice and files itself in real time. No batch jobs. No month-end fire drill.</p>
+      </div>
+      <div class="bento-card">
+        <p class="bento-num">03 — Visibility</p>
+        <h3>Every terminal, live.</h3>
+        <p>One dashboard for every branch. Today's revenue, last settlement, terminal status. Searchable. Exportable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="heading">Live across every store in two weeks.</h2>
+      <p class="section-lead">We do the setup. Your team learns the dashboard in an afternoon.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <p class="step-num">— 01 Week one</p>
+        <h3>We integrate your setup.</h3>
+        <p>Your cashier system, your terminals, your bank, your ZATCA account. No new vendors. No new hardware.</p>
+      </div>
+      <div class="step">
+        <p class="step-num">— 02 Week two</p>
+        <h3>We train your team.</h3>
+        <p>Finance, store managers, IT. One live session and they own the dashboard. We stay on Slack from day one.</p>
+      </div>
+      <div class="step">
+        <p class="step-num">— 03 Day 14</p>
+        <h3>You're live.</h3>
+        <p>We switch branches over one at a time, monitoring as we go. By day fourteen, every terminal is on NeoPaaS.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<section class="compliance" id="compliance">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="heading">Compliance, built in.</h2>
+      <p class="section-lead">Saudi compliance is mandatory and changes often. We've built it once, properly. We update it every time the rules change.</p>
+    </div>
+    <div class="compliance-row">
+      <div class="comp-card">
+        <h4>ZATCA Phase 2</h4>
+        <p>Every transaction generates a compliant e-invoice and files in real time. No batch jobs. No rejection emails.</p>
+      </div>
+      <div class="comp-card">
+        <h4>SAMA reporting</h4>
+        <p>Transaction monitoring, AML signals, and required reporting handled in the background.</p>
+      </div>
+      <div class="comp-card">
+        <h4>PCI-DSS Level 1</h4>
+        <p>The highest tier of card data security, audited annually. Your business never touches a card number.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING TEASER -->
+<section class="pricing-teaser" id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="heading">Pricing that scales with you.</h2>
+      <p class="section-lead">Per-terminal subscription, volume-tiered. No setup fee. No long-term lock-in.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <p class="price-eyebrow">Small fleet · 1–50 terminals</p>
+        <p class="price-num">SAR 22<span class="unit"> / terminal / month</span></p>
+        <p class="desc">For chains and groups starting their first multi-branch rollout. Full platform included.</p>
+      </div>
+      <div class="price-card">
+        <p class="price-eyebrow">Mid-market · 51–200 terminals</p>
+        <p class="price-num">SAR 18<span class="unit"> / terminal / month</span></p>
+        <p class="desc">Most common tier. Includes dedicated account manager and SLA-backed support.</p>
+      </div>
+      <div class="price-card">
+        <p class="price-eyebrow">Enterprise · 200+ terminals</p>
+        <p class="price-num">SAR 14<span class="unit"> / terminal / month</span></p>
+        <p class="desc">Custom pricing below the rate above. Direct technical line. Priority roadmap input.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="heading">Questions operators actually ask.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Will this work with my current POS / cashier system?</summary>
+        <p class="answer">Almost certainly. We're already integrated with FOODICS, OASIS, ERPNext, Odoo, and a long list of others. If yours isn't on the list, we'll add it during your week-one setup. No SDK to install on your side.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Will this work with my current bank / acquirer?</summary>
+        <p class="answer">Yes. We route through Mada, NeoLeap, Geidea, NmoHub, Arab Bank, and others. You keep your existing acquirer relationships. We just orchestrate across them.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if a terminal goes down?</summary>
+        <p class="answer">You'll see it in the dashboard within 60 seconds — branch, terminal ID, last successful transaction, current connectivity status. Your operations team can dispatch before a single customer is impacted.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How long until we're live across every store?</summary>
+        <p class="answer">Two weeks from signed contract. Week 1: we integrate. Week 2: we train your team and switch branches over one at a time. Day 14: every terminal is on NeoPaaS, reconciling, filing.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What does support look like?</summary>
+        <p class="answer">24/7 technical, Arabic and English. Slack channel for your finance and ops teams. Dedicated account manager. 99.99% uptime SLA with credit-backed guarantees. Response time under 15 minutes for critical issues.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if we want to leave?</summary>
+        <p class="answer">90-day notice, no penalty. We hand you back your full transaction history, your settlement records, and your ZATCA filings in standard formats. You're never locked in by data.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is this really better than what my bank gives me?</summary>
+        <p class="answer">Your bank gives you transaction processing. We give you a platform layer on top — across every bank you use, with reconciliation, ZATCA filing, terminal monitoring, and a real dashboard. Your bank's portal stops at "your transactions on us." Ours covers your entire business.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="talk">
+  <div class="container">
+    <h2>See it for <span class="alt">your business.</span></h2>
+    <p>30 minutes. We connect to your real data and show you exactly what changes — across your stores, your terminals, your reconciliation week.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
+      <a href="#pricing" class="btn btn-secondary">See pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <p class="logo">NeoPaaS</p>
+        <p class="tagline">The cloud payment platform for Saudi Arabia's multi-branch businesses. Built in Riyadh by Bab Innovations.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Platform</h4>
+        <a href="index.html#what">Overview</a>
+        <a href="index.html#what">Reconciliation</a>
+        <a href="index.html#compliance">Compliance</a>
+        <a href="index.html#what">Dashboard</a>
+      </div>
+      <div class="foot-col">
+        <h4>For</h4>
+        <a href="for-payment-providers.html">Payment providers</a>
+        <a href="for-cashier-systems.html">POS &amp; ERP vendors</a>
+        <a href="for-merchants.html">Merchants</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#">Resources</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Bab Innovations · Riyadh, Saudi Arabia</span>
+      <span>Privacy · Terms · Security</span>
+    </div>
+  </div>
+</footer>
+
+<div class="wf-label">WIREFRAME v10 · FOR MERCHANTS</div>
+
+<script>
+  // Counters
+  const animateCounter = (el) => {
+    const target = parseInt(el.dataset.counter);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(target * eased);
+      el.textContent = value.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (entry.target.dataset.counter) animateCounter(entry.target);
+        entry.target.querySelectorAll('[data-counter]').forEach(c => {
+          if (!c.dataset.fired) { c.dataset.fired = '1'; animateCounter(c); }
+        });
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.reveal, [data-counter]').forEach(el => io.observe(el));
+
+  // ROI Calculator
+  const branchEl = document.getElementById('branches');
+  const termEl = document.getElementById('terminals');
+  const hoursEl = document.getElementById('hours');
+  const volEl = document.getElementById('volume');
+
+  const fmt = (n) => Math.round(n).toLocaleString('en-US');
+
+  const updateCalc = () => {
+    const branches = +branchEl.value;
+    const termPerBranch = +termEl.value;
+    const hoursWeek = +hoursEl.value;
+    const vol = +volEl.value;
+
+    const totalTerminals = branches * termPerBranch;
+    const hourlyRate = 95; // SAR/hour fully loaded finance staff
+    const hoursSavedYear = hoursWeek * 50 * 0.9; // 90% reduction over 50 working weeks
+    const laborSave = hoursSavedYear * hourlyRate;
+    const totalMonthlyVol = totalTerminals * vol;
+    const cashSave = (totalMonthlyVol / 30) * 5; // 5-day improvement
+    // Pricing tier
+    let perTerm = 22;
+    if (totalTerminals > 50) perTerm = 18;
+    if (totalTerminals > 200) perTerm = 14;
+    const cost = totalTerminals * perTerm * 12;
+    const totalSave = laborSave + (cashSave * 0.06); // cash freed at 6% capital cost
+    const payback = cost > 0 ? Math.max(1, Math.round((cost / totalSave) * 12)) : 0;
+
+    document.getElementById('branchVal').textContent = branches;
+    document.getElementById('termVal').textContent = termPerBranch;
+    document.getElementById('hoursVal').textContent = hoursWeek;
+    document.getElementById('volVal').textContent = fmt(vol);
+    document.getElementById('totalTerm').textContent = totalTerminals;
+    document.getElementById('hoursSaved').textContent = fmt(hoursSavedYear);
+    document.getElementById('laborSave').textContent = fmt(laborSave);
+    document.getElementById('cashSave').textContent = fmt(cashSave);
+    document.getElementById('cost').textContent = fmt(cost);
+    document.getElementById('annualSave').textContent = fmt(totalSave);
+    document.getElementById('payback').textContent = payback;
+  };
+
+  [branchEl, termEl, hoursEl, volEl].forEach(el => el.addEventListener('input', updateCalc));
+  updateCalc();
+
+  // Simulated live transaction feed
+  const branches = ['Riyadh — Olaya', 'Jeddah — Tahlia', 'Dammam — King Fahd', 'Riyadh — Diplomatic', 'Jeddah — Corniche'];
+  const amounts = ['287.50', '1,420.00', '95.00', '624.75', '88.00', '342.10', '1,150.50', '78.25', '410.00', '215.75'];
+  const statuses = [
+    {label: 'Settled', cls: 'pill'},
+    {label: 'Settled', cls: 'pill'},
+    {label: 'Settled', cls: 'pill'},
+    {label: 'Pending', cls: 'pill pending'}
+  ];
+  const rows = document.getElementById('dashRows');
+  const addRow = () => {
+    if (!rows) return;
+    const branch = branches[Math.floor(Math.random() * branches.length)];
+    const amount = amounts[Math.floor(Math.random() * amounts.length)];
+    const status = statuses[Math.floor(Math.random() * statuses.length)];
+    const row = document.createElement('div');
+    row.className = 'mini-dash-row new';
+    row.innerHTML = `
+      <div class="branch">${branch}</div>
+      <div class="amt">SAR ${amount}</div>
+      <div><span class="${status.cls}" style="${status.label === 'Pending' ? 'background:rgba(194,65,12,0.1);color:#c2410c' : ''}">${status.label}</span></div>
+    `;
+    rows.insertBefore(row, rows.firstChild);
+    if (rows.children.length > 5) rows.removeChild(rows.lastChild);
+  };
+  setInterval(addRow, 3200);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For payment providers — Stop building. Start earning. | NeoPaaS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f1e8;
+    --bg-soft: #ede7d6;
+    --ink: #1a1614;
+    --ink-soft: #5a544e;
+    --green: #0c3b2e;
+    --green-soft: #1f5546;
+    --clay: #c2410c;
+    --clay-soft: #ea580c;
+    --line: rgba(26, 22, 20, 0.12);
+    --container: 1200px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1.0625rem; line-height: 1.55;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 2rem; }
+
+  /* NAV */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245, 241, 232, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.top .container { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .logo { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.03em; color: var(--green); }
+  .logo::after { content: '.'; color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--ink-soft); transition: color 0.15s; }
+  .nav-links a.active { color: var(--ink); }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--green); color: #fff !important;
+    padding: 0.6rem 1.2rem; border-radius: 999px;
+    font-size: 0.9rem; font-weight: 500;
+  }
+  .nav-cta:hover { background: var(--green-soft); }
+  @media (max-width: 760px) { .nav-links { display: none; } }
+
+  /* HERO */
+  section.hero {
+    padding: 5rem 0 4rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; color: var(--ink-soft);
+    margin-bottom: 1.75rem;
+    letter-spacing: 0.03em;
+  }
+  .breadcrumb span { color: var(--clay); }
+  h1.display {
+    font-size: clamp(2.6rem, 6.5vw, 5.5rem);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+    max-width: 18ch;
+    margin-bottom: 2rem;
+  }
+  h1.display em {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic; font-weight: 400; color: var(--green);
+  }
+  .sub {
+    font-size: clamp(1.1rem, 1.6vw, 1.375rem);
+    color: var(--ink-soft);
+    max-width: 52ch;
+    line-height: 1.5;
+    margin-bottom: 2.5rem;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 4rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.95rem 1.5rem; border-radius: 999px;
+    font-size: 0.95rem; font-weight: 500;
+    transition: all 0.15s; border: 1.5px solid transparent;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--green); color: #fff; }
+  .btn-primary:hover { background: var(--green-soft); }
+  .btn-secondary { border-color: var(--ink); color: var(--ink); background: transparent; }
+  .btn-secondary:hover { background: var(--ink); color: var(--bg); }
+  .btn .arrow { transition: transform 0.15s; }
+  .btn:hover .arrow { transform: translateX(3px); }
+  .hero-stats {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    padding-top: 2.5rem; border-top: 1px solid var(--line);
+  }
+  .hero-stats .stat { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--ink-soft); }
+  .hero-stats .stat strong {
+    display: block; font-family: 'Inter', sans-serif;
+    font-size: 1.75rem; font-weight: 700; color: var(--ink);
+    letter-spacing: -0.02em; margin-bottom: 0.25rem;
+  }
+  .hero-stats .stat strong em { color: var(--clay); font-style: normal; }
+
+  /* PAIN SECTION (Light move — bold big numbers) */
+  section.pain {
+    padding: 7rem 0;
+    background: var(--ink);
+    color: var(--bg);
+  }
+  section.pain .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--clay-soft);
+    margin-bottom: 1.5rem;
+  }
+  section.pain h2 {
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin-bottom: 4rem;
+    max-width: 18ch;
+  }
+  section.pain h2 em {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic; font-weight: 400; color: var(--clay-soft);
+  }
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+  .pain-stat { border-top: 1px solid rgba(245, 241, 232, 0.25); padding-top: 1.5rem; }
+  .pain-stat .num {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    color: var(--clay-soft);
+    margin-bottom: 1rem;
+  }
+  .pain-stat .label {
+    color: rgba(245, 241, 232, 0.7);
+    font-size: 1.05rem; line-height: 1.4;
+  }
+  @media (max-width: 860px) { .pain-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  /* THE DEAL */
+  section.deal {
+    padding: 7rem 0;
+  }
+  .deal-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
+  .deal-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 1.5rem;
+  }
+  .deal-grid h2 {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  .deal-grid p.deal-body {
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .deal-grid p.deal-body strong { color: var(--green); }
+  @media (max-width: 860px) { .deal-grid { grid-template-columns: 1fr; gap: 2rem; } }
+
+  /* CALCULATOR (Rainforest move — live ROI on page) */
+  section.calc {
+    padding: var(--section, 6rem) 0;
+    background: var(--green);
+    color: var(--bg);
+  }
+  section.calc .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--clay-soft); margin-bottom: 1.5rem;
+  }
+  section.calc h2 {
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    font-weight: 700; letter-spacing: -0.035em;
+    line-height: 1.05; margin-bottom: 1rem; max-width: 22ch;
+  }
+  section.calc h2 em {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic; font-weight: 400; color: var(--clay-soft);
+  }
+  section.calc > .container > p.calc-intro { color: rgba(245, 241, 232, 0.7); max-width: 50ch; margin-bottom: 4rem; }
+  .calc-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: start; }
+  .calc-controls .control { margin-bottom: 2.25rem; }
+  .calc-label {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+  }
+  .calc-label .name { color: rgba(245, 241, 232, 0.7); font-weight: 500; }
+  .calc-label .val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.05rem; font-weight: 500;
+    color: var(--clay-soft);
+  }
+  .calc-controls input[type=range] {
+    width: 100%; height: 4px;
+    background: rgba(245, 241, 232, 0.2); border-radius: 999px;
+    appearance: none; -webkit-appearance: none;
+    outline: none;
+  }
+  .calc-controls input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--clay); border: 3px solid var(--bg);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+  .calc-controls input[type=range]::-moz-range-thumb {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--clay); border: 3px solid var(--bg);
+    cursor: pointer;
+  }
+  .calc-output {
+    background: rgba(245, 241, 232, 0.06);
+    border: 1px solid rgba(245, 241, 232, 0.15);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+  }
+  .calc-output .calc-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(245, 241, 232, 0.55);
+    margin-bottom: 0.75rem;
+  }
+  .calc-output .big-num {
+    font-size: clamp(3.5rem, 7vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    color: var(--bg);
+    margin-bottom: 0.5rem;
+  }
+  .calc-output .big-num .currency { color: var(--clay-soft); font-size: 0.55em; vertical-align: top; margin-right: 0.15em; }
+  .calc-output .annual {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--clay-soft);
+    margin-bottom: 2.5rem;
+  }
+  .calc-output .breakdown {
+    display: grid; grid-template-columns: 1fr; gap: 0.85rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(245, 241, 232, 0.15);
+  }
+  .calc-output .breakdown div {
+    display: flex; justify-content: space-between;
+    font-size: 0.92rem;
+    color: rgba(245, 241, 232, 0.75);
+  }
+  .calc-output .breakdown div span:last-child {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--bg);
+  }
+  .calc-note {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: rgba(245, 241, 232, 0.5);
+    font-style: italic;
+  }
+  @media (max-width: 860px) { .calc-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  /* SCOPE — what we handle / you handle */
+  section.scope { padding: 7rem 0; border-bottom: 1px solid var(--line); }
+  section.scope h2 {
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    font-weight: 700; letter-spacing: -0.035em;
+    line-height: 1.05; margin-bottom: 3rem;
+    max-width: 22ch;
+  }
+  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .scope-col {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 2.5rem;
+  }
+  .scope-col.we { background: var(--green); color: var(--bg); border-color: var(--green); }
+  .scope-col h3 {
+    font-size: 1.5rem; font-weight: 700; letter-spacing: -0.025em;
+    margin-bottom: 1.75rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .scope-col h3 .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--clay);
+    display: inline-block;
+  }
+  .scope-col.we h3 .dot { background: var(--clay-soft); }
+  .scope-col ul { list-style: none; padding: 0; }
+  .scope-col li {
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--line);
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  .scope-col.we li { border-top-color: rgba(245, 241, 232, 0.15); color: rgba(245, 241, 232, 0.9); }
+  .scope-col li:first-child { border-top: none; padding-top: 0; }
+  @media (max-width: 760px) { .scope-grid { grid-template-columns: 1fr; } }
+
+  /* CODE BLOCK (Stedi move) */
+  section.code {
+    padding: 7rem 0;
+    background: var(--bg-soft);
+  }
+  .code-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
+  .code-grid .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 1.5rem;
+  }
+  .code-grid h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; letter-spacing: -0.03em;
+    line-height: 1.1; margin-bottom: 1.5rem;
+  }
+  .code-grid p { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.5; }
+  .code-block {
+    background: var(--ink);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(12, 59, 46, 0.12);
+  }
+  .code-header {
+    background: rgba(255,255,255,0.04);
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .code-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+  .code-dot.r { background: #ef4444; opacity: 0.6; }
+  .code-dot.y { background: #eab308; opacity: 0.6; }
+  .code-dot.g { background: #22c55e; opacity: 0.6; }
+  .code-file {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+  }
+  .code-body {
+    padding: 1.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem; line-height: 1.7;
+    color: rgba(245, 241, 232, 0.85);
+    overflow-x: auto;
+  }
+  .code-body .kw { color: #c084fc; }
+  .code-body .str { color: #fde68a; }
+  .code-body .fn { color: #93c5fd; }
+  .code-body .com { color: rgba(245, 241, 232, 0.4); font-style: italic; }
+  .code-body .ok { color: #86efac; }
+  @media (max-width: 860px) { .code-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  /* TERMS (Helcim move — radical clarity) */
+  section.terms { padding: 7rem 0; }
+  section.terms .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 1.5rem;
+  }
+  section.terms h2 {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 700; letter-spacing: -0.03em;
+    line-height: 1.05; margin-bottom: 3rem; max-width: 22ch;
+  }
+  .terms-list {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+  }
+  .term-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+  .term-card h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 0.75rem;
+  }
+  .term-card p {
+    font-size: 1.25rem; font-weight: 500;
+    letter-spacing: -0.015em; line-height: 1.35;
+    color: var(--ink);
+  }
+  .term-card p strong { color: var(--green); font-weight: 700; }
+  @media (max-width: 760px) { .terms-list { grid-template-columns: 1fr; } }
+
+  /* FAQ */
+  section.faq { padding: 7rem 0; background: var(--bg-soft); }
+  section.faq .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 1.5rem;
+  }
+  section.faq h2 {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 700; letter-spacing: -0.03em;
+    line-height: 1.05; margin-bottom: 3rem;
+  }
+  .faq-list { max-width: 800px; }
+  details.faq-item {
+    border-top: 1px solid var(--line);
+    padding: 1.5rem 0;
+    cursor: pointer;
+  }
+  details.faq-item:last-of-type { border-bottom: 1px solid var(--line); }
+  details.faq-item summary {
+    font-size: 1.25rem; font-weight: 600;
+    letter-spacing: -0.015em;
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem;
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary::after {
+    content: '+';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.4rem; font-weight: 400;
+    color: var(--clay);
+    transition: transform 0.2s;
+  }
+  details.faq-item[open] summary::after { content: '−'; }
+  details.faq-item .answer {
+    padding-top: 1rem; padding-right: 3rem;
+    color: var(--ink-soft); font-size: 1.0625rem; line-height: 1.55;
+  }
+
+  /* FINAL CTA */
+  section.final {
+    padding: 8rem 0;
+    text-align: center;
+  }
+  section.final h2 {
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    font-weight: 700; letter-spacing: -0.035em;
+    line-height: 1.02; margin-bottom: 1.5rem;
+  }
+  section.final h2 em {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic; font-weight: 400; color: var(--clay);
+  }
+  section.final p {
+    font-size: 1.15rem; color: var(--ink-soft);
+    max-width: 42ch; margin: 0 auto 2.5rem;
+  }
+  section.final .cta-row { justify-content: center; margin-bottom: 0; }
+
+  /* FOOTER */
+  footer { background: var(--green); color: rgba(245, 241, 232, 0.7); padding: 4rem 0 2rem; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  footer .logo { color: var(--bg); }
+  footer .tagline { font-size: 0.95rem; max-width: 28ch; line-height: 1.5; margin-top: 1rem; }
+  .foot-col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--clay-soft); margin-bottom: 1.25rem;
+  }
+  .foot-col a { display: block; padding: 0.4rem 0; font-size: 0.95rem; color: rgba(245, 241, 232, 0.7); }
+  .foot-col a:hover { color: var(--bg); }
+  .foot-bottom {
+    padding-top: 2rem; border-top: 1px solid rgba(245, 241, 232, 0.15);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; color: rgba(245, 241, 232, 0.5);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+
+  .wf-label {
+    position: fixed; bottom: 1rem; right: 1rem; z-index: 100;
+    background: var(--ink); color: var(--bg);
+    padding: 0.5rem 0.85rem; border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.05em; opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="container">
+    <a href="index.html" class="logo">NeoPaaS</a>
+    <div class="nav-links">
+      <a href="index.html#platform">Platform</a>
+      <a href="for-payment-providers.html" class="active">Partners</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+    </div>
+    <a href="#talk" class="nav-cta">Talk to partnerships</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <p class="breadcrumb">For payment providers <span>·</span> MSPs <span>·</span> Acquirers</p>
+    <h1 class="display">Stop building integrations. <em>Start earning</em> from them.</h1>
+    <p class="sub">Your engineers spend 30–40% of their time on merchant integrations. That's your cost center. Distribute NeoPaaS to your merchant base instead — and turn it into a recurring revenue stream. Zero code from your team.</p>
+    <div class="cta-row">
+      <a href="#talk" class="btn btn-primary">Talk to partnerships <span class="arrow">→</span></a>
+      <a href="#calc" class="btn btn-secondary">Run the numbers</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>20<em>%</em></strong>recurring revenue share</div>
+      <div class="stat"><strong>4 weeks</strong>to first merchant live</div>
+      <div class="stat"><strong>SAR 0</strong>upfront. Ever.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN (Light move — bold giant numbers on dark) -->
+<section class="pain">
+  <div class="container">
+    <p class="section-eyebrow">The integration tax you're already paying</p>
+    <h2>Every merchant you onboard costs you <em>three weeks</em> and a team of engineers.</h2>
+    <div class="pain-grid">
+      <div class="pain-stat">
+        <p class="num">30–40%</p>
+        <p class="label">Of engineering time spent on custom SDK work, store-by-store activations, and integration troubleshooting.</p>
+      </div>
+      <div class="pain-stat">
+        <p class="num">SAR 1.1M+</p>
+        <p class="label">Annual cost of running integration as a cost center — fully-loaded engineering, ops, and support.</p>
+      </div>
+      <div class="pain-stat">
+        <p class="num">3–12 wks</p>
+        <p class="label">Time from signed merchant to first transaction processed. Every week is a week of churn risk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE DEAL -->
+<section class="deal">
+  <div class="container">
+    <div class="deal-grid">
+      <div>
+        <p class="deal-eyebrow">The partnership</p>
+        <h2>One agreement. Three things change.</h2>
+      </div>
+      <p class="deal-body">
+        You distribute NeoPaaS to your existing merchant base. We handle every cashier integration, every terminal activation, every ZATCA filing, every reconciliation — on infrastructure your engineers don't touch and your ops team doesn't maintain. <strong>You keep the customer relationship. You earn 20% of every terminal subscription, every month, for as long as that merchant stays on us.</strong> No upfront fee. No build cost. No hiring.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE CALCULATOR (Rainforest move) -->
+<section class="calc" id="calc">
+  <div class="container">
+    <p class="section-eyebrow">The math</p>
+    <h2>What 20% recurring <em>actually</em> looks like.</h2>
+    <p class="calc-intro">Move the sliders. The number on the right is yours, every year, for as long as the merchants stay on the platform — which historically is forever.</p>
+    <div class="calc-grid">
+      <div class="calc-controls">
+        <div class="control">
+          <div class="calc-label">
+            <span class="name">Merchants you distribute to</span>
+            <span class="val"><span id="mVal">500</span></span>
+          </div>
+          <input type="range" id="merchants" min="50" max="2000" step="50" value="500">
+        </div>
+        <div class="control">
+          <div class="calc-label">
+            <span class="name">Average terminals per merchant</span>
+            <span class="val"><span id="tVal">5</span></span>
+          </div>
+          <input type="range" id="terminals" min="1" max="20" step="1" value="5">
+        </div>
+        <div class="control">
+          <div class="calc-label">
+            <span class="name">Subscription tier</span>
+            <span class="val">SAR <span id="pVal">22</span>/terminal/month</span>
+          </div>
+          <input type="range" id="price" min="12" max="30" step="1" value="22">
+        </div>
+        <div class="control">
+          <div class="calc-label">
+            <span class="name">Your revenue share</span>
+            <span class="val">20%</span>
+          </div>
+          <input type="range" min="20" max="20" step="1" value="20" disabled style="opacity: 0.4;">
+        </div>
+      </div>
+      <div class="calc-output">
+        <p class="calc-eyebrow">Your recurring revenue, per month</p>
+        <p class="big-num"><span class="currency">SAR</span><span id="monthly">11,000</span></p>
+        <p class="annual">SAR <span id="annual">132,000</span> per year · zero engineering</p>
+        <div class="breakdown">
+          <div><span>Total merchant volume / month</span><span>SAR <span id="totalVol">55,000</span></span></div>
+          <div><span>Your 20% share / month</span><span>SAR <span id="monthly2">11,000</span></span></div>
+          <div><span>NeoPaaS share / month</span><span>SAR <span id="ours">44,000</span></span></div>
+          <div><span>Engineering hours from your team</span><span>0</span></div>
+          <div><span>Time to first merchant live</span><span>4 weeks</span></div>
+        </div>
+        <p class="calc-note">Illustrative. Pricing tier auto-adjusts based on volume in production. Talk to us for your real number.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section class="scope">
+  <div class="container">
+    <h2>What's on us. What's on you.</h2>
+    <div class="scope-grid">
+      <div class="scope-col we">
+        <h3><span class="dot"></span> What NeoPaaS handles</h3>
+        <ul>
+          <li>All cashier system integrations — FOODICS, OASIS, ERPNext, custom POS</li>
+          <li>Acquirer routing — Mada, NeoLeap, Geidea, NmoHub, Arab Bank</li>
+          <li>ZATCA Phase 2 e-invoice filing on every transaction</li>
+          <li>PCI-DSS Level 1 compliance and ongoing audits</li>
+          <li>SAMA transaction reporting and AML monitoring</li>
+          <li>Merchant onboarding — bulk upload, terminal activation, training</li>
+          <li>24/7 technical support for merchants on the platform</li>
+          <li>99.99% uptime SLA with credit-backed guarantees</li>
+        </ul>
+      </div>
+      <div class="scope-col">
+        <h3><span class="dot"></span> What you keep</h3>
+        <ul>
+          <li>The customer relationship — they're your merchant, on your contract</li>
+          <li>Pricing flexibility — set your retail tier; we invoice you net</li>
+          <li>Branding control — co-brand or white-label, your call</li>
+          <li>Direct line into our roadmap — your priorities, our backlog</li>
+          <li>A dedicated partnership lead from day one</li>
+          <li>Monthly performance reports and revenue payouts</li>
+          <li>First-line merchant support if you want it (we'll handle escalations)</li>
+          <li>Full optionality — 90-day exit, no lock-in penalties</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CODE BLOCK (Stedi move) -->
+<section class="code">
+  <div class="container">
+    <div class="code-grid">
+      <div>
+        <p class="section-eyebrow">For your engineers</p>
+        <h2>Onboard a merchant in one API call.</h2>
+        <p>No SDK shipping. No on-prem installer. No cable in the store. One POST request and a merchant's entire fleet is live, filing ZATCA, and reconciling in real time. Your engineers see the same docs your customers do — public, versioned, sandboxed.</p>
+      </div>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-dot r"></span>
+          <span class="code-dot y"></span>
+          <span class="code-dot g"></span>
+          <span class="code-file">onboard-merchant.js</span>
+        </div>
+        <pre class="code-body"><span class="com">// One call. Every terminal in their fleet. Live.</span>
+<span class="kw">const</span> merchant = <span class="kw">await</span> neopaas.merchants.<span class="fn">create</span>({
+  msp:        <span class="str">"geidea"</span>,
+  cashier:    <span class="str">"foodics"</span>,
+  acquirer:   <span class="str">"mada"</span>,
+  zatca_id:   <span class="str">"310000000000003"</span>,
+  branches:   <span class="str">"all"</span>,
+  terminals:  [<span class="str">"TERM-001"</span>, <span class="str">"TERM-002"</span>, <span class="str">"TERM-003"</span>]
+});
+
+<span class="com">// → Merchant live. ZATCA filing active. Reconciliation running.</span>
+<span class="ok">✓ merchant_id: mch_8aF2qK · status: live · 3 terminals provisioned</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERMS (Helcim move — radical pricing clarity) -->
+<section class="terms">
+  <div class="container">
+    <p class="section-eyebrow">The terms — in plain language</p>
+    <h2>No legal warfare. No lock-in. No surprises.</h2>
+    <div class="terms-list">
+      <div class="term-card">
+        <h3>Revenue share</h3>
+        <p><strong>20%</strong> of every merchant subscription, paid monthly, for as long as that merchant uses the platform.</p>
+      </div>
+      <div class="term-card">
+        <h3>Term</h3>
+        <p><strong>3 years</strong>, auto-renewing annually. <strong>90-day exit</strong> with notice. No penalty if you leave.</p>
+      </div>
+      <div class="term-card">
+        <h3>Minimums</h3>
+        <p><strong>None.</strong> No volume commitment. No quota. We earn it merchant by merchant.</p>
+      </div>
+      <div class="term-card">
+        <h3>Upfront cost</h3>
+        <p><strong>SAR 0.</strong> No setup fee. No integration fee. No "platform" fee.</p>
+      </div>
+      <div class="term-card">
+        <h3>What we provide</h3>
+        <p>Full platform, dedicated account manager, marketing collateral, partner portal, monthly revenue payouts.</p>
+      </div>
+      <div class="term-card">
+        <h3>What we ask</h3>
+        <p>You actively promote NeoPaaS to your merchant base and provide first-line support. We do everything else.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <p class="section-eyebrow">Questions partners actually ask</p>
+    <h2>The honest answers.</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Why not just build it ourselves?</summary>
+        <p class="answer">You could. It's roughly SAR 1.1–3M, 12–18 months, three engineers, and 2.5 FTE of ongoing maintenance per year, forever. Or distribute NeoPaaS, earn 20% on every merchant terminal, and put those three engineers on something that actually differentiates your product.</p>
+      </details>
+      <details class="faq-item">
+        <summary>20% feels high. Why not 10%?</summary>
+        <p class="answer">Because we earn it. Build cost is roughly 10x our annual rev share at scale. We hit your break-even in month 2 or 3 — after that, every merchant is pure margin to you, with zero engineering hours billed against it. The 20% is the price of never seeing an integration ticket again.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if you go down?</summary>
+        <p class="answer">99.99% uptime SLA — 4.4 minutes per month maximum, with credit-backed guarantees. We're on Datadog and PagerDuty 24/7. Beyond the SLA: our revenue depends on yours, so our incentive to stay up is structural, not contractual.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do our merchants know it's NeoPaaS?</summary>
+        <p class="answer">Your call. Co-branded (most common), invisible white-label (the merchant only sees your brand), or full-NeoPaaS-branded (least common — usually only when partners want to leverage our compliance story). We support all three.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How does the merchant experience change?</summary>
+        <p class="answer">From their side: onboarding goes from weeks to minutes, reconciliation goes from spreadsheets to a real-time dashboard, ZATCA goes from a quarterly nightmare to invisible, and they get one place to see every terminal and every transaction. They'll thank you for it.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What's the technical lift on our side?</summary>
+        <p class="answer">Realistically: one engineer, two to three weeks. One API integration to our platform, a webhook for status updates, and a partner portal embed if you want one. We have a sandbox you can hit today. Public docs at docs.neopaas.com.</p>
+      </details>
+      <details class="faq-item">
+        <summary>When do we get paid?</summary>
+        <p class="answer">Monthly, on the 5th, for the previous month's revenue. Wired to whatever account you specify. Statements detail revenue per merchant, per terminal, per transaction class. No invoicing required from you.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="talk">
+  <div class="container">
+    <h2>Let's run <em>your</em> numbers.</h2>
+    <p>If you're an MSP, acquirer, or aggregator with a merchant base in Saudi Arabia — you should know what 20% of your existing book looks like as recurring revenue. A 30-minute call. We'll have an answer by the end of it.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary">Book the partnership call <span class="arrow">→</span></a>
+      <a href="#agreement" class="btn btn-secondary">Read the partner agreement</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <p class="logo">NeoPaaS</p>
+        <p class="tagline">The payment layer Saudi Arabia is building on. Built in Riyadh by Bab Innovations.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Platform</h4>
+        <a href="index.html#platform">Orchestration</a>
+        <a href="index.html#platform">Settlement</a>
+        <a href="index.html#platform">Reconciliation</a>
+        <a href="index.html#platform">Compliance</a>
+      </div>
+      <div class="foot-col">
+        <h4>Partners</h4>
+        <a href="for-payment-providers.html">Payment providers</a>
+        <a href="#">Cashier &amp; ERP systems</a>
+        <a href="#">Merchants</a>
+        <a href="#">Partner directory</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Pricing</a>
+        <a href="#">Resources</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Bab Innovations · Riyadh, Saudi Arabia</span>
+      <span>Privacy · Terms · Security</span>
+    </div>
+  </div>
+</footer>
+
+<div class="wf-label">WIREFRAME v1 · FOR PAYMENT PROVIDERS</div>
+
+<script>
+  // Live calculator
+  const merchEl = document.getElementById('merchants');
+  const termEl = document.getElementById('terminals');
+  const priceEl = document.getElementById('price');
+
+  function fmt(n) { return n.toLocaleString('en-US'); }
+
+  function update() {
+    const m = +merchEl.value;
+    const t = +termEl.value;
+    const p = +priceEl.value;
+    const totalMonthlyVol = m * t * p;
+    const monthly = Math.round(totalMonthlyVol * 0.20);
+    const ours = totalMonthlyVol - monthly;
+    const annual = monthly * 12;
+
+    document.getElementById('mVal').textContent = fmt(m);
+    document.getElementById('tVal').textContent = t;
+    document.getElementById('pVal').textContent = p;
+    document.getElementById('monthly').textContent = fmt(monthly);
+    document.getElementById('monthly2').textContent = fmt(monthly);
+    document.getElementById('annual').textContent = fmt(annual);
+    document.getElementById('totalVol').textContent = fmt(totalMonthlyVol);
+    document.getElementById('ours').textContent = fmt(ours);
+  }
+
+  merchEl.addEventListener('input', update);
+  termEl.addEventListener('input', update);
+  priceEl.addEventListener('input', update);
+  update();
+</script>
+
+</body>
+</html>

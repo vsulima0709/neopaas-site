@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For POS, ERP & kiosk vendors — Ship unified payments in 4 weeks. | NeoPaaS</title>
+<style>
+  :root {
+    --bg: #f5f1e8;
+    --bg-soft: #ede7d6;
+    --ink: #0a0a0a;
+    --ink-soft: #404040;
+    --ink-faint: #7f7f7f;
+    --green: #0c3b2e;
+    --green-deep: #081f17;
+    --green-soft: #1f5546;
+    --clay: #c2410c;
+    --clay-soft: #ea580c;
+    --lime: #b3ed97;
+    --line: rgba(0, 0, 0, 0.10);
+    --line-strong: rgba(0, 0, 0, 0.22);
+    --line-dark: rgba(255, 255, 255, 0.10);
+    --container: 1328px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* NAV */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245, 241, 232, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.top .container { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .logo { font-weight: 500; font-size: 26px; letter-spacing: -0.04em; color: var(--ink); }
+  .logo::after { content: '.'; color: var(--clay); }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a { font-size: 15px; color: var(--ink); transition: color 0.15s; }
+  .nav-links a:hover { color: var(--clay); }
+  .nav-links a.active { color: var(--clay); }
+  .nav-cta {
+    background: var(--ink) !important; color: var(--bg) !important;
+    padding: 12px 24px; border-radius: 50px;
+    font-size: 15px; font-weight: 500; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--clay) !important; transform: translateY(-1px); }
+  @media (max-width: 860px) { .nav-links { display: none; } }
+
+  /* HERO — dark */
+  section.hero {
+    background: var(--green-deep);
+    color: #f9f9f8;
+    padding: 120px 0 100px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-glow {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(194,65,12,0.22) 0%, transparent 40%),
+      radial-gradient(circle at 20% 80%, rgba(12,59,46,0.6) 0%, transparent 50%);
+    pointer-events: none;
+    animation: bgPulse 12s ease-in-out infinite;
+  }
+  @keyframes bgPulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+  .hero-content { position: relative; z-index: 2; max-width: 1100px; }
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 16px;
+    background: rgba(179, 237, 151, 0.10);
+    border: 1px solid rgba(179, 237, 151, 0.25);
+    border-radius: 50px;
+    font-size: 13px; color: var(--lime);
+    margin-bottom: 32px; letter-spacing: -0.01em;
+  }
+  .live-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--lime);
+    animation: livePulse 1.8s ease-out infinite;
+  }
+  @keyframes livePulse {
+    0% { box-shadow: 0 0 0 0 rgba(179, 237, 151, 0.6); }
+    70% { box-shadow: 0 0 0 8px rgba(179, 237, 151, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(179, 237, 151, 0); }
+  }
+  h1.display {
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 400; line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: #f9f9f8;
+    margin-bottom: 32px;
+    max-width: 18ch;
+  }
+  h1.display .alt { color: var(--lime); }
+  .sub {
+    font-size: clamp(18px, 1.5vw, 22px);
+    line-height: 1.4;
+    color: rgba(249, 249, 248, 0.72);
+    max-width: 52ch; margin-bottom: 40px;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 28px; border-radius: 50px;
+    font-size: 15px; font-weight: 500;
+    transition: all 0.2s; border: 1.5px solid transparent;
+    cursor: pointer; line-height: 1;
+  }
+  .btn-primary { background: var(--lime); color: var(--green-deep); }
+  .btn-primary:hover { background: #c8f5b3; transform: translateY(-2px); }
+  .btn-secondary { border-color: rgba(249,249,248,0.30); color: #f9f9f8; background: transparent; }
+  .btn-secondary:hover { border-color: #f9f9f8; }
+  .btn .arrow { transition: transform 0.15s; }
+  .btn:hover .arrow { transform: translateX(3px); }
+  .btn-primary-light { background: var(--ink); color: var(--bg); }
+  .btn-primary-light:hover { background: var(--clay); transform: translateY(-2px); }
+  .btn-secondary-light { border-color: var(--ink); color: var(--ink); background: transparent; }
+  .btn-secondary-light:hover { background: var(--ink); color: var(--bg); }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line-dark);
+  }
+  .hero-stat .num {
+    font-size: 40px; font-weight: 400;
+    line-height: 1; letter-spacing: -0.04em;
+    color: #f9f9f8; margin-bottom: 8px;
+  }
+  .hero-stat .label {
+    font-size: 13px; color: rgba(249,249,248,0.55); line-height: 1.4;
+  }
+  @media (max-width: 860px) { .hero-stats { grid-template-columns: 1fr 1fr; } }
+
+  /* SECTION DEFAULTS */
+  section { padding: 112px 0; }
+  .section-head {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: end;
+    margin-bottom: 64px;
+  }
+  .section-eyebrow { font-size: 13px; color: var(--clay); margin-bottom: 20px; }
+  h2.heading {
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 400; line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: var(--ink); max-width: 20ch;
+  }
+  p.section-lead {
+    font-size: 19px; color: var(--ink-soft);
+    max-width: 50ch; line-height: 1.45;
+  }
+  @media (max-width: 860px) { .section-head { grid-template-columns: 1fr; gap: 16px; align-items: start; } }
+
+  /* PAIN cards */
+  section.onramp { background: var(--bg); padding: 112px 0; }
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pain-card {
+    background: var(--bg-soft);
+    border-radius: 20px;
+    padding: 36px 32px;
+    transition: transform 0.3s ease;
+    position: relative; overflow: hidden;
+  }
+  .pain-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 0; height: 4px;
+    background: var(--clay);
+    transition: width 0.4s ease;
+  }
+  .pain-card:hover::before { width: 100%; }
+  .pain-card:hover { transform: translateY(-3px); }
+  .pain-num {
+    font-size: 13px; color: var(--clay);
+    margin-bottom: 18px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .pain-num::after {
+    content: ''; width: 32px; height: 1px; background: var(--line-strong);
+  }
+  .pain-card p {
+    font-size: 17px; line-height: 1.45;
+    color: var(--ink); letter-spacing: -0.01em;
+  }
+  @media (max-width: 860px) { .pain-grid { grid-template-columns: 1fr; } }
+
+  /* MANIFESTO — black */
+  section.manifesto {
+    background: var(--ink);
+    color: #f9f9f8;
+    padding: 140px 0;
+  }
+  section.manifesto h2 {
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 400; line-height: 1.05;
+    letter-spacing: -0.045em;
+    color: #f9f9f8;
+    max-width: 22ch;
+    margin-bottom: 32px;
+  }
+  section.manifesto h2 .alt { color: var(--lime); }
+  section.manifesto .body p {
+    font-size: 19px; line-height: 1.5;
+    color: rgba(249,249,248,0.65);
+    max-width: 60ch; margin-bottom: 20px;
+  }
+
+  /* THE DEAL */
+  section.deal { background: var(--bg-soft); padding: 112px 0; }
+  .deal-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 64px; align-items: start;
+  }
+  .deal-grid h2 { color: var(--ink); }
+  .deal-body {
+    font-size: 22px; line-height: 1.5;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+  .deal-body strong { color: var(--green); font-weight: 500; }
+  @media (max-width: 860px) { .deal-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+  /* BENTO */
+  section.bento { background: var(--bg); padding: 112px 0; }
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+  }
+  .bento-card {
+    background: var(--bg-soft);
+    border-radius: 20px;
+    padding: 36px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 320px;
+    display: flex; flex-direction: column;
+  }
+  .bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(12, 59, 46, 0.10);
+  }
+  .bento-card.dark { background: var(--green-deep); color: #f9f9f8; }
+  .bento-card.dark h3 { color: #f9f9f8; }
+  .bento-card.dark p { color: rgba(249,249,248,0.65); }
+  .bento-card.large { grid-row: span 2; min-height: 656px; }
+  .bento-num { font-size: 12px; color: var(--clay); margin-bottom: 16px; }
+  .bento-card h3 {
+    font-size: clamp(24px, 2.5vw, 36px);
+    font-weight: 400; letter-spacing: -0.035em;
+    line-height: 1.0; margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .bento-card p {
+    font-size: 16px; color: var(--ink-soft);
+    line-height: 1.45; flex: 1;
+  }
+  .bento-card.large h3 {
+    font-size: clamp(36px, 4vw, 56px);
+    max-width: 14ch;
+  }
+  .counter-display {
+    font-size: clamp(72px, 8vw, 128px);
+    font-weight: 400; line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--lime);
+    margin: 24px 0 16px;
+  }
+  .bento-card.dark .counter-display { color: var(--lime); }
+  @media (max-width: 860px) {
+    .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .bento-card.large { grid-row: auto; min-height: 480px; }
+  }
+
+  /* CODE BLOCK */
+  section.code { background: var(--ink); color: #f9f9f8; padding: 120px 0; }
+  section.code .section-head { margin-bottom: 56px; }
+  section.code h2.heading { color: #f9f9f8; }
+  section.code h2.heading .alt { color: var(--lime); font-style: normal; }
+  section.code p.section-lead { color: rgba(249,249,248,0.65); }
+  section.code .section-eyebrow { color: var(--lime); }
+  .code-block {
+    background: #161616;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+  }
+  .code-header {
+    background: rgba(255,255,255,0.04);
+    padding: 12px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .code-dot { width: 11px; height: 11px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+  .code-dot.r { background: #ef4444; opacity: 0.6; }
+  .code-dot.y { background: #eab308; opacity: 0.6; }
+  .code-dot.g { background: #22c55e; opacity: 0.6; }
+  .code-file {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', 'SF Mono', Monaco, monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+  }
+  .code-body {
+    padding: 28px;
+    font-family: 'JetBrains Mono', 'SF Mono', Monaco, monospace;
+    font-size: 14px; line-height: 1.7;
+    color: rgba(249, 249, 248, 0.88);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .code-body .kw { color: #c084fc; }
+  .code-body .str { color: #fde68a; }
+  .code-body .fn { color: #93c5fd; }
+  .code-body .com { color: rgba(249, 249, 248, 0.40); font-style: italic; }
+  .code-body .ok { color: var(--lime); }
+
+  /* SCOPE — we handle / you control */
+  section.scope { background: var(--bg); padding: 112px 0; }
+  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .scope-col {
+    background: var(--bg-soft);
+    border-radius: 20px;
+    padding: 40px 36px;
+  }
+  .scope-col.we { background: var(--green-deep); color: #f9f9f8; }
+  .scope-col h3 {
+    font-size: 24px; font-weight: 500;
+    letter-spacing: -0.025em;
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+    color: var(--ink);
+  }
+  .scope-col.we h3 { color: #f9f9f8; }
+  .scope-col h3::before {
+    content: ''; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--clay);
+  }
+  .scope-col.we h3::before { background: var(--lime); }
+  .scope-col ul { list-style: none; padding: 0; }
+  .scope-col li {
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+    font-size: 16px; line-height: 1.45;
+    color: var(--ink-soft);
+  }
+  .scope-col.we li {
+    border-top-color: rgba(255,255,255,0.10);
+    color: rgba(249,249,248,0.80);
+  }
+  .scope-col li:first-child { border-top: none; padding-top: 0; }
+  @media (max-width: 860px) { .scope-grid { grid-template-columns: 1fr; } }
+
+  /* TERMS */
+  section.terms { background: var(--bg-soft); padding: 112px 0; }
+  .terms-list { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .term-card {
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 32px 28px;
+    transition: transform 0.3s;
+  }
+  .term-card:hover { transform: translateY(-3px); }
+  .term-card h4 {
+    font-size: 13px; color: var(--clay);
+    margin-bottom: 14px; font-weight: 400;
+  }
+  .term-card p {
+    font-size: 20px; font-weight: 400;
+    line-height: 1.3; letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .term-card p strong { color: var(--green); font-weight: 500; }
+  @media (max-width: 860px) { .terms-list { grid-template-columns: 1fr; } }
+
+  /* FAQ */
+  section.faq { background: var(--bg); padding: 112px 0; }
+  .faq-list { max-width: 880px; margin-top: 56px; }
+  details.faq-item {
+    border-top: 1px solid var(--line-strong);
+    padding: 24px 0;
+    cursor: pointer;
+  }
+  details.faq-item:last-of-type { border-bottom: 1px solid var(--line-strong); }
+  details.faq-item summary {
+    font-size: 22px; font-weight: 400;
+    letter-spacing: -0.02em;
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px;
+    color: var(--ink);
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary::after {
+    content: '+';
+    font-size: 28px; font-weight: 300;
+    color: var(--clay);
+    transition: transform 0.2s;
+    line-height: 1;
+  }
+  details.faq-item[open] summary::after { content: '−'; }
+  details.faq-item .answer {
+    padding-top: 16px; padding-right: 48px;
+    color: var(--ink-soft);
+    font-size: 17px; line-height: 1.5;
+  }
+
+  /* FINAL CTA */
+  section.final {
+    background: var(--green-deep); color: #f9f9f8;
+    padding: 160px 0; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  section.final::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(179,237,151,0.10) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  section.final h2 {
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 400; letter-spacing: -0.05em;
+    line-height: 0.98;
+    margin-bottom: 28px; max-width: 18ch;
+    margin-left: auto; margin-right: auto;
+    color: #f9f9f8; position: relative;
+  }
+  section.final h2 .alt { color: var(--lime); }
+  section.final p {
+    font-size: 19px; color: rgba(249,249,248,0.65);
+    max-width: 42ch; margin: 0 auto 36px;
+    line-height: 1.5; position: relative;
+  }
+  section.final .cta-row { justify-content: center; position: relative; }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 72px 0 36px; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 56px; }
+  footer .logo { color: #fff; font-size: 30px; }
+  footer .tagline { font-size: 15px; max-width: 30ch; line-height: 1.5; margin-top: 14px; color: rgba(255,255,255,0.55); }
+  .foot-col h4 { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lime); margin-bottom: 18px; font-weight: 500; }
+  .foot-col a { display: block; padding: 6px 0; font-size: 14px; color: rgba(255,255,255,0.6); transition: color 0.15s; }
+  .foot-col a:hover { color: #fff; }
+  .foot-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.10); font-size: 12px; color: rgba(255,255,255,0.4); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+
+  .wf-label {
+    position: fixed; bottom: 16px; right: 16px; z-index: 100;
+    background: var(--ink); color: var(--bg);
+    padding: 6px 12px; border-radius: 999px;
+    font-size: 11px; opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="container">
+    <a href="index.html" class="logo">NeoPaaS</a>
+    <div class="nav-links">
+      <a href="index.html#what">Platform</a>
+      <a href="index.html#industries">Industries</a>
+      <a href="for-cashier-systems.html" class="active">Partners</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <a href="#talk" class="nav-cta">Talk to partnerships</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="live-badge">
+        <span class="live-dot"></span>
+        For POS, ERP &amp; kiosk software vendors
+      </div>
+      <h1 class="display">Ship unified payments in <span class="alt">four weeks.</span> Not eighteen months.</h1>
+      <p class="sub">Embed NeoPaaS inside your product, under your brand. Your customers see "payments" as a feature you ship. We handle every cashier integration, every acquirer, every ZATCA filing.</p>
+      <div class="cta-row">
+        <a href="#talk" class="btn btn-primary">Talk to partnerships <span class="arrow">→</span></a>
+        <a href="#code" class="btn btn-secondary">See the integration</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num" data-counter="4">0</div>
+          <div class="label">Weeks to live in your product</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num" data-counter="30" data-suffix="%">0</div>
+          <div class="label">Recurring revenue share, up to</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num" data-counter="0">0</div>
+          <div class="label">Engineers needed from your team</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="onramp">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="heading">Sound familiar?</h2>
+      <p class="section-lead">The three reasons software vendors stop trying to build payments themselves.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <p class="pain-num">a.</p>
+        <p>Your customers keep asking why they can't connect any acquirer to your POS. Today, every new integration is a custom project.</p>
+      </div>
+      <div class="pain-card reveal">
+        <p class="pain-num">b.</p>
+        <p>Building unified payments yourself is eighteen months, three engineers, and SAR 2M+. Plus ongoing maintenance forever.</p>
+      </div>
+      <div class="pain-card reveal">
+        <p class="pain-num">c.</p>
+        <p>Every quarter you don't ship it, a competitor does. Unified payments is becoming a product expectation, not a differentiator.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="container">
+    <div class="reveal">
+      <h2>Build unified payments for eighteen months. Or ship it <span class="alt">next month.</span></h2>
+      <div class="body">
+        <p>We've already built every cashier integration. Every acquirer route. Every ZATCA filing pipeline. Every PCI-DSS audit.</p>
+        <p>You white-label our infrastructure under your brand. Your customers think you built it. You take 25–30% of every subscription, forever. Your engineers stay focused on what makes your POS different.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE DEAL -->
+<section class="deal">
+  <div class="container">
+    <div class="deal-grid">
+      <div>
+        <p class="section-eyebrow">The partnership</p>
+        <h2 class="heading">One agreement. Two things change.</h2>
+      </div>
+      <p class="deal-body">
+        You embed NeoPaaS inside your product, under your brand. We handle every cashier integration, every acquirer route, every ZATCA filing — on infrastructure your engineers never touch. <strong>You keep the customer relationship. You earn 25–30% of every subscription, every month, for as long as that customer stays on us.</strong> No upfront fee. No build cost. No engineering hires.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- BENTO -->
+<section class="bento">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="heading">What the partnership gets you.</h2>
+      <p class="section-lead">A new product feature, a new revenue stream, and a customer base that gets stickier.</p>
+    </div>
+
+    <div class="bento-grid">
+      <!-- Large counter card -->
+      <div class="bento-card large dark">
+        <p class="bento-num">01 — Recurring revenue</p>
+        <h3>25–30% of every customer subscription.</h3>
+        <p>Recurring. No customer-acquisition cost on these revenues — your existing book becomes a payments business.</p>
+        <div class="counter-display" data-counter="180000" data-suffix=" SAR">0</div>
+        <p style="color: rgba(249,249,248,0.55); font-size: 14px;">Illustrative: 500 customers × 5 terminals × SAR 24/mo × 30% = your annual cut.</p>
+      </div>
+
+      <!-- Speed card -->
+      <div class="bento-card">
+        <p class="bento-num">02 — Speed</p>
+        <h3>Live in 4 weeks.</h3>
+        <p>White-label setup in two to three weeks. First paying customers on your branded NeoPaaS by week four.</p>
+      </div>
+
+      <!-- Control card -->
+      <div class="bento-card">
+        <p class="bento-num">03 — Control</p>
+        <h3>Your brand. Your customer.</h3>
+        <p>You own the relationship, the pricing, and the marketing. We're infrastructure. Invisible by default, co-branded if you want.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CODE BLOCK -->
+<section class="code" id="code">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <p class="section-eyebrow">For your engineers</p>
+        <h2 class="heading">Onboard a customer in <span class="alt">one API call.</span></h2>
+      </div>
+      <p class="section-lead">No SDK to ship. No on-prem installer. No cables in stores. One POST request and your customer's entire fleet is live — filing ZATCA, reconciling in real time, branded as your product.</p>
+    </div>
+    <div class="code-block reveal">
+      <div class="code-header">
+        <span class="code-dot r"></span>
+        <span class="code-dot y"></span>
+        <span class="code-dot g"></span>
+        <span class="code-file">onboard-customer.js</span>
+      </div>
+<pre class="code-body"><span class="com">// One call. Your customer's entire fleet, live.</span>
+<span class="kw">const</span> customer = <span class="kw">await</span> neopaas.customers.<span class="fn">create</span>({
+  partner_id:  <span class="str">"foodics"</span>,
+  brand:       <span class="str">"FOODICS Pay"</span>,
+  cashier:     <span class="str">"foodics_pos_v8"</span>,
+  acquirer:    <span class="str">"mada"</span>,
+  zatca_id:    <span class="str">"310000000000003"</span>,
+  branches:    <span class="str">"all"</span>,
+  terminals:   [<span class="str">"TERM-001"</span>, <span class="str">"TERM-002"</span>, <span class="str">"TERM-003"</span>]
+});
+
+<span class="com">// → Customer live under your brand. ZATCA filing active. Reconciliation running.</span>
+<span class="ok">✓ customer_id: cus_8aF2qK · brand: FOODICS Pay · 3 terminals provisioned</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section class="scope">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="heading">What we run. What you control.</h2>
+      <p class="section-lead">Clear lines, no ambiguity. We handle infrastructure end-to-end. You own the brand, the customer, and the commercial layer.</p>
+    </div>
+    <div class="scope-grid">
+      <div class="scope-col we">
+        <h3>What NeoPaaS runs</h3>
+        <ul>
+          <li>Every cashier integration we already have</li>
+          <li>Acquirer routing — Mada, NeoLeap, Geidea, NmoHub, Arab Bank</li>
+          <li>ZATCA Phase 2 e-invoicing on every transaction</li>
+          <li>PCI-DSS Level 1 compliance, audited annually</li>
+          <li>SAMA transaction reporting + AML monitoring</li>
+          <li>Bulk terminal onboarding</li>
+          <li>24/7 technical support (your customers, optional escalation)</li>
+          <li>99.99% uptime SLA with credit-backed guarantees</li>
+        </ul>
+      </div>
+      <div class="scope-col">
+        <h3>What you control</h3>
+        <ul>
+          <li>Branding — invisible, co-branded, or fully white-labeled</li>
+          <li>Pricing — set your retail tier; we invoice you net</li>
+          <li>Customer relationship — they're your customer, on your contract</li>
+          <li>Marketing positioning and launch comms</li>
+          <li>Direct roadmap input — your priorities go into our backlog</li>
+          <li>First-line support tone and channels</li>
+          <li>Onboarding workflow inside your product</li>
+          <li>Full exit optionality — 90-day notice, no penalty</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERMS -->
+<section class="terms">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="heading">The terms — in plain language.</h2>
+      <p class="section-lead">No legal warfare. No surprises. No lock-in beyond what protects both of us.</p>
+    </div>
+    <div class="terms-list">
+      <div class="term-card">
+        <h4>Revenue share</h4>
+        <p><strong>25%</strong> year 1, <strong>28%</strong> year 2–3, <strong>30%</strong> thereafter. Paid monthly.</p>
+      </div>
+      <div class="term-card">
+        <h4>Term</h4>
+        <p><strong>2 years</strong>, auto-renewing annually. <strong>90-day exit</strong> with notice.</p>
+      </div>
+      <div class="term-card">
+        <h4>Minimums</h4>
+        <p><strong>None.</strong> No volume commitment. No quota. We earn it customer by customer.</p>
+      </div>
+      <div class="term-card">
+        <h4>Upfront cost</h4>
+        <p><strong>SAR 0.</strong> No setup fee. No integration fee. No platform fee.</p>
+      </div>
+      <div class="term-card">
+        <h4>What we provide</h4>
+        <p>Full platform, dedicated partner manager, white-label kit, sandbox, marketing collateral.</p>
+      </div>
+      <div class="term-card">
+        <h4>What we ask</h4>
+        <p>You actively roll out to your customer base and provide first-line support. We do the rest.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="heading">Questions partners actually ask.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Why not build it ourselves?</summary>
+        <p class="answer">You could. It's roughly SAR 2M+, eighteen months, three engineers full-time, and 2.5 FTE of ongoing maintenance per year, forever. Plus you have to keep up with every ZATCA, SAMA, and PCI rule change. Or you embed NeoPaaS, take 25–30% of every subscription, and put those three engineers on what makes your POS actually different.</p>
+      </details>
+      <details class="faq-item">
+        <summary>25–30% feels high. Why not 10%?</summary>
+        <p class="answer">Because we earn it. The build alternative costs 10x our annual rev share at scale. We hit your break-even in month 2 or 3 — after that, every customer is pure margin to you, with zero engineering hours billed against it. The 25–30% is the price of never seeing an integration ticket again.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How does white-label actually work?</summary>
+        <p class="answer">Three options. (1) Invisible — your customers see only your brand; NeoPaaS isn't mentioned anywhere. (2) Co-branded — "Payments powered by NeoPaaS" small text in the footer. (3) Powered by — explicit attribution. Most partners pick option 1. Switching between is a config change, not a code change.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What does the integration look like on our side?</summary>
+        <p class="answer">Realistically: one engineer, two to three weeks. One API integration to our platform, a webhook for status updates, and an embedded merchant dashboard if you want one (we provide a React component). Public docs at docs.neopaas.com. Sandbox available today.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if you go down?</summary>
+        <p class="answer">99.99% uptime SLA — 4.4 minutes per month maximum, with credit-backed guarantees. Datadog and PagerDuty 24/7. Beyond the SLA: our revenue depends on yours, so our incentive to stay up is structural. We've had zero customer-impacting outages in 2025.</p>
+      </details>
+      <details class="faq-item">
+        <summary>When do we get paid?</summary>
+        <p class="answer">Monthly, on the 5th, for the previous month. Wire to whatever account you specify. Statement details revenue per customer, per terminal, per transaction class. No invoicing required from you.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can we sell to customers outside our existing book?</summary>
+        <p class="answer">Yes. The rev share applies to any customer that lands on NeoPaaS through your product. We don't restrict your sales motion — go after new logos the same way you do today, just now with unified payments included.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="talk">
+  <div class="container">
+    <h2>Let's run <span class="alt">your numbers.</span></h2>
+    <p>If you're a POS, ERP, or kiosk vendor with customers in Saudi Arabia, you should know what 25–30% of your existing book looks like as recurring revenue. A 30-minute call. We'll have an answer by the end of it.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary">Book the partnership call <span class="arrow">→</span></a>
+      <a href="#agreement" class="btn btn-secondary">Read the partner agreement</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <p class="logo">NeoPaaS</p>
+        <p class="tagline">The cloud payment platform for Saudi Arabia's multi-branch businesses. Built in Riyadh by Bab Innovations.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Platform</h4>
+        <a href="index.html#what">Overview</a>
+        <a href="index.html#what">Reconciliation</a>
+        <a href="index.html#compliance">Compliance</a>
+        <a href="index.html#what">Dashboard</a>
+      </div>
+      <div class="foot-col">
+        <h4>For</h4>
+        <a href="for-payment-providers.html">Payment providers</a>
+        <a href="for-cashier-systems.html">POS &amp; ERP vendors</a>
+        <a href="for-merchants.html">Merchants</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Pricing</a>
+        <a href="#">Resources</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Bab Innovations · Riyadh, Saudi Arabia</span>
+      <span>Privacy · Terms · Security</span>
+    </div>
+  </div>
+</footer>
+
+<div class="wf-label">WIREFRAME v10 · FOR POS / ERP VENDORS</div>
+
+<script>
+  const animateCounter = (el) => {
+    const target = parseInt(el.dataset.counter);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(target * eased);
+      el.textContent = value.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (entry.target.dataset.counter) animateCounter(entry.target);
+        entry.target.querySelectorAll('[data-counter]').forEach(c => {
+          if (!c.dataset.fired) { c.dataset.fired = '1'; animateCounter(c); }
+        });
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.reveal, [data-counter]').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
