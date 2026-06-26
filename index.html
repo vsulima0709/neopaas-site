@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NeoPaaS — One platform behind every card payment in your business.</title>
+<title>BAB Innovations · NeoPaaS — Card payments, under control. Across every store.</title>
 <style>
-  /* v8 — Campfire-flavored, image-light, dynamic */
+  /* v11 — Call fixes + Moov-inspired patterns */
   :root {
     --bg: #f5f1e8;
     --bg-soft: #ede7d6;
@@ -28,7 +28,7 @@
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -36,12 +36,10 @@
   }
   a { color: inherit; text-decoration: none; }
   .container { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
-
-  /* Reveal on scroll */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* ============ NAV ============ */
+  /* ============ NAV — BAB brand + verb-IA inspired by Moov ============ */
   nav.top {
     position: sticky; top: 0; z-index: 50;
     background: rgba(245, 241, 232, 0.85);
@@ -49,10 +47,25 @@
     border-bottom: 1px solid var(--line);
   }
   nav.top .container { display: flex; align-items: center; justify-content: space-between; height: 76px; }
-  .logo { font-weight: 500; font-size: 26px; letter-spacing: -0.04em; color: var(--ink); }
+  .logo-wrap { display: flex; align-items: baseline; gap: 12px; }
+  .logo {
+    font-weight: 700; font-size: 26px;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
   .logo::after { content: '.'; color: var(--clay); }
-  .nav-links { display: flex; gap: 36px; }
-  .nav-links a { font-size: 15px; font-weight: 400; color: var(--ink); transition: color 0.15s; }
+  .logo-sub {
+    font-size: 13px;
+    color: var(--ink-faint);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    font-size: 15px; font-weight: 400;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
   .nav-links a:hover { color: var(--clay); }
   .nav-cta {
     background: var(--ink) !important; color: var(--bg) !important;
@@ -61,9 +74,9 @@
     transition: all 0.2s;
   }
   .nav-cta:hover { background: var(--clay) !important; transform: translateY(-1px); }
-  @media (max-width: 860px) { .nav-links { display: none; } }
+  @media (max-width: 860px) { .nav-links { display: none; } .logo-sub { display: none; } }
 
-  /* ============ HERO — DARK (Campfire signature) ============ */
+  /* ============ HERO ============ */
   section.hero {
     background: var(--green-deep);
     color: #f9f9f8;
@@ -79,10 +92,7 @@
     pointer-events: none;
     animation: bgPulse 12s ease-in-out infinite;
   }
-  @keyframes bgPulse {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
-  }
+  @keyframes bgPulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
   .hero-content { position: relative; z-index: 2; max-width: 1100px; }
   .live-badge {
     display: inline-flex; align-items: center; gap: 10px;
@@ -90,15 +100,12 @@
     background: rgba(179, 237, 151, 0.10);
     border: 1px solid rgba(179, 237, 151, 0.25);
     border-radius: 50px;
-    font-size: 13px;
-    color: var(--lime);
-    margin-bottom: 32px;
-    letter-spacing: -0.01em;
+    font-size: 13px; color: var(--lime);
+    margin-bottom: 32px; letter-spacing: -0.01em;
   }
   .live-dot {
     width: 8px; height: 8px; border-radius: 50%;
     background: var(--lime);
-    box-shadow: 0 0 0 0 rgba(179, 237, 151, 0.7);
     animation: livePulse 1.8s ease-out infinite;
   }
   @keyframes livePulse {
@@ -107,20 +114,20 @@
     100% { box-shadow: 0 0 0 0 rgba(179, 237, 151, 0); }
   }
   h1.display {
-    font-size: clamp(48px, 8vw, 96px);
-    font-weight: 400;
-    line-height: 0.98;
-    letter-spacing: -0.045em;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
     color: #f9f9f8;
     margin-bottom: 32px;
-    max-width: 18ch;
+    max-width: 20ch;
   }
   h1.display .alt { color: var(--lime); }
   .sub {
     font-size: clamp(18px, 1.5vw, 22px);
-    line-height: 1.4;
-    color: rgba(249, 249, 248, 0.72);
-    max-width: 52ch;
+    line-height: 1.45;
+    color: rgba(249, 249, 248, 0.75);
+    max-width: 56ch;
     margin-bottom: 40px;
   }
   .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -143,131 +150,82 @@
   .btn-secondary-light:hover { background: var(--ink); color: var(--bg); }
 
   .hero-stats {
-    display: grid; grid-template-columns: repeat(4, 1fr);
+    display: grid; grid-template-columns: repeat(3, 1fr);
     gap: 32px;
     margin-top: 64px;
     padding-top: 32px;
     border-top: 1px solid var(--line-dark);
   }
   .hero-stat .num {
-    font-size: 40px; font-weight: 400;
-    line-height: 1; letter-spacing: -0.04em;
-    color: #f9f9f8;
-    margin-bottom: 8px;
+    font-size: 40px; font-weight: 500;
+    line-height: 1; letter-spacing: -0.035em;
+    color: #f9f9f8; margin-bottom: 8px;
   }
   .hero-stat .label {
-    font-size: 13px; color: rgba(249,249,248,0.55);
-    line-height: 1.4;
+    font-size: 13px; color: rgba(249,249,248,0.55); line-height: 1.4;
   }
-  @media (max-width: 860px) {
-    .hero-stats { grid-template-columns: 1fr 1fr; }
-  }
+  @media (max-width: 860px) { .hero-stats { grid-template-columns: 1fr 1fr; } }
 
-  /* ============ ON-RAMP / PAIN ============ */
-  section.onramp {
-    background: var(--bg);
-    padding: 112px 0;
+  /* ============ VERB-IA STRIP (Moov pattern) ============ */
+  section.verbs {
+    background: var(--ink);
+    color: #f9f9f8;
+    padding: 64px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
   }
-  .pain-grid {
+  .verbs-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 48px;
+  }
+  .verbs-intro h2 {
+    font-size: clamp(24px, 2.5vw, 32px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: #f9f9f8;
+    margin-bottom: 12px;
+  }
+  .verbs-intro p {
+    font-size: 16px;
+    color: rgba(249,249,248,0.6);
+  }
+  .verbs-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .pain-card {
-    background: var(--bg-soft);
-    border-radius: 20px;
-    padding: 36px 32px;
-    transition: transform 0.3s ease, background 0.3s ease;
-    position: relative; overflow: hidden;
-  }
-  .pain-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0;
-    width: 0; height: 4px;
-    background: var(--clay);
-    transition: width 0.4s ease;
-  }
-  .pain-card:hover::before { width: 100%; }
-  .pain-card:hover { transform: translateY(-3px); }
-  .pain-num {
-    font-size: 13px;
-    color: var(--clay);
-    margin-bottom: 18px;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .pain-num::after {
-    content: ''; width: 32px; height: 1px; background: var(--line-strong);
-  }
-  .pain-card p {
-    font-size: 17px;
-    line-height: 1.45;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
-  @media (max-width: 860px) { .pain-grid { grid-template-columns: 1fr; } }
-
-  /* ============ MARQUEE — Campfire signature ============ */
-  section.marquee-section {
-    background: var(--bg);
-    padding: 100px 0;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
     overflow: hidden;
   }
-  .marquee-intro {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 56px;
+  .verb-tile {
+    background: var(--ink);
+    padding: 36px 28px;
+    transition: background 0.2s;
+    cursor: pointer;
   }
-  .marquee-intro h2 {
-    font-size: clamp(28px, 3vw, 44px);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.035em;
-    color: var(--ink);
-    margin-bottom: 20px;
+  .verb-tile:hover { background: var(--green-deep); }
+  .verb-tile .verb-num {
+    font-size: 12px;
+    color: var(--clay-soft);
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
   }
-  .marquee-intro p {
-    font-size: 18px;
-    color: var(--ink-soft);
+  .verb-tile h3 {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    color: #f9f9f8;
+    margin-bottom: 10px;
+  }
+  .verb-tile p {
+    font-size: 14px;
+    color: rgba(249,249,248,0.6);
     line-height: 1.45;
   }
-  .marquee-row {
-    display: flex;
-    gap: 16px;
-    animation: marqueeScroll 38s linear infinite;
-    width: max-content;
+  @media (max-width: 860px) {
+    .verbs-grid { grid-template-columns: 1fr 1fr; }
   }
-  .marquee-row.reverse {
-    animation: marqueeScrollReverse 42s linear infinite;
-    margin-top: 16px;
-  }
-  @keyframes marqueeScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  @keyframes marqueeScrollReverse {
-    0% { transform: translateX(-50%); }
-    100% { transform: translateX(0); }
-  }
-  .marquee-chip {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 22px;
-    background: transparent;
-    border: 1px solid var(--line-strong);
-    border-radius: 50px;
-    font-size: 17px;
-    color: var(--ink);
-    white-space: nowrap;
-    letter-spacing: -0.01em;
-    transition: background 0.2s, color 0.2s;
-  }
-  .marquee-chip:hover { background: var(--ink); color: var(--bg); }
-  .marquee-chip::before {
-    content: '';
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--clay);
-    flex-shrink: 0;
-  }
-  .marquee-section:hover .marquee-row { animation-play-state: paused; }
 
   /* ============ SECTION DEFAULTS ============ */
   section { padding: 112px 0; }
@@ -285,12 +243,15 @@
     margin-bottom: 20px;
   }
   h2.heading {
-    font-size: clamp(36px, 5vw, 72px);
-    font-weight: 400;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 500;
     line-height: 0.98;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.04em;
     color: var(--ink);
-    max-width: 20ch;
+    max-width: 22ch;
+  }
+  h2.heading .alt {
+    color: var(--green);
   }
   p.section-lead {
     font-size: 19px;
@@ -300,11 +261,131 @@
   }
   @media (max-width: 860px) { .section-head { grid-template-columns: 1fr; gap: 16px; align-items: start; } }
 
-  /* ============ BENTO GRID — product features ============ */
-  section.bento {
+  /* ============ PAIN CARDS ============ */
+  section.onramp { background: var(--bg-soft); padding: 112px 0; }
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pain-card {
     background: var(--bg);
-    padding: 80px 0 112px;
+    border-radius: 20px;
+    padding: 36px 32px;
+    transition: transform 0.3s ease;
+    position: relative; overflow: hidden;
   }
+  .pain-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 0; height: 4px;
+    background: var(--clay);
+    transition: width 0.4s ease;
+  }
+  .pain-card:hover::before { width: 100%; }
+  .pain-card:hover { transform: translateY(-3px); }
+  .pain-num {
+    font-size: 13px; color: var(--clay);
+    margin-bottom: 18px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .pain-num::after { content: ''; width: 32px; height: 1px; background: var(--line-strong); }
+  .pain-card p { font-size: 17px; line-height: 1.45; color: var(--ink); letter-spacing: -0.01em; }
+  @media (max-width: 860px) { .pain-grid { grid-template-columns: 1fr; } }
+
+  /* ============ CASE STUDY — JMT logistics ============ */
+  section.case {
+    background: var(--green-deep);
+    color: #f9f9f8;
+    padding: 120px 0;
+    position: relative; overflow: hidden;
+  }
+  section.case::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(179,237,151,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .case-grid {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1.1fr;
+    gap: 80px; align-items: start;
+  }
+  .case-eyebrow {
+    font-size: 13px;
+    color: var(--lime);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .case-quote {
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: #f9f9f8;
+    margin-bottom: 32px;
+  }
+  .case-quote .alt { color: var(--lime); }
+  .case-attribution {
+    font-size: 14px;
+    color: rgba(249,249,248,0.6);
+    line-height: 1.5;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .case-attribution strong {
+    color: #f9f9f8;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .case-metrics {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .case-metric {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 16px;
+    padding: 32px 28px;
+  }
+  .case-metric .num {
+    font-size: clamp(40px, 4vw, 56px);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--lime);
+    margin-bottom: 14px;
+  }
+  .case-metric .label {
+    font-size: 14px;
+    color: rgba(249,249,248,0.7);
+    line-height: 1.45;
+  }
+  @media (max-width: 860px) {
+    .case-grid { grid-template-columns: 1fr; gap: 32px; }
+    .case-metrics { grid-template-columns: 1fr; }
+  }
+
+  /* ============ DIAGRAM ============ */
+  section.diagram { background: var(--bg); }
+  .diagram-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .diagram-panel {
+    background: var(--bg-soft);
+    border-radius: 20px;
+    padding: 40px 32px;
+  }
+  .diagram-panel.after { background: var(--green); color: #f9f9f8; }
+  .diagram-label { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; letter-spacing: -0.01em; }
+  .diagram-panel.after .diagram-label { color: var(--lime); }
+  .diagram-title {
+    font-size: 26px; font-weight: 500;
+    letter-spacing: -0.03em; line-height: 1.0;
+    margin-bottom: 32px;
+  }
+  .diagram-panel.after .diagram-title { color: #f9f9f8; }
+  .diagram-svg { width: 100%; height: auto; display: block; margin-bottom: 20px; }
+  .diagram-foot { font-size: 15px; color: var(--ink-soft); line-height: 1.5; }
+  .diagram-panel.after .diagram-foot { color: rgba(249,249,248,0.65); }
+  @media (max-width: 860px) { .diagram-grid { grid-template-columns: 1fr; } }
+
+  /* ============ BENTO ============ */
+  section.bento { background: var(--bg); padding: 112px 0; }
   .bento-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
@@ -325,52 +406,38 @@
     transform: translateY(-4px);
     box-shadow: 0 24px 48px rgba(12, 59, 46, 0.10);
   }
-  .bento-card.dark {
-    background: var(--green-deep);
-    color: #f9f9f8;
-  }
+  .bento-card.dark { background: var(--green-deep); color: #f9f9f8; }
   .bento-card.dark h3 { color: #f9f9f8; }
   .bento-card.dark p { color: rgba(249,249,248,0.65); }
-  .bento-card.large {
-    grid-row: span 2;
-    min-height: 656px;
-  }
-  .bento-num {
-    font-size: 12px;
-    color: var(--clay);
-    margin-bottom: 16px;
-    letter-spacing: -0.01em;
-  }
+  .bento-card.large { grid-row: span 2; min-height: 656px; }
+  .bento-num { font-size: 12px; color: var(--clay); margin-bottom: 16px; }
+  .bento-card.dark .bento-num { color: var(--lime); }
   .bento-card h3 {
     font-size: clamp(24px, 2.5vw, 36px);
-    font-weight: 400;
-    letter-spacing: -0.035em;
-    line-height: 1.0;
-    margin-bottom: 16px;
+    font-weight: 500; letter-spacing: -0.035em;
+    line-height: 1.0; margin-bottom: 16px;
     color: var(--ink);
   }
   .bento-card p {
-    font-size: 16px;
-    color: var(--ink-soft);
-    line-height: 1.45;
-    flex: 1;
+    font-size: 16px; color: var(--ink-soft);
+    line-height: 1.5; flex: 1;
   }
   .bento-card.large h3 {
     font-size: clamp(36px, 4vw, 56px);
     max-width: 14ch;
   }
-
-  /* Counter on dark bento */
-  .counter-display {
-    font-size: clamp(64px, 7vw, 112px);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.05em;
+  .bento-roadmap-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(179,237,151,0.15);
     color: var(--lime);
-    margin: 24px 0 16px;
+    border-radius: 99px;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 16px;
+    width: fit-content;
   }
-
-  /* Bento mini dashboard preview */
   .mini-dash {
     margin-top: 24px;
     background: #fff;
@@ -412,106 +479,92 @@
     0% { background: rgba(179, 237, 151, 0.35); }
     100% { background: transparent; }
   }
-
   @media (max-width: 860px) {
     .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
     .bento-card.large { grid-row: auto; min-height: 480px; }
   }
 
-  /* ============ MANIFESTO — black section ============ */
-  section.manifesto {
+  /* ============ CUSTOMIZATION / API callout ============ */
+  section.custom { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .custom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .custom-text h2.heading { margin-bottom: 24px; }
+  .custom-text p { font-size: 18px; line-height: 1.55; color: var(--ink-soft); }
+  .custom-code {
     background: var(--ink);
-    color: #f9f9f8;
-    padding: 140px 0;
+    border-radius: 16px;
+    padding: 24px;
+    font-family: 'JetBrains Mono', 'SF Mono', Monaco, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(249,249,248,0.88);
+    overflow-x: auto;
+    white-space: pre;
   }
-  section.manifesto h2 {
-    font-size: clamp(36px, 5vw, 72px);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.045em;
-    color: #f9f9f8;
-    max-width: 22ch;
-    margin-bottom: 32px;
-  }
-  section.manifesto h2 .alt { color: var(--lime); }
-  section.manifesto .body p {
-    font-size: 19px;
-    line-height: 1.5;
-    color: rgba(249,249,248,0.65);
-    max-width: 60ch;
-    margin-bottom: 20px;
-  }
+  .custom-code .kw { color: #c084fc; }
+  .custom-code .str { color: #fde68a; }
+  .custom-code .fn { color: #93c5fd; }
+  .custom-code .com { color: rgba(249,249,248,0.4); font-style: italic; }
+  .custom-code .ok { color: var(--lime); }
+  @media (max-width: 860px) { .custom-grid { grid-template-columns: 1fr; gap: 32px; } }
 
-  /* ============ DIAGRAM ============ */
-  section.diagram { background: var(--bg-soft); padding: 112px 0; }
-  .diagram-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-  }
-  .diagram-panel {
-    background: #ffffff;
-    padding: 40px 32px;
-    border-radius: 20px;
-  }
-  .diagram-panel.after {
-    background: var(--green-deep);
-    color: #f9f9f8;
-  }
-  .diagram-label { font-size: 12px; color: var(--ink-soft); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
-  .diagram-panel.after .diagram-label { color: var(--lime); }
-  .diagram-title {
-    font-size: 24px; font-weight: 400; letter-spacing: -0.03em;
-    line-height: 1.0; margin-bottom: 32px;
-    color: var(--ink);
-  }
-  .diagram-panel.after .diagram-title { color: #f9f9f8; }
-  .diagram-svg { width: 100%; height: auto; display: block; margin-bottom: 20px; }
-  .diagram-foot { font-size: 14px; color: var(--ink-soft); line-height: 1.45; }
-  .diagram-panel.after .diagram-foot { color: rgba(249,249,248,0.55); }
-  @media (max-width: 860px) { .diagram-grid { grid-template-columns: 1fr; } }
-
-  /* ============ INDUSTRIES — text-only cards, hover lift ============ */
+  /* ============ INDUSTRIES (Moov-style by-vertical) ============ */
   section.industries { background: var(--bg); }
-  .ind-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .ind-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+  }
   .ind-card {
     background: var(--bg-soft);
-    border-radius: 20px;
-    padding: 40px;
+    border-radius: 16px;
+    padding: 32px 24px;
     transition: transform 0.3s ease, background 0.3s ease;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    min-height: 240px;
+    display: flex; flex-direction: column;
   }
   .ind-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0;
+    content: ''; position: absolute; top: 0; left: 0;
     width: 0; height: 4px;
     background: var(--clay);
     transition: width 0.4s ease;
   }
   .ind-card:hover::before { width: 100%; }
   .ind-card:hover { transform: translateY(-4px); }
+  .ind-card.lead { background: var(--green-deep); color: #f9f9f8; }
+  .ind-card.lead .ind-num { color: var(--lime); }
+  .ind-card.lead h3 { color: #f9f9f8; }
+  .ind-card.lead p { color: rgba(249,249,248,0.6); }
   .ind-num {
-    font-size: 13px; color: var(--clay); margin-bottom: 14px;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .ind-num::after {
-    content: ''; width: 32px; height: 1px; background: var(--line-strong);
+    font-size: 11px; color: var(--clay);
+    margin-bottom: 14px;
+    letter-spacing: 0.05em; text-transform: uppercase;
   }
   .ind-card h3 {
-    font-size: 32px; font-weight: 400;
-    line-height: 1.0; letter-spacing: -0.035em;
-    margin-bottom: 14px;
+    font-size: 22px; font-weight: 500;
+    line-height: 1.05; letter-spacing: -0.025em;
+    margin-bottom: 12px;
   }
-  .ind-card p { font-size: 17px; color: var(--ink-soft); line-height: 1.45; }
-  @media (max-width: 860px) { .ind-grid { grid-template-columns: 1fr; } }
+  .ind-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.45; flex: 1; }
+  .ind-card .status {
+    font-size: 11px;
+    color: var(--clay);
+    letter-spacing: 0.05em;
+    margin-top: 12px;
+    text-transform: uppercase;
+  }
+  .ind-card.lead .status { color: var(--lime); }
+  @media (max-width: 1100px) { .ind-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 700px) { .ind-grid { grid-template-columns: 1fr 1fr; } }
 
-  /* ============ LOGO WALL ============ */
-  section.logos { background: var(--bg-soft); padding: 72px 0; }
+  /* ============ LOGOS ============ */
+  section.logos { background: var(--bg-soft); padding: 80px 0; }
   .logos-eyebrow { text-align: center; font-size: 13px; color: var(--ink-soft); margin-bottom: 40px; }
   .logos-grid {
     display: grid; grid-template-columns: repeat(6, 1fr);
     gap: 24px;
     max-width: 1100px; margin: 0 auto;
+    align-items: center;
   }
   .logo-slot {
     height: 56px;
@@ -523,6 +576,7 @@
     transition: border-color 0.2s, color 0.2s;
   }
   .logo-slot:hover { border-color: var(--clay); color: var(--clay); }
+  .logo-slot.real { border-style: solid; color: var(--ink-soft); font-weight: 500; }
   @media (max-width: 860px) { .logos-grid { grid-template-columns: repeat(3, 1fr); } }
 
   /* ============ HOW IT WORKS ============ */
@@ -537,10 +591,10 @@
   .step-num { font-size: 13px; color: var(--clay); margin-bottom: 18px; }
   .step h3 {
     font-size: clamp(26px, 3vw, 36px);
-    font-weight: 400; line-height: 1.0; letter-spacing: -0.035em;
+    font-weight: 500; line-height: 1.0; letter-spacing: -0.035em;
     margin-bottom: 16px;
   }
-  .step p { font-size: 17px; color: var(--ink-soft); line-height: 1.45; }
+  .step p { font-size: 17px; color: var(--ink-soft); line-height: 1.5; }
   @media (max-width: 860px) { .steps { grid-template-columns: 1fr; gap: 32px; } }
 
   /* ============ COMPLIANCE ============ */
@@ -562,20 +616,65 @@
     content: ''; width: 8px; height: 8px; border-radius: 50%;
     background: var(--lime);
   }
+  .comp-card.upcoming h4::before { background: var(--clay-soft); }
   .comp-card p { font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
+  .comp-status {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 4px 10px;
+    background: rgba(194,65,12,0.1);
+    color: var(--clay);
+    border-radius: 99px;
+    font-size: 11px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
   @media (max-width: 860px) { .compliance-row { grid-template-columns: 1fr; } }
 
+  /* ============ ROADMAP ============ */
+  section.roadmap { background: var(--bg); padding: 100px 0; border-top: 1px solid var(--line); }
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 48px;
+  }
+  .road-card {
+    background: var(--bg-soft);
+    border-radius: 14px;
+    padding: 28px 24px;
+    border-left: 3px solid var(--clay);
+  }
+  .road-card .when {
+    font-size: 11px;
+    color: var(--clay);
+    letter-spacing: 0.05em; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .road-card h4 {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .road-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 860px) { .roadmap-grid { grid-template-columns: 1fr; } }
+
   /* ============ COMPARE ============ */
-  section.compare { background: var(--bg); }
+  section.compare { background: var(--bg-soft); }
   .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .compare-col { padding: 48px 40px; border-radius: 20px; }
-  .compare-col.today { background: var(--bg-soft); }
+  .compare-col.today { background: var(--bg); border: 1px solid var(--line); }
   .compare-col.neopaas { background: var(--green-deep); color: #f9f9f8; }
   .compare-eyebrow { font-size: 13px; color: var(--ink-soft); margin-bottom: 14px; }
   .compare-col.neopaas .compare-eyebrow { color: var(--lime); }
   .compare-col h3 {
     font-size: clamp(28px, 3vw, 40px);
-    font-weight: 400; line-height: 1.0; letter-spacing: -0.04em;
+    font-weight: 500; line-height: 1.0; letter-spacing: -0.04em;
     margin-bottom: 32px;
   }
   .compare-col.neopaas h3 { color: #f9f9f8; }
@@ -588,7 +687,8 @@
     color: var(--ink-soft);
   }
   .compare-col li::before {
-    font-size: 16px; flex-shrink: 0; line-height: 1.4; font-weight: 500;
+    font-size: 16px; flex-shrink: 0; line-height: 1.4;
+    font-weight: 500;
   }
   .compare-col.today li::before { content: '×'; color: var(--ink-faint); font-size: 20px; }
   .compare-col.neopaas li::before { content: '→'; color: var(--lime); }
@@ -596,7 +696,7 @@
   @media (max-width: 860px) { .compare-grid { grid-template-columns: 1fr; } }
 
   /* ============ PARTNERS ============ */
-  section.partners-strip { background: var(--bg-soft); }
+  section.partners-strip { background: var(--bg); }
   .strip-grid { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 16px; }
   .strip-intro {
     display: flex; flex-direction: column; justify-content: center;
@@ -604,12 +704,12 @@
   }
   .strip-intro h2 {
     font-size: clamp(28px, 3vw, 44px);
-    font-weight: 400; line-height: 1.0; letter-spacing: -0.04em;
+    font-weight: 500; line-height: 1.0; letter-spacing: -0.04em;
     margin-bottom: 18px;
   }
-  .strip-intro p { font-size: 17px; line-height: 1.45; color: var(--ink-soft); }
+  .strip-intro p { font-size: 17px; line-height: 1.5; color: var(--ink-soft); }
   .partner-card {
-    background: var(--bg);
+    background: var(--bg-soft);
     padding: 32px; border-radius: 20px;
     display: flex; flex-direction: column;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -617,7 +717,7 @@
   .partner-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(12,59,46,0.08); }
   .partner-card .pc-eyebrow { font-size: 12px; color: var(--clay); margin-bottom: 18px; letter-spacing: 0.04em; text-transform: uppercase; }
   .partner-card h3 {
-    font-size: 26px; font-weight: 400;
+    font-size: 26px; font-weight: 500;
     line-height: 1.0; letter-spacing: -0.035em;
     margin-bottom: 14px;
   }
@@ -627,43 +727,39 @@
   .partner-card:hover .go::after { transform: translateX(4px); }
   @media (max-width: 860px) { .strip-grid { grid-template-columns: 1fr; } .strip-intro { padding-right: 0; } }
 
-  /* ============ FINAL CTA — dark, big ============ */
+  /* ============ FINAL CTA ============ */
   section.final {
     background: var(--green-deep); color: #f9f9f8;
-    padding: 160px 0;
-    text-align: center;
+    padding: 160px 0; text-align: center;
     position: relative; overflow: hidden;
   }
   section.final::before {
-    content: '';
-    position: absolute; inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: radial-gradient(circle at 50% 50%, rgba(179,237,151,0.10) 0%, transparent 50%);
     pointer-events: none;
   }
   section.final h2 {
-    font-size: clamp(48px, 7vw, 96px);
-    font-weight: 400; letter-spacing: -0.05em;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 500; letter-spacing: -0.04em;
     line-height: 0.98;
-    margin-bottom: 28px;
-    max-width: 16ch;
+    margin-bottom: 28px; max-width: 16ch;
     margin-left: auto; margin-right: auto;
-    color: #f9f9f8;
-    position: relative;
+    color: #f9f9f8; position: relative;
   }
   section.final h2 .alt { color: var(--lime); }
   section.final p {
     font-size: 19px; color: rgba(249,249,248,0.65);
     max-width: 42ch; margin: 0 auto 36px;
-    line-height: 1.5;
-    position: relative;
+    line-height: 1.5; position: relative;
   }
   section.final .cta-row { justify-content: center; position: relative; }
 
-  /* ============ FOOTER ============ */
+  /* ============ FOOTER — BAB branding ============ */
   footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 72px 0 36px; }
   .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 56px; }
-  footer .logo { color: #fff; font-size: 30px; }
-  footer .tagline { font-size: 15px; max-width: 30ch; line-height: 1.5; margin-top: 14px; color: rgba(255,255,255,0.55); }
+  footer .logo { color: #fff; font-size: 32px; font-weight: 700; }
+  footer .logo-sub-foot { color: rgba(255,255,255,0.55); font-size: 14px; margin-top: 4px; display: block; }
+  footer .tagline { font-size: 15px; max-width: 32ch; line-height: 1.5; margin-top: 18px; color: rgba(255,255,255,0.55); }
   .foot-col h4 {
     font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--lime); margin-bottom: 18px; font-weight: 500;
@@ -687,20 +783,25 @@
 </head>
 <body>
 
-<!-- NAV -->
+<!-- NAV — BAB brand + verb-IA -->
 <nav class="top">
   <div class="container">
-    <a href="index.html" class="logo">NeoPaaS</a>
+    <a href="index.html" class="logo-wrap">
+      <span class="logo">BAB</span>
+      <span class="logo-sub">NeoPaaS · payment platform</span>
+    </a>
     <div class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="for-payment-providers.html">Payment providers</a>
-      <a href="for-cashier-systems.html">Cashier systems</a>
+      <a href="#verbs">Platform</a>
+      <a href="#industries">Industries</a>
+      <a href="for-payment-providers.html">Partners</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#pricing">Pricing</a>
     </div>
     <a href="#talk" class="nav-cta">Get a demo</a>
   </div>
 </nav>
 
-<!-- HERO — Campfire-style dark, lime accent, live badge -->
+<!-- HERO — fixed: no ZATCA overclaim in sub -->
 <section class="hero">
   <div class="hero-bg-glow"></div>
   <div class="container">
@@ -709,35 +810,63 @@
         <span class="live-dot"></span>
         Built in Riyadh · For multi-branch businesses in Saudi Arabia
       </div>
-      <h1 class="display">One platform behind <span class="alt">every card payment</span> in your business.</h1>
-      <p class="sub">Connect every terminal in every store to one dashboard. Reconcile in real time. File ZATCA automatically.</p>
+      <h1 class="display">Card payments, finally <span class="alt">under control.</span></h1>
+      <p class="sub">One cloud platform connecting every terminal in every store to a single intelligence layer. Reconcile across acquirers in real time. Stop chasing settlements your bank should already have sent.</p>
       <div class="cta-row">
         <a href="#talk" class="btn btn-primary">Get a demo <span class="arrow">→</span></a>
-        <a href="#what" class="btn btn-secondary">See how it works</a>
+        <a href="#verbs" class="btn btn-secondary">See the platform</a>
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <div class="num" data-counter="2">0</div>
-          <div class="label">Weeks to live across every store</div>
-        </div>
-        <div class="hero-stat">
           <div class="num" data-counter="30" data-suffix="+">0</div>
-          <div class="label">Hours back to finance, every week</div>
+          <div class="label">Hours a week back to your finance team</div>
         </div>
         <div class="hero-stat">
           <div class="num" data-counter="5">0</div>
           <div class="label">Days faster cash flow on average</div>
         </div>
         <div class="hero-stat">
-          <div class="num" data-counter="100" data-suffix="%">0</div>
-          <div class="label">ZATCA filings, every transaction</div>
+          <div class="num" data-counter="2">0</div>
+          <div class="label">Weeks from signup to live everywhere</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ON-RAMP / PAIN — restored from v7 -->
+<!-- VERB-IA STRIP — Moov pattern adapted -->
+<section class="verbs" id="verbs">
+  <div class="container">
+    <div class="verbs-intro">
+      <h2>One platform. Four jobs done automatically.</h2>
+      <p>The work your finance team currently does by hand, handled by NeoPaaS in the background.</p>
+    </div>
+    <div class="verbs-grid">
+      <div class="verb-tile">
+        <p class="verb-num">— 01</p>
+        <h3>Connect</h3>
+        <p>Every cashier, every terminal, every acquirer — through one cloud integration.</p>
+      </div>
+      <div class="verb-tile">
+        <p class="verb-num">— 02</p>
+        <h3>Route</h3>
+        <p>Every transaction goes to the right acquirer, automatically. Live monitoring on every terminal.</p>
+      </div>
+      <div class="verb-tile">
+        <p class="verb-num">— 03</p>
+        <h3>Reconcile</h3>
+        <p>Every settlement matched to every order across every provider. Zero manual spreadsheets.</p>
+      </div>
+      <div class="verb-tile">
+        <p class="verb-num">— 04</p>
+        <h3>Report</h3>
+        <p>One intelligence layer. Every branch, every transaction, live. Searchable, exportable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN ON-RAMP -->
 <section class="onramp">
   <div class="container">
     <div class="section-head reveal">
@@ -755,26 +884,47 @@
       </div>
       <div class="pain-card reveal">
         <p class="pain-num">c.</p>
-        <p>ZATCA filing is a panic every month-end. Rejected invoices show up weeks later. Someone has to fix them.</p>
+        <p>Settlements arrive days late. Disputes pile up. Someone manually files claims one by one — and half of them get rejected.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- MANIFESTO — black section -->
-<section class="manifesto">
+<!-- CASE STUDY — JMT logistics -->
+<section class="case">
   <div class="container">
-    <div class="reveal">
-      <h2>Accepting card payments in Saudi Arabia used to be slow, manual and <span class="alt">fragmented.</span></h2>
-      <div class="body">
-        <p>NeoPaaS replaces all of it.</p>
-        <p>One cloud platform. Every terminal. Every branch. Every payment provider. Reconciled and filed, automatically.</p>
+    <div class="case-grid">
+      <div class="reveal">
+        <p class="case-eyebrow">Customer story · Logistics</p>
+        <p class="case-quote">"We replaced cash-on-delivery with portable terminals. NeoPaaS automated the entire <span class="alt">claim cycle</span> — settlement mapped, evidence attached, sent to the bank. Zero manual work."</p>
+        <p class="case-attribution">
+          <strong>Head of Operations</strong>
+          A Saudi-based courier and last-mile logistics network, 200+ active couriers. Customer name available under NDA.
+        </p>
+      </div>
+      <div class="case-metrics reveal">
+        <div class="case-metric">
+          <div class="num">100%</div>
+          <div class="label">Of claims now filed automatically — no manual processing in the loop.</div>
+        </div>
+        <div class="case-metric">
+          <div class="num">200+</div>
+          <div class="label">Portable terminals deployed across courier fleet.</div>
+        </div>
+        <div class="case-metric">
+          <div class="num">Real-time</div>
+          <div class="label">Settlement-to-order matching with full evidence trail.</div>
+        </div>
+        <div class="case-metric">
+          <div class="num">Zero</div>
+          <div class="label">Cash-on-delivery transactions — fully replaced with card payments.</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DIAGRAM -->
+<!-- DIAGRAM — anonymized acquirer names -->
 <section class="diagram" id="what">
   <div class="container">
     <div class="section-head reveal">
@@ -786,7 +936,7 @@
         <p class="diagram-label">— Today</p>
         <p class="diagram-title">Direct, point-to-point. Brittle.</p>
         <svg class="diagram-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-          <g font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#0a0a0a">
+          <g font-family="Inter, sans-serif" font-size="11" fill="#0a0a0a">
             <rect x="20" y="40" width="100" height="32" rx="6" fill="#f5f1e8" stroke="#0a0a0a" stroke-width="1.2"/>
             <text x="70" y="60" text-anchor="middle">Branch A</text>
             <rect x="20" y="135" width="100" height="32" rx="6" fill="#f5f1e8" stroke="#0a0a0a" stroke-width="1.2"/>
@@ -794,15 +944,15 @@
             <rect x="20" y="230" width="100" height="32" rx="6" fill="#f5f1e8" stroke="#0a0a0a" stroke-width="1.2"/>
             <text x="70" y="250" text-anchor="middle">Branch C</text>
           </g>
-          <g font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#404040">
+          <g font-family="Inter, sans-serif" font-size="10" fill="#404040">
             <rect x="280" y="15" width="100" height="26" rx="4" fill="#ede7d6" stroke="#404040" stroke-width="1"/>
             <text x="330" y="32" text-anchor="middle">Cashier system</text>
             <rect x="280" y="65" width="100" height="26" rx="4" fill="#ede7d6" stroke="#404040" stroke-width="1"/>
-            <text x="330" y="82" text-anchor="middle">Mada terminal</text>
+            <text x="330" y="82" text-anchor="middle">Payment terminal</text>
             <rect x="280" y="115" width="100" height="26" rx="4" fill="#ede7d6" stroke="#404040" stroke-width="1"/>
             <text x="330" y="132" text-anchor="middle">Acquirer (bank)</text>
             <rect x="280" y="165" width="100" height="26" rx="4" fill="#ede7d6" stroke="#404040" stroke-width="1"/>
-            <text x="330" y="182" text-anchor="middle">ZATCA filing</text>
+            <text x="330" y="182" text-anchor="middle">Tax filing</text>
             <rect x="280" y="215" width="100" height="26" rx="4" fill="#ede7d6" stroke="#404040" stroke-width="1"/>
             <text x="330" y="232" text-anchor="middle">SAMA reporting</text>
             <rect x="280" y="265" width="100" height="26" rx="4" fill="#ede7d6" stroke="#404040" stroke-width="1"/>
@@ -826,7 +976,7 @@
         <p class="diagram-label">— With NeoPaaS</p>
         <p class="diagram-title">One cloud platform in the middle.</p>
         <svg class="diagram-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-          <g font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#f9f9f8">
+          <g font-family="Inter, sans-serif" font-size="11" fill="#f9f9f8">
             <rect x="20" y="40" width="100" height="32" rx="6" fill="rgba(255,255,255,0.08)" stroke="#f9f9f8" stroke-width="1"/>
             <text x="70" y="60" text-anchor="middle">Branch A</text>
             <rect x="20" y="135" width="100" height="32" rx="6" fill="rgba(255,255,255,0.08)" stroke="#f9f9f8" stroke-width="1"/>
@@ -836,18 +986,18 @@
           </g>
           <g>
             <rect x="160" y="115" width="80" height="70" rx="10" fill="#b3ed97" stroke="#f9f9f8" stroke-width="1.5"/>
-            <text x="200" y="148" text-anchor="middle" fill="#081f17" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="500">NeoPaaS</text>
-            <text x="200" y="165" text-anchor="middle" fill="#0c3b2e" font-family="Helvetica Neue, Arial, sans-serif" font-size="8" letter-spacing="1">CLOUD</text>
+            <text x="200" y="148" text-anchor="middle" fill="#081f17" font-family="Inter, sans-serif" font-size="12" font-weight="500">NeoPaaS</text>
+            <text x="200" y="165" text-anchor="middle" fill="#0c3b2e" font-family="Inter, sans-serif" font-size="8" letter-spacing="1">CLOUD</text>
           </g>
-          <g font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="rgba(249,249,248,0.85)">
+          <g font-family="Inter, sans-serif" font-size="10" fill="rgba(249,249,248,0.85)">
             <rect x="280" y="15" width="100" height="26" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
             <text x="330" y="32" text-anchor="middle">Cashier system</text>
             <rect x="280" y="65" width="100" height="26" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-            <text x="330" y="82" text-anchor="middle">Mada terminal</text>
+            <text x="330" y="82" text-anchor="middle">Payment terminal</text>
             <rect x="280" y="115" width="100" height="26" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
             <text x="330" y="132" text-anchor="middle">Acquirer (bank)</text>
             <rect x="280" y="165" width="100" height="26" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-            <text x="330" y="182" text-anchor="middle">ZATCA filing</text>
+            <text x="330" y="182" text-anchor="middle">Tax filing</text>
             <rect x="280" y="215" width="100" height="26" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
             <text x="330" y="232" text-anchor="middle">SAMA reporting</text>
             <rect x="280" y="265" width="100" height="26" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
@@ -864,13 +1014,13 @@
             <line x1="240" y1="165" x2="280" y2="228"/><line x1="240" y1="170" x2="280" y2="278"/>
           </g>
         </svg>
-        <p class="diagram-foot">One integration to NeoPaaS connects every branch to every service. We handle routing, compliance, and reconciliation. Live across your fleet in two weeks.</p>
+        <p class="diagram-foot">One integration to NeoPaaS connects every branch to every service in the Saudi payment ecosystem. We handle routing, reconciliation, and monitoring. Live across your fleet in two weeks.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BENTO GRID — product features replaces the 3-row spread -->
+<!-- BENTO — fixed: ZATCA reframed to roadmap-ready -->
 <section class="bento">
   <div class="container">
     <div class="section-head reveal">
@@ -879,7 +1029,6 @@
     </div>
 
     <div class="bento-grid">
-      <!-- LARGE CARD with live dashboard preview -->
       <div class="bento-card large dark">
         <p class="bento-num">01 — Reconciliation</p>
         <h3>30 hours a week, back.</h3>
@@ -920,50 +1069,82 @@
         </div>
       </div>
 
-      <!-- ZATCA card -->
       <div class="bento-card">
-        <p class="bento-num">02 — ZATCA filing</p>
-        <h3>Filed automatically.</h3>
-        <p>Every transaction generates a compliant e-invoice and files itself in real time. No batch jobs. No month-end fire drill.</p>
+        <p class="bento-num">02 — Visibility</p>
+        <h3>Every terminal, live.</h3>
+        <p>One intelligence layer for every branch. Today's revenue, last settlement, terminal connectivity, transaction failures. Searchable. Exportable.</p>
       </div>
 
-      <!-- Visibility card -->
       <div class="bento-card">
-        <p class="bento-num">03 — Visibility</p>
-        <h3>Every terminal, live.</h3>
-        <p>One dashboard for every branch. Today's revenue, last settlement, terminal status. Searchable. Exportable.</p>
+        <p class="bento-num">03 — ZATCA &amp; SAMA</p>
+        <h3>Built for compliance.</h3>
+        <p>SAMA-aligned reporting on every transaction today. ZATCA Phase 2 e-invoicing architecture ready — going live with the upcoming release.</p>
+        <span class="bento-roadmap-tag">ZATCA Phase 2 · Coming next</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INDUSTRIES — text cards, hover lift, NO PHOTOS -->
+<!-- CUSTOMIZATION / API callout -->
+<section class="custom">
+  <div class="container">
+    <div class="custom-grid">
+      <div class="custom-text reveal">
+        <p class="section-eyebrow">Built around your workflow</p>
+        <h2 class="heading">Your stack. <span class="alt">Our pipes.</span></h2>
+        <p>Every merchant runs their finance ops differently. NeoPaaS exposes its full surface as APIs and webhooks — so your finance team, your ops team, and your developers can wire NeoPaaS into your existing tools. Custom reconciliation rules, custom claim workflows, custom export formats — built to your spec.</p>
+      </div>
+      <div class="reveal">
+        <pre class="custom-code"><span class="com">// Custom claim cycle, fully automated</span>
+<span class="kw">await</span> neopaas.claims.<span class="fn">configure</span>({
+  merchant:    <span class="str">"your_merchant_id"</span>,
+  trigger:     <span class="str">"settlement_mismatch"</span>,
+  match_on:    [<span class="str">"order_id"</span>, <span class="str">"amount"</span>],
+  attach:      [<span class="str">"transaction_log"</span>, <span class="str">"settlement_file"</span>],
+  send_to:     <span class="str">"acquirer_dispute_endpoint"</span>,
+  human:       <span class="kw">false</span>
+});
+
+<span class="com">// → Claims now file themselves. No human in the loop.</span>
+<span class="ok">✓ Logistics customer: 100% automated claim filing</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES — reordered: Logistics first, Healthcare added, 5 cards -->
 <section class="industries" id="industries">
   <div class="container">
     <div class="section-head reveal">
-      <h2 class="heading">Built for multi-branch businesses.</h2>
-      <p class="section-lead">If you run one store, any POS will do. The moment you have multiple terminals across multiple branches, you need us.</p>
+      <h2 class="heading">Built for these five industries.</h2>
+      <p class="section-lead">Five verticals where multi-branch payment ops is hardest — and where we've already proven the workflow.</p>
     </div>
     <div class="ind-grid">
-      <div class="ind-card">
-        <p class="ind-num">01 — F&amp;B</p>
-        <h3>Restaurants &amp; F&amp;B</h3>
-        <p>Quick-service, casual dining, coffee chains, cloud kitchens. 50 to 500 terminals across the kingdom.</p>
-      </div>
-      <div class="ind-card">
-        <p class="ind-num">02 — Retail</p>
-        <h3>Retail chains</h3>
-        <p>Apparel, grocery, electronics, pharmacy. Real-time visibility across every store and region.</p>
-      </div>
-      <div class="ind-card">
-        <p class="ind-num">03 — Hospitality</p>
-        <h3>Hotels &amp; hospitality</h3>
-        <p>Hotel groups and resorts. Front desk, F&amp;B, spa, and POS payments in one view. Audit-ready.</p>
-      </div>
-      <div class="ind-card">
-        <p class="ind-num">04 — Logistics</p>
+      <div class="ind-card lead">
+        <p class="ind-num">01 — Logistics</p>
         <h3>Logistics &amp; delivery</h3>
-        <p>Couriers, last-mile, field service. Mobile terminals that work anywhere. Cash-on-delivery, replaced.</p>
+        <p>Couriers, last-mile, field service. Portable terminals, full claim cycle automation. Cash-on-delivery, replaced.</p>
+        <span class="status">★ Live customer</span>
+      </div>
+      <div class="ind-card">
+        <p class="ind-num">02 — Tourism</p>
+        <h3>Tourism &amp; hospitality</h3>
+        <p>Hotel groups, resorts, tour operators. Front desk, F&amp;B, spa, and POS payments in one view.</p>
+      </div>
+      <div class="ind-card">
+        <p class="ind-num">03 — Healthcare</p>
+        <h3>Healthcare</h3>
+        <p>Clinics, polyclinic chains, pharmacies. Multi-location card payments with compliance audit trail.</p>
+      </div>
+      <div class="ind-card">
+        <p class="ind-num">04 — Retail</p>
+        <h3>Retail chains</h3>
+        <p>Apparel, grocery, electronics. Real-time visibility across every store and region.</p>
+      </div>
+      <div class="ind-card">
+        <p class="ind-num">05 — F&amp;B</p>
+        <h3>Restaurants &amp; F&amp;B</h3>
+        <p>QSR, casual dining, coffee chains, cloud kitchens. 50 to 500 terminals across the kingdom.</p>
       </div>
     </div>
   </div>
@@ -972,7 +1153,7 @@
 <!-- LOGO WALL -->
 <section class="logos">
   <div class="container">
-    <p class="logos-eyebrow">Saudi operators on NeoPaaS</p>
+    <p class="logos-eyebrow">Trusted by Saudi operators</p>
     <div class="logos-grid">
       <div class="logo-slot">LOGO</div>
       <div class="logo-slot">LOGO</div>
@@ -995,47 +1176,90 @@
   <div class="container">
     <div class="section-head reveal">
       <h2 class="heading">Live across every store in two weeks.</h2>
-      <p class="section-lead">We do the setup. Your team learns the dashboard in an afternoon.</p>
+      <p class="section-lead">We do the setup. Your team learns the platform in an afternoon.</p>
     </div>
     <div class="steps">
       <div class="step">
         <p class="step-num">— 01 Week one</p>
         <h3>We integrate your setup.</h3>
-        <p>Your cashier system, your terminals, your bank, your ZATCA account. No new vendors. No new hardware.</p>
+        <p>Your cashier system, your terminals, your bank. No new vendors. No new hardware. No engineers dispatched to your stores.</p>
       </div>
       <div class="step">
         <p class="step-num">— 02 Week two</p>
         <h3>We train your team.</h3>
-        <p>Finance, store managers, IT. One live session and they own the dashboard. We stay on Slack from day one.</p>
+        <p>Finance, store managers, IT. One live session and they own the intelligence layer. We stay on Slack from day one.</p>
       </div>
       <div class="step">
         <p class="step-num">— 03 Day 14</p>
         <h3>You're live.</h3>
-        <p>We switch branches over one at a time, monitoring as we go. By day fourteen, every terminal is on NeoPaaS.</p>
+        <p>We switch branches over one at a time, monitoring as we go. By day fourteen, every terminal in your network is on NeoPaaS.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COMPLIANCE -->
+<!-- COMPLIANCE — honest about ZATCA roadmap -->
 <section class="compliance" id="compliance">
   <div class="container">
     <div class="section-head reveal">
-      <h2 class="heading">Compliance, built in.</h2>
-      <p class="section-lead">Saudi compliance is mandatory and changes often. We've built it once, properly. We update it every time the rules change.</p>
+      <h2 class="heading">Compliance — built in, kept current.</h2>
+      <p class="section-lead">Saudi regulation is mandatory and changes often. We build to the standard, and update it every time the rules move.</p>
     </div>
     <div class="compliance-row">
       <div class="comp-card">
-        <h4>ZATCA Phase 2</h4>
-        <p>Every transaction generates a compliant e-invoice and files in real time. No batch jobs. No rejection emails.</p>
-      </div>
-      <div class="comp-card">
-        <h4>SAMA reporting</h4>
-        <p>Transaction monitoring, AML signals, and required reporting handled in the background.</p>
+        <h4>SAMA-aligned reporting</h4>
+        <p>Every transaction logged, monitored, and reported to SAMA payment infrastructure standards. AML signals on every flow.</p>
       </div>
       <div class="comp-card">
         <h4>PCI-DSS Level 1</h4>
         <p>The highest tier of card data security, audited annually. Your business never touches a card number.</p>
+      </div>
+      <div class="comp-card upcoming">
+        <h4>ZATCA Phase 2</h4>
+        <p>Architecture is ready. E-invoicing on every transaction is in the upcoming release.</p>
+        <span class="comp-status">Coming next</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP — Coming next -->
+<section class="roadmap" id="roadmap">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="heading">What's coming next.</h2>
+      <p class="section-lead">A live roadmap of what's shipping next. We tell you what's built today, what's in the kitchen, and when you'll see it in production.</p>
+    </div>
+    <div class="roadmap-grid">
+      <div class="road-card">
+        <p class="when">Next release</p>
+        <h4>ZATCA Phase 2 e-invoicing</h4>
+        <p>Live e-invoice filed to ZATCA on every transaction, in real time. Architecture in place; clearance pending.</p>
+      </div>
+      <div class="road-card">
+        <p class="when">Q3 2026</p>
+        <h4>Online card payments</h4>
+        <p>Card-not-present transactions through the same orchestration layer. One reconciliation flow across in-store and online.</p>
+      </div>
+      <div class="road-card">
+        <p class="when">Q3 2026</p>
+        <h4>Bank transfers &amp; open banking</h4>
+        <p>Account-to-account transfers and open-banking-driven payouts, settled into the same intelligence layer.</p>
+      </div>
+      <div class="road-card">
+        <p class="when">Q4 2026</p>
+        <h4>Loyalty integrations</h4>
+        <p>Automatic loyalty point scoring on every card transaction, partnered with leading Saudi loyalty providers.</p>
+      </div>
+      <div class="road-card">
+        <p class="when">Q4 2026</p>
+        <h4>AI mismatch analysis</h4>
+        <p>Settlement and reconciliation mismatch detection, built with banks. Flag, route, resolve — automatically.</p>
+      </div>
+      <div class="road-card">
+        <p class="when">2027</p>
+        <h4>GCC expansion</h4>
+        <p>NeoPaaS in UAE, Kuwait, Qatar, Bahrain. Same intelligence layer, same partner program, regional acquirers.</p>
       </div>
     </div>
   </div>
@@ -1053,10 +1277,10 @@
         <h3>Manual, fragmented, slow.</h3>
         <ul>
           <li>Reconciliation eats 30+ hours a week in Excel</li>
-          <li>ZATCA filed in batches, with a month-end scramble</li>
           <li>Multiple bank portals for terminal visibility</li>
           <li>Settlement files arrive T+3 to T+5</li>
           <li>New terminal onboarding takes 2-3 weeks per store</li>
+          <li>Claims filed one by one — half get rejected</li>
           <li>Compliance burden lives with your finance team</li>
         </ul>
       </div>
@@ -1065,11 +1289,11 @@
         <h3>Automatic, unified, real-time.</h3>
         <ul>
           <li>Reconciliation happens automatically, across every provider</li>
-          <li>ZATCA filed per transaction, the instant it lands</li>
-          <li>One dashboard for every terminal in every branch</li>
+          <li>One intelligence layer for every terminal in every branch</li>
           <li>Settlement tracked live, T+0 visibility</li>
           <li>New terminals onboard in minutes, in bulk</li>
-          <li>Compliance is built in. We maintain it.</li>
+          <li>Claim cycle fully automated — file, attach, send</li>
+          <li>Compliance built in. We maintain it.</li>
         </ul>
       </div>
     </div>
@@ -1082,15 +1306,15 @@
     <div class="strip-grid">
       <div class="strip-intro">
         <h2>Distribute NeoPaaS to your customers.</h2>
-        <p>If you're a payment provider or a software vendor, there's a partner program that earns you recurring revenue with no engineering work.</p>
+        <p>If you're a payment provider or a software vendor in Saudi Arabia, there's a partner program that earns you recurring revenue with no engineering work.</p>
       </div>
       <a href="for-payment-providers.html" class="partner-card">
         <p class="pc-eyebrow">For payment providers</p>
-        <h3>MSPs &amp; acquirers</h3>
-        <p>Distribute NeoPaaS to your existing merchant base. 20% recurring. Zero engineering.</p>
+        <h3>Acquirers &amp; MSPs</h3>
+        <p>Distribute NeoPaaS to your existing merchant base. Recurring revenue share. Zero engineering.</p>
         <span class="go">Partner program</span>
       </a>
-      <a href="#cashier" class="partner-card">
+      <a href="for-cashier-systems.html" class="partner-card">
         <p class="pc-eyebrow">For software vendors</p>
         <h3>POS, ERP &amp; kiosk vendors</h3>
         <p>White-label NeoPaaS inside your product. Ship payments in 4 weeks instead of building for 18 months.</p>
@@ -1104,54 +1328,59 @@
 <section class="final" id="talk">
   <div class="container">
     <h2>See it for <span class="alt">your business.</span></h2>
-    <p>30 minutes. We connect to your real data and show you what changes.</p>
+    <p>30 minutes. We connect to your real data and show you what changes — across your stores, your terminals, your reconciliation week.</p>
     <div class="cta-row">
       <a href="#contact" class="btn btn-primary">Get a demo <span class="arrow">→</span></a>
-      <a href="#pricing" class="btn btn-secondary">See pricing</a>
+      <a href="for-payment-providers.html" class="btn btn-secondary">Or partner with us</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- FOOTER — BAB branding leads -->
 <footer>
   <div class="container">
     <div class="foot-grid">
       <div>
-        <p class="logo">NeoPaaS</p>
-        <p class="tagline">The cloud payment platform for Saudi Arabia's multi-branch businesses. Built in Riyadh by Bab Innovations.</p>
+        <p class="logo">BAB<span style="color:var(--clay)">.</span></p>
+        <span class="logo-sub-foot">Bab Innovations · babbinnovations.com</span>
+        <p class="tagline">Cloud payment infrastructure for Saudi Arabia's multi-branch businesses. NeoPaaS is our flagship product.</p>
       </div>
       <div class="foot-col">
         <h4>Platform</h4>
-        <a href="#what">Overview</a>
-        <a href="#what">Reconciliation</a>
-        <a href="#compliance">Compliance</a>
-        <a href="#what">Dashboard</a>
+        <a href="#verbs">Connect</a>
+        <a href="#verbs">Route</a>
+        <a href="#verbs">Reconcile</a>
+        <a href="#verbs">Report</a>
+        <a href="#roadmap">Roadmap</a>
       </div>
       <div class="foot-col">
         <h4>For</h4>
-        <a href="index.html">Merchants</a>
-        <a href="for-payment-providers.html">Payment providers</a>
-        <a href="for-cashier-systems.html">Cashier systems</a>
+        <a href="#industries">Logistics</a>
+        <a href="#industries">Tourism &amp; hospitality</a>
+        <a href="#industries">Healthcare</a>
+        <a href="#industries">Retail</a>
+        <a href="#industries">F&amp;B</a>
+        <a href="for-payment-providers.html">Partners</a>
       </div>
       <div class="foot-col">
         <h4>Company</h4>
-        <a href="#">About</a>
-        <a href="#">Pricing</a>
-        <a href="#">Resources</a>
+        <a href="#">About BAB</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#compliance">Compliance</a>
         <a href="#">Contact</a>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 Bab Innovations · Riyadh, Saudi Arabia</span>
+      <span>© 2026 BAB Innovations · Riyadh, Saudi Arabia</span>
       <span>Privacy · Terms · Security</span>
     </div>
   </div>
 </footer>
 
-<div class="wf-label">WIREFRAME v10 · CLEAN FLOW</div>
+<div class="wf-label">WIREFRAME v11 · CALL FIXES · MOOV-INSPIRED</div>
 
 <script>
-  // ============ Counter animation on viewport entry ============
+  // Counter animation
   const animateCounter = (el) => {
     const target = parseInt(el.dataset.counter);
     const suffix = el.dataset.suffix || '';
@@ -1167,28 +1396,22 @@
     requestAnimationFrame(step);
   };
 
-  // ============ Reveal-on-scroll ============
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         if (entry.target.dataset.counter) animateCounter(entry.target);
-        const counters = entry.target.querySelectorAll('[data-counter]');
-        counters.forEach(c => {
-          if (!c.dataset.fired) {
-            c.dataset.fired = '1';
-            animateCounter(c);
-          }
+        entry.target.querySelectorAll('[data-counter]').forEach(c => {
+          if (!c.dataset.fired) { c.dataset.fired = '1'; animateCounter(c); }
         });
         io.unobserve(entry.target);
       }
     });
   }, { threshold: 0.2 });
-
   document.querySelectorAll('.reveal, [data-counter]').forEach(el => io.observe(el));
 
-  // ============ Simulated live transaction feed ============
-  const branches = ['Riyadh — Olaya', 'Jeddah — Tahlia', 'Dammam — King Fahd', 'Riyadh — Diplomatic', 'Jeddah — Corniche', 'Riyadh — Olaya', 'Dammam — King Fahd', 'Jeddah — Tahlia'];
+  // Live transaction feed
+  const branches = ['Riyadh — Olaya', 'Jeddah — Tahlia', 'Dammam — King Fahd', 'Riyadh — Diplomatic', 'Jeddah — Corniche'];
   const amounts = ['287.50', '1,420.00', '95.00', '624.75', '88.00', '342.10', '1,150.50', '78.25', '410.00', '215.75'];
   const statuses = [
     {label: 'Settled', cls: 'pill'},
@@ -1196,7 +1419,6 @@
     {label: 'Settled', cls: 'pill'},
     {label: 'Pending', cls: 'pill pending'}
   ];
-
   const rows = document.getElementById('dashRows');
   const addRow = () => {
     if (!rows) return;
